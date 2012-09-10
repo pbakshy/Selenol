@@ -25,7 +25,16 @@ namespace Selenol.Tests.Elements
         public void Init()
         {
             this.WebElement = MockRepository.GenerateStub<IWebElement>();
+            this.SetProperElementConditions();
             this.TypedElement = this.CreateElement();
+        }
+
+        [Test, ExpectedException(typeof(WrongElementException))]
+        public void WrongElement()
+        {
+            this.WebElement = MockRepository.GenerateStub<IWebElement>();
+            this.SetWrongElementConditions();
+            this.CreateElement();
         }
 
         [Test]
@@ -89,5 +98,12 @@ namespace Selenol.Tests.Elements
         }
 
         protected abstract TElement CreateElement();
+
+        protected abstract void SetProperElementConditions();
+
+        protected virtual void SetWrongElementConditions()
+        {
+            this.WebElement.Stub(x => x.TagName).Return("p");
+        }
     }
 }

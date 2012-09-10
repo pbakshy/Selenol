@@ -31,5 +31,11 @@ namespace Selenol.Tests.Elements
         {
             return new TextboxElement(this.WebElement);
         }
+
+        protected override void SetProperElementConditions()
+        {
+            this.WebElement.Stub(x => x.TagName).Return("input");
+            this.WebElement.Stub(x => x.GetAttribute("type")).Return("text");
+        }
     }
 }

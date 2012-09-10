@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 using OpenQA.Selenium;
@@ -12,15 +13,27 @@ namespace Selenol.Elements
     public abstract class BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="BaseHtmlElement"/> class.</summary>
-        /// <param name="webElement">The web element. </param>
-        protected BaseHtmlElement(IWebElement webElement)
+        /// <param name="webElement">The web element.</param>
+        /// <param name="checkElementPredicate">The check element predicate.</param>
+        protected BaseHtmlElement(IWebElement webElement, Func<BaseHtmlElement, bool> checkElementPredicate)
         {
             if (webElement == null)
             {
                 throw new ArgumentNullException("webElement");
             }
 
+            if (checkElementPredicate == null)
+            {
+                throw new ArgumentNullException("checkElementPredicate");
+            }
+
             this.WebElement = webElement;
+            if (!checkElementPredicate(this))
+            {
+                throw new WrongElementException(
+                    string.Format(CultureInfo.CurrentCulture, "The web element does not match restrictions of the element '{0}.'", this.GetType()), 
+                    webElement);
+            }
         }
 
         /// <summary>Gets the element id.</summary>
