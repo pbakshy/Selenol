@@ -37,11 +37,22 @@ namespace Selenol.Elements
         }
 
         /// <summary>Gets the element id.</summary>
+        /// <remarks>If id attribute does not exist empty string will be returned.</remarks>
         public string Id
         {
             get
             {
-                return this.WebElement.GetAttribute("id");
+                return this.WebElement.GetAttribute("id") ?? string.Empty;
+            }
+        }
+
+        /// <summary>Gets the element name.</summary>
+        /// <remarks>If name attribute does not exist empty string will be returned.</remarks>
+        public string Name 
+        {
+            get
+            {
+                return this.WebElement.GetAttribute("name") ?? string.Empty;
             }
         }
 
@@ -53,7 +64,25 @@ namespace Selenol.Elements
                 var attributeValue = this.WebElement.GetAttribute("class");
                 return !string.IsNullOrEmpty(attributeValue) ? attributeValue.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
             }
-        } 
+        }
+
+        /// <summary>Gets a value indicating whether the element is displayed or not.</summary>
+        public bool IsDisplayed
+        {
+            get
+            {
+                return this.WebElement.Displayed;
+            }
+        }
+
+        /// <summary>Gets a value indicating whether the element is enabled or not.</summary>
+        public bool IsEnabled
+        {
+            get
+            {
+                return this.WebElement.Enabled;
+            }
+        }
 
         /// <summary>Gets the wrapped Selenium element.</summary>
         protected IWebElement WebElement { get; private set; }

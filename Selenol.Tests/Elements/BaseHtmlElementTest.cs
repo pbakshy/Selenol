@@ -45,6 +45,13 @@ namespace Selenol.Tests.Elements
         }
 
         [Test]
+        public void GetNotExistingId()
+        {
+            this.WebElement.Stub(x => x.GetAttribute("id")).Return(null);
+            this.TypedElement.Id.Should().Be(string.Empty);
+        }
+
+        [Test]
         public void GetClassesNoneDeclared()
         {
             this.WebElement.Stub(x => x.GetAttribute("class")).Return(null);
@@ -95,6 +102,38 @@ namespace Selenol.Tests.Elements
             this.TypedElement.HasAttribute("attr1").Should().BeTrue();
             this.TypedElement.HasAttribute("attr2").Should().BeTrue();
             this.TypedElement.HasAttribute("attr3").Should().BeFalse();
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void GetIsDisplayed(bool wrappedValue)
+        {
+            this.WebElement.Stub(x => x.Displayed).Return(wrappedValue);
+            this.TypedElement.IsDisplayed.Should().Be(wrappedValue);
+        }
+
+        [Test]
+        [TestCase(true)]
+        [TestCase(false)]
+        public void GetIsEnabled(bool wrappedValue)
+        {
+            this.WebElement.Stub(x => x.Enabled).Return(wrappedValue);
+            this.TypedElement.IsEnabled.Should().Be(wrappedValue);
+        }
+
+        [Test]
+        public void GetName()
+        {
+            this.WebElement.Stub(x => x.GetAttribute("name")).Return("test-name");
+            this.TypedElement.Name.Should().Be("test-name");
+        }
+
+        [Test]
+        public void GetNotExistingName()
+        {
+            this.WebElement.Stub(x => x.GetAttribute("name")).Return(null);
+            this.TypedElement.Name.Should().Be(string.Empty);
         }
 
         protected abstract TElement CreateElement();
