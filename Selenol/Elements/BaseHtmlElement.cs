@@ -42,7 +42,7 @@ namespace Selenol.Elements
         {
             get
             {
-                return this.WebElement.GetAttribute("id") ?? string.Empty;
+                return this.WebElement.GetAttribute(HtmlElementAttributes.Id) ?? string.Empty;
             }
         }
 
@@ -52,7 +52,7 @@ namespace Selenol.Elements
         {
             get
             {
-                return this.WebElement.GetAttribute("name") ?? string.Empty;
+                return this.WebElement.GetAttribute(HtmlElementAttributes.Name) ?? string.Empty;
             }
         }
 
@@ -61,7 +61,7 @@ namespace Selenol.Elements
         {
             get
             {
-                var attributeValue = this.WebElement.GetAttribute("class");
+                var attributeValue = this.WebElement.GetAttribute(HtmlElementAttributes.Class);
                 return !string.IsNullOrEmpty(attributeValue) ? attributeValue.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
             }
         }

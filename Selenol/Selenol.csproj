@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\BaseHtmlElement.cs" />
+    <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
     <Compile Include="Elements\WrongElementException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
