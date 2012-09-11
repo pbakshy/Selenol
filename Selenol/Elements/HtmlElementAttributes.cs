@@ -13,5 +13,8 @@ namespace Selenol.Elements
 
         /// <summary>The class attribute name.</summary>
         public const string Class = "class";
+
+        /// <summary>The value attribute name.</summary>
+        public const string Value = "value";
     }
 }
