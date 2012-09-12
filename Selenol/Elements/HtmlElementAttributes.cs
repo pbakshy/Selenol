@@ -16,5 +16,8 @@ namespace Selenol.Elements
 
         /// <summary>The value attribute name.</summary>
         public const string Value = "value";
+
+        /// <summary>The selected attribute name.</summary>
+        public const string Selected = "selected";
     }
 }

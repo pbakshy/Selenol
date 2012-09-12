@@ -27,6 +27,8 @@ namespace Selenol.Tests.Elements
             this.WebElement = MockRepository.GenerateStub<IWebElement>();
             this.SetProperElementConditions();
             this.TypedElement = this.CreateElement();
+
+            this.OnItit();
         }
 
         [Test, ExpectedException(typeof(WrongElementException))]
@@ -134,6 +136,10 @@ namespace Selenol.Tests.Elements
         {
             this.WebElement.Stub(x => x.GetAttribute("name")).Return(null);
             this.TypedElement.Name.Should().Be(string.Empty);
+        }
+
+        protected virtual void OnItit()
+        {
         }
 
         protected abstract TElement CreateElement();

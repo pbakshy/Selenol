@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="Elements\BaseHtmlElement.cs" />
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\OptionElement.cs" />

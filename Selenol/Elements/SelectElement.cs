@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 using OpenQA.Selenium;
@@ -32,7 +33,8 @@ namespace Selenol.Elements
         {
             get
             {
-                throw new NotImplementedException();
+                var options = this.Options.ToArray();
+                return options.FirstOrDefault(x => x.IsSelected) ?? options.FirstOrDefault();
             }
         }
 
@@ -46,7 +48,9 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("text");
             }
 
-            throw new NotImplementedException();
+            this.SelectBy(x => Equals(x.Text, text), string.Format(CultureInfo.CurrentCulture, "text '{0}'", text));
+            this.Options.First().Select();
+            return this;
         }
 
         /// <summary>Select option by value.</summary>
@@ -59,7 +63,19 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("value");
             }
 
-            throw new NotImplementedException();
+            this.SelectBy(x => Equals(x.Value, value), string.Format(CultureInfo.CurrentCulture, "value '{0}'", value));
+            return this;
+        }
+
+        private void SelectBy(Func<OptionElement, bool> predicate, string description)
+        {
+            var option = this.Options.FirstOrDefault(predicate);
+            if (option == null)
+            {
+                throw new ElementNotFoundException(string.Format(CultureInfo.CurrentCulture, "Cannot find option with {0}.", description));
+            }
+
+            option.Select();
         }
     }
 }
