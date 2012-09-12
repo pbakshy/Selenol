@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 using FluentAssertions;
 
@@ -15,13 +16,26 @@ using Selenol.Elements;
 
 namespace Selenol.Tests.Elements
 {
-    public class TestSelectElement : BaseSelectElementTest<SelectElement>
+    [TestFixture]
+    public class TestListboxElement : BaseSelectElementTest<ListboxElement>
     {
         [Test]
-        public void GetSelectedOption()
+        public void GetTheOnlySelectedOption()
         {
             this.SetSelectedAndOptions();
-            this.TypedElement.SelectedOption.Value.Should().Be("b2");
+            this.TypedElement.SelectedOptions.Select(x => x.Value).Should().Equal(new[] { "b2" }.AsEnumerable());
+        }
+
+        [Test]
+        public void GetSelectedOptions()
+        {
+            this.Option1.Stub(x => x.GetAttribute("selected")).Return(null);
+            this.Option2.Stub(x => x.GetAttribute("selected")).Return(string.Empty);
+            this.Option3.Stub(x => x.GetAttribute("selected")).Return("selected");
+
+            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
+
+            this.TypedElement.SelectedOptions.Select(x => x.Value).Should().Equal(new[] { "b2", "c3" }.AsEnumerable());
         }
 
         [Test]
@@ -32,19 +46,19 @@ namespace Selenol.Tests.Elements
             this.Option3.Stub(x => x.GetAttribute("selected")).Return(null);
 
             this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
-            this.TypedElement.SelectedOption.Value.Should().Be("a1");
+            this.TypedElement.SelectedOptions.Should().BeEmpty();
         }
 
         [Test]
         public void GetSelectedOptionFromEmptySelect()
         {
             this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement>()));
-            this.TypedElement.SelectedOption.Should().BeNull();
+            this.TypedElement.SelectedOptions.Should().BeEmpty();
         }
 
-        protected override SelectElement CreateElement()
+        protected override ListboxElement CreateElement()
         {
-            return new SelectElement(this.WebElement);
+            return new ListboxElement(this.WebElement);
         }
     }
 }

@@ -62,6 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\BaseHtmlElementTest.cs" />
+    <Compile Include="Elements\BaseSelectElementTest.cs" />
+    <Compile Include="Elements\TestListboxElement.cs" />
     <Compile Include="Elements\TestSelectElement.cs" />
     <Compile Include="Elements\TestTextAreaElement.cs" />
     <Compile Include="Elements\TestTextboxElement.cs" />
