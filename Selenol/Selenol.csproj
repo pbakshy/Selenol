@@ -55,7 +55,9 @@
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="Elements\BaseHtmlElement.cs" />
     <Compile Include="Elements\BaseSelectElement.cs" />
+    <Compile Include="Elements\CheckboxElement.cs" />
     <Compile Include="Elements\HtmlElementAttributes.cs" />
+    <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\ListboxElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
     <Compile Include="Elements\SelectElement.cs" />

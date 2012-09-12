@@ -19,5 +19,11 @@ namespace Selenol.Elements
 
         /// <summary>The selected attribute name.</summary>
         public const string Selected = "selected";
+
+        /// <summary>The checked attribute name.</summary>
+        public const string Checked = "checked";
+
+        /// <summary>The type attribute name.</summary>
+        public const string Type = "type";
     }
 }
