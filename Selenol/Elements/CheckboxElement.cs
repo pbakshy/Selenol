@@ -10,7 +10,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="CheckboxElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public CheckboxElement(IWebElement webElement)
-            : base(webElement, x => webElement.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == "checkbox")
+            : base(webElement, x => webElement.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.Checkbox)
         {
         }
 

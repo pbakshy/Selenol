@@ -10,7 +10,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="TextAreaElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         public TextAreaElement(IWebElement webElement)
-            : base(webElement, x => webElement.TagName == "textarea")
+            : base(webElement, x => webElement.TagName == HtmlElements.TextArea)
         {
         }
     }

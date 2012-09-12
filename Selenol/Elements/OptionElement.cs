@@ -10,7 +10,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="OptionElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public OptionElement(IWebElement webElement)
-            : base(webElement, x => webElement.TagName == "option")
+            : base(webElement, x => webElement.TagName == HtmlElements.Option)
         {
         }
 

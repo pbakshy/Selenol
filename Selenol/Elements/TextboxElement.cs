@@ -12,7 +12,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="TextboxElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         public TextboxElement(IWebElement webElement)
-            : this(webElement, x => webElement.TagName == "input" && x.GetAttributeValue("type") == "text")
+            : this(webElement, x => webElement.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.Textbox)
         {
         }
 

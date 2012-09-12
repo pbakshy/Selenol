@@ -10,5 +10,11 @@ namespace Selenol.Elements
 
         /// <summary>The select element name.</summary>
         public const string Select = "select";
+
+        /// <summary>The option element name.</summary>
+        public const string Option = "option";
+
+        /// <summary>The text area element name.</summary>
+        public const string TextArea = "textarea";
     }
 }
