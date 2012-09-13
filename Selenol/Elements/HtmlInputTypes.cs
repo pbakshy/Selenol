@@ -20,5 +20,8 @@
 
         /// <summary>The button input type name.</summary>
         public const string Button = "button";
+
+        /// <summary>The file input type name.</summary>
+        public const string File = "file";
     }
 }

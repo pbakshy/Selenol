@@ -57,6 +57,7 @@
     <Compile Include="Elements\BaseSelectElement.cs" />
     <Compile Include="Elements\ButtonElement.cs" />
     <Compile Include="Elements\CheckboxElement.cs" />
+    <Compile Include="Elements\FileUploadElement.cs" />
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\HtmlInputTypes.cs" />
