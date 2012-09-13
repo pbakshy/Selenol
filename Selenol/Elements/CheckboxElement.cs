@@ -23,6 +23,16 @@ namespace Selenol.Elements
             }
         }
 
+        /// <summary>Gets the checkbox value.</summary>
+        /// <remarks>If value attribute does not exist empty string will be returned.</remarks>
+        public string Value
+        {
+            get
+            {
+                return this.GetAttributeValue(HtmlElementAttributes.Value);
+            }
+        }
+
         /// <summary>Checks the checkbox.</summary>
         public void Check()
         {

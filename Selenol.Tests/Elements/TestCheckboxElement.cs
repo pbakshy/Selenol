@@ -31,6 +31,20 @@ namespace Selenol.Tests.Elements
         }
 
         [Test]
+        public void GetValue()
+        {
+            this.WebElement.Stub(x => x.GetAttribute("value")).Return("abc");
+            this.TypedElement.Value.Should().Be("abc");
+        }
+
+        [Test]
+        public void GetNotExistingValue()
+        {
+            this.WebElement.Stub(x => x.GetAttribute("value")).Return(null);
+            this.TypedElement.Value.Should().Be(string.Empty);
+        }
+
+        [Test]
         public void CheckInUncheckedState()
         {
             this.WebElement.Stub(x => x.GetAttribute("checked")).Return(null);
