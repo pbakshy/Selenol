@@ -15,7 +15,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="BaseSelectElement"/> class. Initializes a new instance of the <see cref="SelectElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         protected BaseSelectElement(IWebElement webElement)
-            : base(webElement, x => webElement.TagName == HtmlElements.Select)
+            : base(webElement, x => x.TagName == HtmlElements.Select)
         {
         }
 

@@ -10,7 +10,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="RadioButtonElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public RadioButtonElement(IWebElement webElement)
-            : base(webElement, x => webElement.TagName == HtmlElements.Input && webElement.GetAttribute(HtmlElementAttributes.Type) == HtmlInputTypes.RadioButton)
+            : base(webElement, x => x.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.RadioButton)
         {
         }
 
