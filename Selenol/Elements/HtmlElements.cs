@@ -16,5 +16,8 @@ namespace Selenol.Elements
 
         /// <summary>The text area element name.</summary>
         public const string TextArea = "textarea";
+
+        /// <summary>The button element name.</summary>
+        public const string Button = "button";
     }
 }

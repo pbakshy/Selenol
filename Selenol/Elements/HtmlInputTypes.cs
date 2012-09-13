@@ -11,5 +11,14 @@
 
         /// <summary>The radio button input type name.</summary>
         public const string RadioButton = "radio";
+
+        /// <summary>The submit input type name.</summary>
+        public const string Submit = "submit";
+
+        /// <summary>The reset input type name.</summary>
+        public const string Reset = "reset";
+
+        /// <summary>The button input type name.</summary>
+        public const string Button = "button";
     }
 }

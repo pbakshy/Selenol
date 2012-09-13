@@ -84,6 +84,15 @@ namespace Selenol.Elements
             }
         }
 
+        /// <summary>Gets the element tag name.</summary>
+        internal string TagName
+        {
+            get
+            {
+                return this.WebElement.TagName;
+            }
+        }
+
         /// <summary>Gets the wrapped Selenium element.</summary>
         protected IWebElement WebElement { get; private set; }
 

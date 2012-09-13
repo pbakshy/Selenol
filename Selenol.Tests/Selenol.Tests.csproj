@@ -63,6 +63,9 @@
   <ItemGroup>
     <Compile Include="Elements\BaseHtmlElementTest.cs" />
     <Compile Include="Elements\BaseSelectElementTest.cs" />
+    <Compile Include="Elements\BaseButtonElementTest.cs" />
+    <Compile Include="Elements\TestButtonElementHtmlButton.cs" />
+    <Compile Include="Elements\TestButtonElementHtmlInput.cs" />
     <Compile Include="Elements\TestCheckboxElement.cs" />
     <Compile Include="Elements\TestListboxElement.cs" />
     <Compile Include="Elements\TestRadioButtonElement.cs" />
