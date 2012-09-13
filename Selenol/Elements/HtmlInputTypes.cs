@@ -8,5 +8,8 @@
 
         /// <summary>The checkbox input type name.</summary>
         public const string Checkbox = "checkbox";
+
+        /// <summary>The radio button input type name.</summary>
+        public const string RadioButton = "radio";
     }
 }

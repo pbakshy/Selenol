@@ -65,6 +65,7 @@
     <Compile Include="Elements\BaseSelectElementTest.cs" />
     <Compile Include="Elements\TestCheckboxElement.cs" />
     <Compile Include="Elements\TestListboxElement.cs" />
+    <Compile Include="Elements\TestRadioButtonElement.cs" />
     <Compile Include="Elements\TestSelectElement.cs" />
     <Compile Include="Elements\TestTextAreaElement.cs" />
     <Compile Include="Elements\TestTextboxElement.cs" />
