@@ -25,5 +25,8 @@ namespace Selenol.Elements
 
         /// <summary>The type attribute name.</summary>
         public const string Type = "type";
+
+        /// <summary>The hyper reference attribute name.</summary>
+        public const string HyperReference = "href";
     }
 }

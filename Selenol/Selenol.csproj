@@ -60,6 +60,7 @@
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\HtmlInputTypes.cs" />
+    <Compile Include="Elements\LinkElement.cs" />
     <Compile Include="Elements\ListboxElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
     <Compile Include="Elements\RadioButtonElement.cs" />

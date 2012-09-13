@@ -19,5 +19,8 @@ namespace Selenol.Elements
 
         /// <summary>The button element name.</summary>
         public const string Button = "button";
+
+        /// <summary>The link element name.</summary>
+        public const string Link = "a";
     }
 }
