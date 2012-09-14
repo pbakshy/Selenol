@@ -25,5 +25,23 @@ namespace Selenol.Elements
 
         /// <summary>The form element name.</summary>
         public const string Form = "form";
+
+        /// <summary>The table element name.</summary>
+        public const string Table = "table";
+
+        /// <summary>The table row element name.</summary>
+        public const string TableRow = "tr";
+
+        /// <summary>The table cell element name.</summary>
+        public const string TableCell = "td";
+
+        /// <summary>The table header cell element name.</summary>
+        public const string TableHeaderCell = "th";
+
+        /// <summary>The table head element name.</summary>
+        public const string TableHead = "thead";
+
+        /// <summary>The table body element name.</summary>
+        public const string TableBody = "tbody";
     }
 }

@@ -67,6 +67,8 @@
     <Compile Include="Elements\OptionElement.cs" />
     <Compile Include="Elements\RadioButtonElement.cs" />
     <Compile Include="Elements\SelectElement.cs" />
+    <Compile Include="Elements\TableElement.cs" />
+    <Compile Include="Elements\TableRowElement.cs" />
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
     <Compile Include="Elements\WrongElementException.cs" />
