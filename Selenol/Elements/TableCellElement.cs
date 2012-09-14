@@ -13,5 +13,14 @@ namespace Selenol.Elements
             : base(webElement, x => x.TagName == HtmlElements.TableCell || x.TagName == HtmlElements.TableHeaderCell)
         {
         }
+
+        /// <summary>Gets the cell text.</summary>
+        public string Text
+        {
+            get
+            {
+                return this.WebElement.Text;
+            }
+        }
     }
 }
