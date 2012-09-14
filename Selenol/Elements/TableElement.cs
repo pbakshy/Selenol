@@ -61,7 +61,7 @@ namespace Selenol.Elements
 
         private IEnumerable<TableRowElement> GetRows(By by)
         {
-            return this.WebElement.FindElements(by).Select(x => new TableRowElement(x)).ToArray();
+            return this.WebElement.FindElements(by).Select((element, index) => new TableRowElement(element, this, index)).ToArray();
         }
     }
 }

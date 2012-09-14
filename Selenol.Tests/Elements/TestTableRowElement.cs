@@ -19,6 +19,8 @@ namespace Selenol.Tests.Elements
     [TestFixture]
     public class TestTableRowElement : BaseHtmlElementTest<TableRowElement>
     {
+        private TableElement parentTable;
+
         [Test]
         public void GetCells()
         {
@@ -40,9 +42,24 @@ namespace Selenol.Tests.Elements
             this.TypedElement.Cells.Select(x => x.Id).Should().Equal(new[] { "cell-1", "cell-2", "cell-3" }.AsEnumerable());
         }
 
+        [Test]
+        public void GetParent()
+        {
+            this.TypedElement.Parent.Should().Be(this.parentTable);
+        }
+
+        [Test]
+        public void GetIndex()
+        {
+            this.TypedElement.Index.Should().Be(7);
+        }
+
         protected override TableRowElement CreateElement()
         {
-            return new TableRowElement(this.WebElement);
+            var element = MockRepository.GenerateStub<IWebElement>();
+            element.Stub(x => x.TagName).Return("table");
+            this.parentTable = new TableElement(element);
+            return new TableRowElement(this.WebElement, this.parentTable, 7);
         }
 
         protected override void SetProperElementConditions()
