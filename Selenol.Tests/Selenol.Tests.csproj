@@ -74,6 +74,7 @@
     <Compile Include="Elements\TestRadioButtonElement.cs" />
     <Compile Include="Elements\TestSelectElement.cs" />
     <Compile Include="Elements\TestTableElement.cs" />
+    <Compile Include="Elements\TestTableRowElement.cs" />
     <Compile Include="Elements\TestTextAreaElement.cs" />
     <Compile Include="Elements\TestTextboxElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
