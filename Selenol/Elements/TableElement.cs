@@ -1,7 +1,6 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 
 using OpenQA.Selenium;
@@ -11,6 +10,10 @@ namespace Selenol.Elements
     /// <summary>The table element.</summary>
     public class TableElement : BaseHtmlElement
     {
+        private const string HeadRowsSelector = HtmlElements.TableHead + " " + HtmlElements.TableRow;
+
+        private const string BodyRowsSelector = HtmlElements.TableBody + " " + HtmlElements.TableRow;
+
         /// <summary>Initializes a new instance of the <see cref="TableElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public TableElement(IWebElement webElement)
@@ -23,8 +26,7 @@ namespace Selenol.Elements
         {
             get
             {
-                var selector = string.Format(CultureInfo.InvariantCulture, "{0} {1}", HtmlElements.TableHead, HtmlElements.TableRow);
-                return this.GetRows(By.CssSelector(selector));
+                return this.GetRows(By.CssSelector(HeadRowsSelector));
             }
         }
 
@@ -33,8 +35,7 @@ namespace Selenol.Elements
         {
             get
             {
-                var selector = string.Format(CultureInfo.InvariantCulture, "{0} {1}", HtmlElements.TableBody, HtmlElements.TableRow);
-                return this.GetRows(By.CssSelector(selector));
+                return this.GetRows(By.CssSelector(BodyRowsSelector));
             }
         }
 
