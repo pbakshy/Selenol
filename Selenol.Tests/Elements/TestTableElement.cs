@@ -40,6 +40,15 @@ namespace Selenol.Tests.Elements
         }
 
         [Test]
+        public void GetFooterRows()
+        {
+            this.WebElement.Stub(x => x.FindElements(By.CssSelector("tfoot tr")))
+                .Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.row2, this.row1 }));
+
+            this.TypedElement.FooterRows.Select(x => x.Id).Should().Equal(new[] { "row-2", "row-1" }.AsEnumerable());
+        }
+
+        [Test]
         public void GetAllRows()
         {
             this.WebElement.Stub(x => x.FindElements(By.TagName("tr")))

@@ -12,6 +12,8 @@ namespace Selenol.Elements
     {
         private const string HeadRowsSelector = HtmlElements.TableHead + " " + HtmlElements.TableRow;
 
+        private const string FooterRowsSelector = HtmlElements.TableFooter + " " + HtmlElements.TableRow;
+
         private const string BodyRowsSelector = HtmlElements.TableBody + " " + HtmlElements.TableRow;
 
         /// <summary>Initializes a new instance of the <see cref="TableElement"/> class.</summary>
@@ -27,6 +29,15 @@ namespace Selenol.Elements
             get
             {
                 return this.GetRows(By.CssSelector(HeadRowsSelector));
+            }
+        }
+
+        /// <summary>Gets the footer rows of the table.</summary>
+        public IEnumerable<TableRowElement> FooterRows
+        {
+            get
+            {
+                return this.GetRows(By.CssSelector(FooterRowsSelector));
             }
         }
 

@@ -43,5 +43,8 @@ namespace Selenol.Elements
 
         /// <summary>The table body element name.</summary>
         public const string TableBody = "tbody";
+
+        /// <summary>The table footer element name.</summary>
+        public const string TableFooter = "tfoot";
     }
 }
