@@ -22,5 +22,8 @@ namespace Selenol.Elements
 
         /// <summary>The link element name.</summary>
         public const string Link = "a";
+
+        /// <summary>The form element name.</summary>
+        public const string Form = "form";
     }
 }
