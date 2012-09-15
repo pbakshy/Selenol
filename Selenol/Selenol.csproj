@@ -59,6 +59,7 @@
     <Compile Include="Elements\CheckboxElement.cs" />
     <Compile Include="Elements\FileUploadElement.cs" />
     <Compile Include="Elements\FormElement.cs" />
+    <Compile Include="Elements\GenericContainerElement.cs" />
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\HtmlInputTypes.cs" />
