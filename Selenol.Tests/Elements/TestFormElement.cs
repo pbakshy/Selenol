@@ -9,7 +9,7 @@ using Selenol.Elements;
 namespace Selenol.Tests.Elements
 {
     [TestFixture]
-    public class TestFormElement : BaseHtmlElementTest<FormElement>
+    public class TestFormElement : BaseGenericContainerElementTest<FormElement>
     {
         [Test]
         public void Submit()

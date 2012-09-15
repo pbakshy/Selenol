@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 namespace Selenol.Elements
 {
     /// <summary>The form element.</summary>
-    public class FormElement : BaseHtmlElement
+    public class FormElement : GenericContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="FormElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>

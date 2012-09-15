@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 namespace Selenol.Elements
 {
     /// <summary>The table cell element.</summary>
-    public class TableCellElement : BaseHtmlElement
+    public class TableCellElement : GenericContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="TableCellElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
@@ -23,14 +23,5 @@ namespace Selenol.Elements
 
         /// <summary>Gets the index.</summary>
         public int Index { get; private set; }
-
-        /// <summary>Gets the cell text.</summary>
-        public string Text
-        {
-            get
-            {
-                return this.WebElement.Text;
-            }
-        }
     }
 }

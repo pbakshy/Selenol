@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 namespace Selenol.Elements
 {
     /// <summary>The table row element.</summary>
-    public class TableRowElement : BaseHtmlElement
+    public class TableRowElement : GenericContainerElement
     {
         private const string CellSelector = HtmlElements.TableCell + "," + HtmlElements.TableHeaderCell;
 

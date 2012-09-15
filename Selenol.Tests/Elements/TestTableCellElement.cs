@@ -13,18 +13,11 @@ using Selenol.Elements;
 namespace Selenol.Tests.Elements
 {
     [TestFixture]
-    public class TestTableCellElement : BaseHtmlElementTest<TableCellElement>
+    public class TestTableCellElement : BaseGenericContainerElementTest<TableCellElement>
     {
         private TableElement parentTable;
 
         private TableRowElement parentRow;
-
-        [Test]
-        public void GetText()
-        {
-            this.WebElement.Stub(x => x.Text).Return("abc");
-            this.TypedElement.Text.Should().Be("abc");
-        }
 
         [Test]
         public void GetParent()

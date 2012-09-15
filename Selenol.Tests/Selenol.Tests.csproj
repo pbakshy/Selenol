@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\BaseGenericContainerElementTest.cs" />
     <Compile Include="Elements\BaseHtmlElementTest.cs" />
     <Compile Include="Elements\BaseSelectElementTest.cs" />
     <Compile Include="Elements\BaseButtonElementTest.cs" />
