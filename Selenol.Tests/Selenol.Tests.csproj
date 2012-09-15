@@ -73,6 +73,7 @@
     <Compile Include="Elements\TestLinkElement.cs" />
     <Compile Include="Elements\TestListboxElement.cs" />
     <Compile Include="Elements\TestRadioButtonElement.cs" />
+    <Compile Include="Elements\TestSearchContextExtensions.cs" />
     <Compile Include="Elements\TestSelectElement.cs" />
     <Compile Include="Elements\TestTableCellElement.cs" />
     <Compile Include="Elements\TestTableElement.cs" />

@@ -67,6 +67,7 @@
     <Compile Include="Elements\ListboxElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
     <Compile Include="Elements\RadioButtonElement.cs" />
+    <Compile Include="Elements\SearchContextExtensions.cs" />
     <Compile Include="Elements\SelectElement.cs" />
     <Compile Include="Elements\TableCellElement.cs" />
     <Compile Include="Elements\TableElement.cs" />
