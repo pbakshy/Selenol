@@ -6,6 +6,8 @@ using System.IO;
 
 using OpenQA.Selenium;
 
+using Selenol.Extensions;
+
 namespace Selenol.Elements
 {
     /// <summary>The html file upload element.</summary>
@@ -31,7 +33,7 @@ namespace Selenol.Elements
         /// <param name="fullFileName">The full file name.</param>
         public void SelectFile(string fullFileName)
         {
-            if (string.IsNullOrEmpty(fullFileName))
+            if (fullFileName.IsNullOrEmpty())
             {
                 throw new ArgumentNullException("fullFileName");
             }
@@ -39,7 +41,7 @@ namespace Selenol.Elements
             var file = new FileInfo(fullFileName);
             if (!file.Exists)
             {
-                throw new FileNotFoundException(string.Format(CultureInfo.CurrentCulture, "File '{0}' does not exist.", fullFileName));
+                throw new FileNotFoundException("File '{0}' does not exist.".F(fullFileName));
             }
 
             this.WebElement.SendKeys(file.FullName);

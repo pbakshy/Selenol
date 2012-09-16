@@ -7,6 +7,8 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Extensions;
+
 namespace Selenol.Elements
 {
     /// <summary>The base select element.</summary>
@@ -37,7 +39,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("text");
             }
 
-            this.SelectBy(x => Equals(x.Text, text), string.Format(CultureInfo.CurrentCulture, "text '{0}'", text));
+            this.SelectBy(x => Equals(x.Text, text), "text '{0}'".F(text));
             this.Options.First().Select();
         }
 
@@ -50,7 +52,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("value");
             }
 
-            this.SelectBy(x => Equals(x.Value, value), string.Format(CultureInfo.CurrentCulture, "value '{0}'", value));
+            this.SelectBy(x => Equals(x.Value, value), "value '{0}'".F(value));
         }
 
         private void SelectBy(Func<OptionElement, bool> predicate, string description)
@@ -58,7 +60,7 @@ namespace Selenol.Elements
             var option = this.Options.FirstOrDefault(predicate);
             if (option == null)
             {
-                throw new ElementNotFoundException(string.Format(CultureInfo.CurrentCulture, "Cannot find option with {0}.", description));
+                throw new ElementNotFoundException("Cannot find option with {0}.".F(description));
             }
 
             option.Select();

@@ -75,6 +75,7 @@
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
     <Compile Include="Elements\WrongElementException.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,8 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Extensions;
+
 namespace Selenol.Elements
 {
     /// <summary>The base html element.</summary>
@@ -30,9 +32,7 @@ namespace Selenol.Elements
             this.WebElement = webElement;
             if (!checkElementPredicate(this))
             {
-                throw new WrongElementException(
-                    string.Format(CultureInfo.CurrentCulture, "The web element does not match restrictions of the element '{0}.'", this.GetType()), 
-                    webElement);
+                throw new WrongElementException("The web element does not match restrictions of the element '{0}.'".F(this.GetType()), webElement);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Selenol.Elements
             get
             {
                 var attributeValue = this.WebElement.GetAttribute(HtmlElementAttributes.Class);
-                return !string.IsNullOrEmpty(attributeValue) ? attributeValue.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
+                return !attributeValue.IsNullOrEmpty() ? attributeValue.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries) : new string[0];
             }
         }
 
@@ -114,7 +114,7 @@ namespace Selenol.Elements
         /// <returns>True if element has given class otherwise false.</returns>
         public bool HasClass(string className)
         {
-            if (string.IsNullOrEmpty(className))
+            if (className.IsNullOrEmpty())
             {
                 throw new ArgumentNullException("className");
             }
@@ -127,7 +127,7 @@ namespace Selenol.Elements
         /// <returns>True if element has given attribute otherwise false.</returns>
         public bool HasAttribute(string attributeName)
         {
-            if (string.IsNullOrEmpty(attributeName))
+            if (attributeName.IsNullOrEmpty())
             {
                 throw new ArgumentNullException("attributeName");
             }
