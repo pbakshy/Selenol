@@ -17,7 +17,7 @@ using Selenol.Elements;
 namespace Selenol.Tests.Elements
 {
     [TestFixture]
-    public class TestTableRowElement : BaseGenericContainerElementTest<TableRowElement>
+    public class TestTableRowElement : BaseContainerElementTest<TableRowElement>
     {
         private TableElement parentTable;
 

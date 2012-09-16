@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 namespace Selenol.Elements
 {
     /// <summary>The table cell element.</summary>
-    public class TableCellElement : GenericContainerElement
+    public class TableCellElement : ContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="TableCellElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>

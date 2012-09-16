@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Elements\BaseGenericContainerElementTest.cs" />
+    <Compile Include="Elements\BaseContainerElementTest.cs" />
     <Compile Include="Elements\BaseHtmlElementTest.cs" />
     <Compile Include="Elements\BaseSelectElementTest.cs" />
     <Compile Include="Elements\BaseButtonElementTest.cs" />
@@ -70,7 +70,7 @@
     <Compile Include="Elements\TestCheckboxElement.cs" />
     <Compile Include="Elements\TestFileUploadElement.cs" />
     <Compile Include="Elements\TestFormElement.cs" />
-    <Compile Include="Elements\TestGenericContainerElement.cs" />
+    <Compile Include="Elements\TestContainerElement.cs" />
     <Compile Include="Elements\TestLinkElement.cs" />
     <Compile Include="Elements\TestListboxElement.cs" />
     <Compile Include="Elements\TestRadioButtonElement.cs" />

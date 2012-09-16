@@ -164,7 +164,7 @@ namespace Selenol.Elements
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
         /// <returns>The found element.</returns>
-        public static GenericContainerElement Element(this ISearchContext context, By by)
+        public static ContainerElement Element(this ISearchContext context, By by)
         {
             if (context == null)
             {
@@ -176,7 +176,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("by");
             }
 
-            return new GenericContainerElement(context.FindElement(by));
+            return new ContainerElement(context.FindElement(by));
         }
 
         /// <summary>Finds elements that meets a criteria.</summary>
@@ -184,14 +184,14 @@ namespace Selenol.Elements
         /// <param name="by">The criteria.</param>
         /// <returns>The found elements.</returns>
         /// <remarks>If <paramref name="by"/> is skipped all elements will be returned.</remarks>
-        public static IEnumerable<GenericContainerElement> Elements(this ISearchContext context, By by = null)
+        public static IEnumerable<ContainerElement> Elements(this ISearchContext context, By by = null)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
 
-            return context.FindElements(by ?? By.CssSelector(ElementsDefaultSelector)).Select(x => new GenericContainerElement(x)).ToArray();
+            return context.FindElements(by ?? By.CssSelector(ElementsDefaultSelector)).Select(x => new ContainerElement(x)).ToArray();
         }
 
         /// <summary>Finds a link that meets a criteria.</summary>

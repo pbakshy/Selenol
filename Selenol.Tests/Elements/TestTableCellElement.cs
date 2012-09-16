@@ -13,7 +13,7 @@ using Selenol.Elements;
 namespace Selenol.Tests.Elements
 {
     [TestFixture]
-    public class TestTableCellElement : BaseGenericContainerElementTest<TableCellElement>
+    public class TestTableCellElement : BaseContainerElementTest<TableCellElement>
     {
         private TableElement parentTable;
 

@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 namespace Selenol.Elements
 {
     /// <summary>The table element.</summary>
-    public class TableElement : GenericContainerElement
+    public class TableElement : ContainerElement
     {
         private const string HeadRowsSelector = HtmlElements.TableHead + " " + HtmlElements.TableRow;
 
