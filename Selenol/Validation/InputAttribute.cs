@@ -8,6 +8,7 @@ using Selenol.Extensions;
 namespace Selenol.Validation
 {
     /// <summary>The attribute that validates an input element by a type.</summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class InputAttribute : Attribute, IElementValidator
     {
         private readonly string typeName;

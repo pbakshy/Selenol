@@ -8,6 +8,7 @@ using Selenol.Extensions;
 namespace Selenol.Validation
 {
     /// <summary>The attribute that validates an element by a tag name.</summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class TagAttribute : Attribute, IElementValidator
     {
         private readonly string tagName;
