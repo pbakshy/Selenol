@@ -79,6 +79,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\IElementValidator.cs" />
     <Compile Include="Validation\InputAttribute.cs" />
+    <Compile Include="Validation\NotInputAttribute.cs" />
     <Compile Include="Validation\TagAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
