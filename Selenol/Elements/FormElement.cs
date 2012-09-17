@@ -2,15 +2,18 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The form element.</summary>
+    [Tag(HtmlElements.Form)]
     public class FormElement : ContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="FormElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public FormElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Form)
+            : base(webElement)
         {
         }
 

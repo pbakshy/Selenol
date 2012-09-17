@@ -1,27 +1,21 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.ObjectModel;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The generic container element.</summary>
+    [NotInput]
     public class ContainerElement : BaseHtmlElement, ISearchContext
     {
         /// <summary>Initializes a new instance of the <see cref="ContainerElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public ContainerElement(IWebElement webElement)
-            : base(webElement, x => x.TagName != HtmlElements.Input)
-        {
-        }
-
-        /// <summary>Initializes a new instance of the <see cref="ContainerElement"/> class.</summary>
-        /// <param name="webElement">The web element.</param>
-        /// <param name="checkElementPredicate">The check element predicate.</param>
-        protected ContainerElement(IWebElement webElement, Func<BaseHtmlElement, bool> checkElementPredicate)
-            : base(webElement, checkElementPredicate)
+            : base(webElement)
         {
         }
 

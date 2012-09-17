@@ -7,6 +7,7 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenol.Extensions;
+using Selenol.Validation;
 
 namespace Selenol.Elements
 {
@@ -15,23 +16,19 @@ namespace Selenol.Elements
     {
         /// <summary>Initializes a new instance of the <see cref="BaseHtmlElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
-        /// <param name="checkElementPredicate">The check element predicate.</param>
-        protected BaseHtmlElement(IWebElement webElement, Func<BaseHtmlElement, bool> checkElementPredicate)
+        protected BaseHtmlElement(IWebElement webElement)
         {
             if (webElement == null)
             {
                 throw new ArgumentNullException("webElement");
             }
 
-            if (checkElementPredicate == null)
-            {
-                throw new ArgumentNullException("checkElementPredicate");
-            }
-
             this.WebElement = webElement;
-            if (!checkElementPredicate(this))
+
+            var validators = this.GetType().GetCustomAttributes(true).OfType<IElementValidator>().ToArray();
+            if (!validators.Any(x => x.Validate(this)))
             {
-                throw new WrongElementException("The web element does not match restrictions of the element '{0}.'".F(this.GetType()), webElement);
+                throw new WrongElementException(validators.First().GetErrorMessage(this), this.WebElement);
             }
         }
 

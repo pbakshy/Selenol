@@ -5,9 +5,12 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The table row element.</summary>
+    [Tag(HtmlElements.TableRow)]
     public class TableRowElement : ContainerElement
     {
         private const string CellSelector = HtmlElements.TableCell + "," + HtmlElements.TableHeaderCell;
@@ -17,7 +20,7 @@ namespace Selenol.Elements
         /// <param name="parent">The parent table. </param>
         /// <param name="index">The index. </param>
         public TableRowElement(IWebElement webElement, TableElement parent, int index)
-            : base(webElement, x => x.TagName == HtmlElements.TableRow)
+            : base(webElement)
         {
             this.Parent = parent;
             this.Index = index;

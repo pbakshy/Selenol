@@ -4,23 +4,18 @@ using System;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>Textbox HTML element.</summary>
+    [Input(HtmlInputTypes.Textbox)]
     public class TextboxElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="TextboxElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         public TextboxElement(IWebElement webElement)
-            : this(webElement, x => x.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.Textbox)
-        {
-        }
-
-        /// <summary>Initializes a new instance of the <see cref="TextboxElement"/> class.</summary>
-        /// <param name="webElement">The web element.</param>
-        /// <param name="checkElementPredicate">The check element predicate.</param>
-        protected TextboxElement(IWebElement webElement, Func<BaseHtmlElement, bool> checkElementPredicate)
-            : base(webElement, checkElementPredicate)
+            : base(webElement)
         {
         }
 

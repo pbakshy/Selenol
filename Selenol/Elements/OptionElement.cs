@@ -2,15 +2,18 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The option element.</summary>
+    [Tag(HtmlElements.Option)]
     public class OptionElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="OptionElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public OptionElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Option)
+            : base(webElement)
         {
         }
 

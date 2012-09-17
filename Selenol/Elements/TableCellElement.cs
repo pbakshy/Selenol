@@ -2,9 +2,13 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The table cell element.</summary>
+    [Tag(HtmlElements.TableHeaderCell)]
+    [Tag(HtmlElements.TableCell)]
     public class TableCellElement : ContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="TableCellElement"/> class.</summary>
@@ -12,7 +16,7 @@ namespace Selenol.Elements
         /// <param name="parent">The parent row. </param>
         /// <param name="index">The index. </param>
         public TableCellElement(IWebElement webElement, TableRowElement parent, int index)
-            : base(webElement, x => x.TagName == HtmlElements.TableCell || x.TagName == HtmlElements.TableHeaderCell)
+            : base(webElement)
         {
             this.Parent = parent;
             this.Index = index;

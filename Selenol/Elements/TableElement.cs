@@ -5,9 +5,12 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The table element.</summary>
+    [Tag(HtmlElements.Table)]
     public class TableElement : ContainerElement
     {
         private const string HeadRowsSelector = HtmlElements.TableHead + " " + HtmlElements.TableRow;
@@ -19,7 +22,7 @@ namespace Selenol.Elements
         /// <summary>Initializes a new instance of the <see cref="TableElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public TableElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Table)
+            : base(webElement)
         {
         }
 

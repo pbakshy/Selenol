@@ -2,15 +2,18 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The checkbox html element.</summary>
+    [Input(HtmlInputTypes.Checkbox)]
     public class CheckboxElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="CheckboxElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public CheckboxElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.Checkbox)
+            : base(webElement)
         {
         }
 

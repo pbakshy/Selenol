@@ -2,15 +2,18 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The html link element.</summary>
+    [Tag(HtmlElements.Link)]
     public class LinkElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="LinkElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public LinkElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Link)
+            : base(webElement)
         {
         }
 

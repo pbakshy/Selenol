@@ -2,15 +2,18 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The radio button html element.</summary>
+    [Input(HtmlInputTypes.RadioButton)]
     public class RadioButtonElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="RadioButtonElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public RadioButtonElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.RadioButton)
+            : base(webElement)
         {
         }
 

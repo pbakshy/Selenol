@@ -6,16 +6,18 @@ using System.IO;
 using OpenQA.Selenium;
 
 using Selenol.Extensions;
+using Selenol.Validation;
 
 namespace Selenol.Elements
 {
     /// <summary>The html file upload element.</summary>
+    [Input(HtmlInputTypes.File)]
     public class FileUploadElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="FileUploadElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public FileUploadElement(IWebElement webElement)
-            : base(webElement, x => x.TagName == HtmlElements.Input && x.GetAttributeValue(HtmlElementAttributes.Type) == HtmlInputTypes.File)
+            : base(webElement)
         {
         }
 

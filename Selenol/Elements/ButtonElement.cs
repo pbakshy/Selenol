@@ -2,15 +2,21 @@
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The button element.</summary>
+    [Tag(HtmlElements.Button)]
+    [Input(HtmlInputTypes.Button)]
+    [Input(HtmlInputTypes.Submit)]
+    [Input(HtmlInputTypes.Reset)]
     public class ButtonElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="ButtonElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
         public ButtonElement(IWebElement webElement)
-            : base(webElement, CheckElement)
+            : base(webElement)
         {
         }
 
@@ -38,22 +44,6 @@ namespace Selenol.Elements
         public void Click()
         {
             this.WebElement.Click();
-        }
-
-        private static bool CheckElement(BaseHtmlElement element)
-        {
-            if (element.TagName == HtmlElements.Button)
-            {
-                return true;
-            }
-
-            if (element.TagName != HtmlElements.Input)
-            {
-                return false;
-            }
-
-            var type = element.GetAttributeValue(HtmlElementAttributes.Type);
-            return type == HtmlInputTypes.Button || type == HtmlInputTypes.Submit || type == HtmlInputTypes.Reset;
         }
     }
 }
