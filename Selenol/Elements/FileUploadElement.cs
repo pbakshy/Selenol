@@ -1,7 +1,6 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System;
-using System.Globalization;
 using System.IO;
 
 using OpenQA.Selenium;

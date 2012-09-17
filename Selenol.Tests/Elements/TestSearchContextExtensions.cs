@@ -90,7 +90,7 @@ namespace Selenol.Tests.Elements
             this.context.AssertWasCalled(x => x.FindElements(selector));
         }
 
-        private static IEnumerable<TestCaseData> SingleElementFactory()
+        protected static IEnumerable<TestCaseData> SingleElementFactory()
         {
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Button(by)), "button", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Checkbox(by)), "input", "checkbox");
@@ -106,7 +106,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Textbox(by)), "input", "text");
         }
 
-        private static IEnumerable<TestCaseData> MultiElementsFactory()
+        protected static IEnumerable<TestCaseData> MultiElementsFactory()
         {
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Buttons(by)), "button", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Checkboxes(by)), "input", "checkbox");
@@ -120,9 +120,9 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Tables(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.TextAreas(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Textboxes(by)), "input", "text");
-        } 
+        }
 
-        private static IEnumerable<TestCaseData> MultiElementsDefaultFactory()
+        protected static IEnumerable<TestCaseData> MultiElementsDefaultFactory()
         {
             yield return new TestCaseData(
                     new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Buttons()),
