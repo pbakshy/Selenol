@@ -138,6 +138,84 @@ namespace Selenol.Tests.Elements
             this.TypedElement.Name.Should().Be(string.Empty);
         }
 
+        [Test]
+        public void GetParent()
+        {
+            var parent = MockRepository.GenerateStub<IWebElement>();
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./parent::*"))).Return(parent);
+            parent.Stub(x => x.GetAttribute("id")).Return("parent");
+
+            var actualParent = this.TypedElement.Parent;
+            actualParent.Should().BeOfType<ContainerElement>();
+            actualParent.Id.Should().Be("parent");
+        }
+
+        [Test]
+        public void GetNextSibling()
+        {
+            var sibling = MockRepository.GenerateStub<IWebElement>();
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./following-sibling::*"))).Return(sibling);
+            sibling.Stub(x => x.GetAttribute("id")).Return("sibling");
+
+            var actualParent = this.TypedElement.NextSibling;
+            actualParent.Should().BeOfType<BasicHtmlElement>();
+            actualParent.Id.Should().Be("sibling");
+        }
+
+        [Test]
+        public void GetPreviousSibling()
+        {
+            var sibling = MockRepository.GenerateStub<IWebElement>();
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Return(sibling);
+            sibling.Stub(x => x.GetAttribute("id")).Return("sibling");
+
+            var actualParent = this.TypedElement.PreviousSibling;
+            actualParent.Should().BeOfType<BasicHtmlElement>();
+            actualParent.Id.Should().Be("sibling");
+        }
+
+        [Test]
+        public void HasParent()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./parent::*"))).Return(MockRepository.GenerateStub<IWebElement>());
+            this.TypedElement.HasParent.Should().BeTrue();
+        }
+
+        [Test]
+        public void HasNextSibling()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./following-sibling::*"))).Return(MockRepository.GenerateStub<IWebElement>());
+            this.TypedElement.HasNextSibling.Should().BeTrue();
+        }
+
+        [Test]
+        public void HasPreviousSibling()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Return(MockRepository.GenerateStub<IWebElement>());
+            this.TypedElement.HasPreviousSibling.Should().BeTrue();
+        }
+
+        [Test]
+        public void DoesNotHasParent()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./parent::*"))).Throw(new NoSuchElementException());
+            this.TypedElement.HasParent.Should().BeFalse();
+        }
+
+        [Test]
+        public void DoesNotHasNextSibling()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./following-sibling::*"))).Throw(new NoSuchElementException());
+            this.TypedElement.HasNextSibling.Should().BeFalse();
+        }
+
+        [Test]
+        public void DoesNotHasPreviousSibling()
+        {
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Throw(new NoSuchElementException());
+            this.TypedElement.HasPreviousSibling.Should().BeFalse();
+        }
+
         protected virtual void OnItit()
         {
         }

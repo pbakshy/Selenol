@@ -60,6 +60,7 @@
     <Compile Include="Elements\FileUploadElement.cs" />
     <Compile Include="Elements\FormElement.cs" />
     <Compile Include="Elements\ContainerElement.cs" />
+    <Compile Include="Elements\BasicHtmlElement.cs" />
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\HtmlInputTypes.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Validation\IElementValidator.cs" />
     <Compile Include="Validation\InputAttribute.cs" />
     <Compile Include="Validation\NotInputAttribute.cs" />
+    <Compile Include="Validation\SkipValidationAttribute.cs" />
     <Compile Include="Validation\TagAttribute.cs" />
     <Compile Include="Validation\ValidationAbsenceException.cs" />
   </ItemGroup>
