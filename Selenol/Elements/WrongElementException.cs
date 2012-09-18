@@ -1,6 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Serialization;
 
 using OpenQA.Selenium;
@@ -9,6 +10,7 @@ namespace Selenol.Elements
 {
     /// <summary>Indicates that element does not match restrictions.</summary>
     [Serializable]
+    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Justification = "We do not use any remote calls.")]
     public class WrongElementException : Exception
     {
         /// <summary>Initializes a new instance of the <see cref="WrongElementException"/> class.</summary>
