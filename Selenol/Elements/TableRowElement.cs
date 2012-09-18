@@ -16,6 +16,15 @@ namespace Selenol.Elements
         private const string CellSelector = HtmlElements.TableCell + "," + HtmlElements.TableHeaderCell;
 
         /// <summary>Initializes a new instance of the <see cref="TableRowElement"/> class.</summary>
+        /// <param name="webElement">The web element.</param>
+        public TableRowElement(IWebElement webElement)
+            : base(webElement)
+        {
+            this.ParentTable = this.Parent.As<TableElement>();
+            this.Index = -1;
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="TableRowElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         /// <param name="parent">The parent table. </param>
         /// <param name="index">The index. </param>

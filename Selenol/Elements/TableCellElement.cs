@@ -12,6 +12,15 @@ namespace Selenol.Elements
     public class TableCellElement : ContainerElement
     {
         /// <summary>Initializes a new instance of the <see cref="TableCellElement"/> class.</summary>
+        /// <param name="webElement">The web element.</param>
+        public TableCellElement(IWebElement webElement)
+            : base(webElement)
+        {
+            this.ParentRow = this.Parent.As<TableRowElement>();
+            this.Index = -1;
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="TableCellElement"/> class.</summary>
         /// <param name="webElement">The web element. </param>
         /// <param name="parent">The parent row. </param>
         /// <param name="index">The index. </param>
