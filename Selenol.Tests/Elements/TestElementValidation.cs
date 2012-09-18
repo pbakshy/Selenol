@@ -36,7 +36,7 @@ namespace Selenol.Tests.Elements
         public void IncorrectElementSeveralValidator()
         {
             var exception = Assert.Throws<WrongElementException>(() => new ElementWithSeveralValidations(this.webElement));
-            exception.Message.Should().Be("'p' tag does not match to 'div' tag or 'p' tag does not match to 'input' tag");
+            exception.Message.Should().Contain("'p' tag does not match to 'div' tag").And.Contain("'p' tag does not match to 'input' tag");
         }
 
         [Test, ExpectedException(typeof(ValidationAbsenceException))]
