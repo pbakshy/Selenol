@@ -8,7 +8,6 @@ using OpenQA.Selenium;
 
 using Rhino.Mocks;
 
-using Selenol.Elements;
 using Selenol.Validation;
 
 namespace Selenol.Tests.Validation
@@ -19,59 +18,53 @@ namespace Selenol.Tests.Validation
         [Test] 
         public void ValidateCorrectElement()
         {
-            var webElement = MockRepository.GenerateStub<IWebElement>();
-            webElement.Stub(x => x.TagName).Return("input");
-            webElement.Stub(x => x.GetAttribute("type")).Return("button");
-
-            var element = new ButtonElement(webElement);
-            var attribute = new InputAttribute("button");
-            attribute.Validate(element).Should().BeTrue();
+            ValidateTest("input", "button", true);
         }
 
         [Test]
         public void ValidateElementWithIncorrectType()
         {
-            var webElement = MockRepository.GenerateStub<IWebElement>();
-            webElement.Stub(x => x.TagName).Return("input");
-            webElement.Stub(x => x.GetAttribute("type")).Return("button");
-
-            var element = new ButtonElement(webElement);
-            var attribute = new InputAttribute("text");
-            attribute.Validate(element).Should().BeFalse();
+            ValidateTest("input", "text", false);
         }
 
         [Test]
         public void ValidateElementWithIncorrectTag()
         {
-            var webElement = MockRepository.GenerateStub<IWebElement>();
-            webElement.Stub(x => x.TagName).Return("button");
-
-            var element = new ButtonElement(webElement);
-            var attribute = new InputAttribute("button");
-            attribute.Validate(element).Should().BeFalse();
+            ValidateTest("div", null, false);
         }
 
         [Test]
         public void GetErrorMessageForElementWithIncorrectType()
         {
-            var webElement = MockRepository.GenerateStub<IWebElement>();
-            webElement.Stub(x => x.TagName).Return("input");
-            webElement.Stub(x => x.GetAttribute("type")).Return("button");
-
-            var element = new ButtonElement(webElement);
-            var attribute = new InputAttribute("text");
-            attribute.GetErrorMessage(element).Should().Be(@"The attribute 'type=""button""' does not match to 'type=""text""'");
+            GetErrorMessageTest("input", "button", @"The attribute 'type=""button""' does not match to 'type=""text""'");
         }
 
         [Test]
         public void GetErrorMessageForElementWithIncorrectTag()
         {
-            var webElement = MockRepository.GenerateStub<IWebElement>();
-            webElement.Stub(x => x.TagName).Return("button");
+            GetErrorMessageTest("button", null, "'button' tag does not match to 'input' tag");
+        }
 
-            var element = new ButtonElement(webElement);
+        private static void ValidateTest(string tagName, string typeName, bool result)
+        {
+            var webElement = MockRepository.GenerateStub<IWebElement>();
+            webElement.Stub(x => x.TagName).Return(tagName);
+            webElement.Stub(x => x.GetAttribute("type")).Return(typeName);
+
+            var element = new ElementForTest(webElement);
             var attribute = new InputAttribute("button");
-            attribute.GetErrorMessage(element).Should().Be("'button' tag does not match to 'input' tag");
+            attribute.Validate(element).Should().Be(result);
+        }
+
+        private static void GetErrorMessageTest(string tagName, string typeName, string message)
+        {
+            var webElement = MockRepository.GenerateStub<IWebElement>();
+            webElement.Stub(x => x.TagName).Return(tagName);
+            webElement.Stub(x => x.GetAttribute("type")).Return(typeName);
+
+            var element = new ElementForTest(webElement);
+            var attribute = new InputAttribute("text");
+            attribute.GetErrorMessage(element).Should().Be(message);
         }
     }
 }

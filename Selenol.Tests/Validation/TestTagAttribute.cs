@@ -8,7 +8,6 @@ using OpenQA.Selenium;
 
 using Rhino.Mocks;
 
-using Selenol.Elements;
 using Selenol.Validation;
 
 namespace Selenol.Tests.Validation
@@ -16,7 +15,7 @@ namespace Selenol.Tests.Validation
     [TestFixture]
     public class TestTagAttribute
     {
-        private ButtonElement element;
+        private ElementForTest element;
 
         [SetUp]
         public void Init()
@@ -24,7 +23,7 @@ namespace Selenol.Tests.Validation
             var webElement = MockRepository.GenerateStub<IWebElement>();
             webElement.Stub(x => x.TagName).Return("button");
 
-            this.element = new ButtonElement(webElement);
+            this.element = new ElementForTest(webElement);
         }
 
         [Test]     
