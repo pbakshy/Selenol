@@ -1,6 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Selenol.Extensions
@@ -42,6 +43,25 @@ namespace Selenol.Extensions
             }
 
             return string.Format(CultureInfo.InvariantCulture, format, parameters);
+        }
+
+        /// <summary>Extension method for <see cref="string.Join(string,string[])"/>.</summary>
+        /// <param name="values">The strings.</param>
+        /// <param name="separator">The separator.</param>
+        /// <returns>The joined string.</returns>
+        public static string Join(this IEnumerable<string> values, string separator)
+        {
+            if (values == null)
+            {
+                throw new ArgumentNullException("values");
+            }
+
+            if (separator == null)
+            {
+                throw new ArgumentNullException("separator");
+            }
+
+            return string.Join(separator, values);
         }
     }
 }
