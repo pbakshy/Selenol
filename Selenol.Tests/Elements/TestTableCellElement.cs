@@ -20,9 +20,9 @@ namespace Selenol.Tests.Elements
         private TableRowElement parentRow;
 
         [Test]
-        public void GetParent()
+        public void GetParentRow()
         {
-            this.TypedElement.Parent.Should().Be(this.parentRow);
+            this.TypedElement.ParentRow.Should().Be(this.parentRow);
         }
 
         [Test]

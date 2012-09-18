@@ -18,12 +18,12 @@ namespace Selenol.Elements
         public TableCellElement(IWebElement webElement, TableRowElement parent, int index)
             : base(webElement)
         {
-            this.Parent = parent;
+            this.ParentRow = parent;
             this.Index = index;
         }
 
         /// <summary>Gets the parent row.</summary>
-        public TableRowElement Parent { get; private set; }
+        public TableRowElement ParentRow { get; private set; }
 
         /// <summary>Gets the index.</summary>
         public int Index { get; private set; }

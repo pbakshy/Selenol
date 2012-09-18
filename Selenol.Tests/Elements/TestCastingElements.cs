@@ -47,6 +47,8 @@ namespace Selenol.Tests.Elements
             new BasicHtmlElement(webElement).As<NotProperElement>();
         }
 
+// ReSharper disable ClassNeverInstantiated.Local
+// ReSharper disable UnusedParameter.Local
         [Tag("div")]
         private class NotProperElement : BaseHtmlElement
         {
@@ -55,5 +57,7 @@ namespace Selenol.Tests.Elements
             {
             }
         }
+// ReSharper restore ClassNeverInstantiated.Local
+// ReSharper restore UnusedParameter.Local
     }
 }

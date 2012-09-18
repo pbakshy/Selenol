@@ -43,9 +43,9 @@ namespace Selenol.Tests.Elements
         }
 
         [Test]
-        public void GetParent()
+        public void GetParentTable()
         {
-            this.TypedElement.Parent.Should().Be(this.parentTable);
+            this.TypedElement.ParentTable.Should().Be(this.parentTable);
         }
 
         [Test]

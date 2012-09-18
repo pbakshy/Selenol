@@ -22,12 +22,12 @@ namespace Selenol.Elements
         public TableRowElement(IWebElement webElement, TableElement parent, int index)
             : base(webElement)
         {
-            this.Parent = parent;
+            this.ParentTable = parent;
             this.Index = index;
         }
 
         /// <summary>Gets the parent table.</summary>
-        public TableElement Parent { get; private set; }
+        public TableElement ParentTable { get; private set; }
 
         /// <summary>Gets the index.</summary>
         public int Index { get; private set; }
