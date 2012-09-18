@@ -5,9 +5,12 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The listbox html element.</summary>
+    [Tag(HtmlElements.Select)]
     public class ListboxElement : BaseSelectElement
     {
         /// <summary>Initializes a new instance of the <see cref="ListboxElement"/> class.</summary>

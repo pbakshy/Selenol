@@ -25,10 +25,16 @@ namespace Selenol.Elements
 
             this.WebElement = webElement;
 
-            var validators = this.GetType().GetCustomAttributes(true).OfType<IElementValidator>().ToArray();
+            var validators = this.GetType().GetCustomAttributes(false).OfType<IElementValidator>().ToArray();
+            if (validators.Length == 0)
+            {
+                throw new ValidationAbsenceException("Element '{0}' does not have any validation. Please add a validation.".F(this.GetType()));
+            }
+
             if (!validators.Any(x => x.Validate(this)))
             {
-                throw new WrongElementException(validators.First().GetErrorMessage(this), this.WebElement);
+                var message = validators.Select(x => x.GetErrorMessage(this)).Join(" or ");
+                throw new WrongElementException(message, this.WebElement);
             }
         }
 

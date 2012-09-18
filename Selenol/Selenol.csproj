@@ -81,6 +81,7 @@
     <Compile Include="Validation\InputAttribute.cs" />
     <Compile Include="Validation\NotInputAttribute.cs" />
     <Compile Include="Validation\TagAttribute.cs" />
+    <Compile Include="Validation\ValidationAbsenceException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -68,6 +68,7 @@
     <Compile Include="Elements\TestButtonElementHtmlButton.cs" />
     <Compile Include="Elements\TestButtonElementHtmlInput.cs" />
     <Compile Include="Elements\TestCheckboxElement.cs" />
+    <Compile Include="Elements\TestElementValidation.cs" />
     <Compile Include="Elements\TestFileUploadElement.cs" />
     <Compile Include="Elements\TestFormElement.cs" />
     <Compile Include="Elements\TestContainerElement.cs" />

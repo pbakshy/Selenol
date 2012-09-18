@@ -4,9 +4,12 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
+using Selenol.Validation;
+
 namespace Selenol.Elements
 {
     /// <summary>The select html element.</summary>
+    [Tag(HtmlElements.Select)]
     public class SelectElement : BaseSelectElement
     {
         /// <summary>Initializes a new instance of the <see cref="SelectElement"/> class.</summary>

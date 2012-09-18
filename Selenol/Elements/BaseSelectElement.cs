@@ -7,12 +7,10 @@ using System.Linq;
 using OpenQA.Selenium;
 
 using Selenol.Extensions;
-using Selenol.Validation;
 
 namespace Selenol.Elements
 {
     /// <summary>The base select element.</summary>
-    [Tag(HtmlElements.Select)]
     public abstract class BaseSelectElement : BaseHtmlElement
     {
         /// <summary>Initializes a new instance of the <see cref="BaseSelectElement"/> class. Initializes a new instance of the <see cref="SelectElement"/> class.</summary>
