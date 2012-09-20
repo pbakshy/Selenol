@@ -208,12 +208,24 @@ namespace Selenol.Elements
             var constructor = targetType.GetConstructors().FirstOrDefault(IsProperElementConstructor);
             if (constructor == null)
             {
-                throw new MissingMemberException(
+                throw new MissingMethodException(
                     "The element type '{0}' does not have constructor with the only one parameter of type IWebElement. Please add it in order to have ability to use As method."
                         .F(targetType));
             }
 
-            return (TElement)constructor.Invoke(new object[] { this.WebElement });
+            try
+            {
+                return (TElement)constructor.Invoke(new object[] { this.WebElement });
+            }
+            catch (TargetInvocationException ex)
+            {
+                if (ex.InnerException != null)
+                {
+                    throw ex.InnerException;
+                }
+
+                throw;
+            }
         }
 
         private static bool IsProperElementConstructor(ConstructorInfo constructor)

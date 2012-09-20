@@ -431,5 +431,45 @@ namespace Selenol.Elements
 
             return context.FindElements(by ?? By.CssSelector(TextboxesDefaultSelector)).Select(x => new TextboxElement(x)).ToArray();
         }
+
+        /// <summary>Finds a user defined control that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found a user defined control.</returns>
+        public static TControl Control<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (@by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return new BasicHtmlElement(context.FindElement(by)).As<TControl>();
+        }
+
+        /// <summary>Finds user defined controls that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found user defined controls.</returns>
+        public static IEnumerable<TControl> Controls<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (@by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return context.FindElements(by).Select(x => new BasicHtmlElement(x).As<TControl>()).ToArray();
+        }
     }
 }

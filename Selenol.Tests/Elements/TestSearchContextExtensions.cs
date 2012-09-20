@@ -14,6 +14,7 @@ using OpenQA.Selenium;
 using Rhino.Mocks;
 
 using Selenol.Elements;
+using Selenol.Validation;
 
 namespace Selenol.Tests.Elements
 {
@@ -75,8 +76,7 @@ namespace Selenol.Tests.Elements
         public void MultiElementsDefault(Func<ISearchContext, IEnumerable<BaseHtmlElement>> method, string cssSelector, string tag, string type)
         {
             var selector = By.CssSelector(cssSelector);
-            this.context.Stub(x => x.FindElements(selector))
-                .Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.element1, this.element2 }));
+            this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
 
             this.element1.Stub(x => x.TagName).Return(tag);
             this.element2.Stub(x => x.TagName).Return(tag);
@@ -88,6 +88,38 @@ namespace Selenol.Tests.Elements
 
             method(this.context).Select(x => x.Id).Should().Equal(new[] { "e1", "e2" }.AsEnumerable());
             this.context.AssertWasCalled(x => x.FindElements(selector));
+        }
+
+        [Test, ExpectedException(typeof(ValidationAbsenceException))]
+        public void FindUserControlWithoutVerification()
+        {
+            var selector = By.CssSelector("div");
+            this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
+            this.context.Control<UserControlForTestWithoutVerification>(selector);
+        }
+
+        [Test, ExpectedException(typeof(ValidationAbsenceException))]
+        public void FindUserControlsWithoutVerification()
+        {
+            var selector = By.CssSelector("div");
+            this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
+            this.context.Controls<UserControlForTestWithoutVerification>(selector);
+        }
+
+        [Test, ExpectedException(typeof(MissingMethodException))]
+        public void FindUserControlWithoutProperConctructor()
+        {
+            var selector = By.CssSelector("div");
+            this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
+            this.context.Control<UserControlForTestWithoutProperConstructor>(selector);
+        }
+
+        [Test, ExpectedException(typeof(MissingMethodException))]
+        public void FindUserControlsWithoutProperConctructor()
+        {
+            var selector = By.CssSelector("div");
+            this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
+            this.context.Controls<UserControlForTestWithoutProperConstructor>(selector);
         }
 
         protected static IEnumerable<TestCaseData> SingleElementFactory()
@@ -104,6 +136,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Table(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.TextArea(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Textbox(by)), "input", "text");
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Control<UserControlForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsFactory()
@@ -120,6 +153,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Tables(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.TextAreas(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Textboxes(by)), "input", "text");
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Controls<UserControlForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsDefaultFactory()
@@ -147,5 +181,35 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.TextAreas()), "textarea", "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Textboxes()), "input[type='text']", "input", "text");
         }
+
+// ReSharper disable ClassNeverInstantiated.Local
+        [Tag("div")]
+        private class UserControlForTest : BaseHtmlElement
+        {
+            public UserControlForTest(IWebElement webElement)
+                : base(webElement)
+            {
+            }
+        }
+
+        private class UserControlForTestWithoutVerification : BaseHtmlElement
+        {
+            public UserControlForTestWithoutVerification(IWebElement webElement)
+                : base(webElement)
+            {
+            }
+        }
+        
+// ReSharper disable UnusedParameter.Local
+        [Tag("div")]
+        private class UserControlForTestWithoutProperConstructor : BaseHtmlElement
+        {
+            public UserControlForTestWithoutProperConstructor(IWebElement webElement, int index)
+                : base(webElement)
+            {
+            }
+        }
+// ReSharper restore UnusedParameter.Local
+// ReSharper restore ClassNeverInstantiated.Local
     }
 }

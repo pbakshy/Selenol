@@ -38,7 +38,7 @@ namespace Selenol.Tests.Elements
             new ContainerElement(webElement).As<TableElement>().Id.Should().Be("t1");
         }
 
-        [Test, ExpectedException(typeof(MissingMemberException))]
+        [Test, ExpectedException(typeof(MissingMethodException))]
         public void ElementDoesNotHavePropertConstructor()
         {
             var webElement = MockRepository.GenerateStub<IWebElement>();
