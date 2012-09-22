@@ -76,14 +76,14 @@
     <Compile Include="Elements\TableRowElement.cs" />
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
-    <Compile Include="Elements\WrongElementException.cs" />
+    <Compile Include="Validation\Element\WrongElementException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Validation\IElementValidator.cs" />
-    <Compile Include="Validation\InputAttribute.cs" />
-    <Compile Include="Validation\NotInputAttribute.cs" />
-    <Compile Include="Validation\SkipValidationAttribute.cs" />
-    <Compile Include="Validation\TagAttribute.cs" />
+    <Compile Include="Validation\Element\IElementValidator.cs" />
+    <Compile Include="Validation\Element\InputAttribute.cs" />
+    <Compile Include="Validation\Element\NotInputAttribute.cs" />
+    <Compile Include="Validation\Element\SkipValidationAttribute.cs" />
+    <Compile Include="Validation\Element\TagAttribute.cs" />
     <Compile Include="Validation\ValidationAbsenceException.cs" />
   </ItemGroup>
   <ItemGroup>

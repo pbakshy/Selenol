@@ -11,7 +11,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 
 using Selenol.Elements;
-using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Tests.Elements
 {

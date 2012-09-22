@@ -3,7 +3,7 @@
 using System;
 
 using Selenol.Elements;
-using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Tests.Validation
 {

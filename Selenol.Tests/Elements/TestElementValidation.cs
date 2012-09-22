@@ -10,6 +10,7 @@ using Rhino.Mocks;
 
 using Selenol.Elements;
 using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Tests.Elements
 {

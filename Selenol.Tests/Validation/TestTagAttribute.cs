@@ -8,7 +8,7 @@ using OpenQA.Selenium;
 
 using Rhino.Mocks;
 
-using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Tests.Validation
 {

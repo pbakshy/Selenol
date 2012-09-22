@@ -6,7 +6,7 @@ using System.IO;
 using OpenQA.Selenium;
 
 using Selenol.Extensions;
-using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Elements
 {

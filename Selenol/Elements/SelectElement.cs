@@ -4,7 +4,7 @@ using System.Linq;
 
 using OpenQA.Selenium;
 
-using Selenol.Validation;
+using Selenol.Validation.Element;
 
 namespace Selenol.Elements
 {
