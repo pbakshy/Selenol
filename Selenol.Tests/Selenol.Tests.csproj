@@ -70,6 +70,7 @@
     <Compile Include="Elements\TestCastingElements.cs" />
     <Compile Include="Elements\TestCheckboxElement.cs" />
     <Compile Include="Elements\TestElementDeclareRules.cs" />
+    <Compile Include="Elements\TestElementStyles.cs" />
     <Compile Include="Elements\TestElementValidation.cs" />
     <Compile Include="Elements\TestFileUploadElement.cs" />
     <Compile Include="Elements\TestFormElement.cs" />

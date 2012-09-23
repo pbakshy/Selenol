@@ -58,6 +58,8 @@
     <Compile Include="Elements\BaseSelectElement.cs" />
     <Compile Include="Elements\ButtonElement.cs" />
     <Compile Include="Elements\CheckboxElement.cs" />
+    <Compile Include="Elements\CssStyles.cs" />
+    <Compile Include="Elements\ElementStyles.cs" />
     <Compile Include="Elements\FileUploadElement.cs" />
     <Compile Include="Elements\FormElement.cs" />
     <Compile Include="Elements\ContainerElement.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Elements\HtmlElementAttributes.cs" />
     <Compile Include="Elements\HtmlElements.cs" />
     <Compile Include="Elements\HtmlInputTypes.cs" />
+    <Compile Include="Elements\InvalidValueException.cs" />
     <Compile Include="Elements\LinkElement.cs" />
     <Compile Include="Elements\ListboxElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
