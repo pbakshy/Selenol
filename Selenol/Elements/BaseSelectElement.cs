@@ -38,7 +38,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("text");
             }
 
-            this.SelectBy(x => Equals(x.Text, text), "text '{0}'".F(text));
+            this.SelectBy(x => string.Equals(x.Text, text), "text '{0}'".F(text));
             this.Options.First().Select();
         }
 
@@ -51,7 +51,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("value");
             }
 
-            this.SelectBy(x => Equals(x.Value, value), "value '{0}'".F(value));
+            this.SelectBy(x => string.Equals(x.Value, value), "value '{0}'".F(value));
         }
 
         private void SelectBy(Func<OptionElement, bool> predicate, string description)
