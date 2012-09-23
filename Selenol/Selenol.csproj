@@ -79,6 +79,7 @@
     <Compile Include="Elements\TableRowElement.cs" />
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
+    <Compile Include="BasePage.cs" />
     <Compile Include="Validation\Element\WrongElementException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
