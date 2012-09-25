@@ -20,7 +20,7 @@ namespace Selenol.FunctionalTests
             Browser.Current = new FirefoxDriver();
         }
 
-        [AfterScenario]
+        [AfterTestRun]
         public static void AfterScenario()
         {
             var driver = Browser.Current;

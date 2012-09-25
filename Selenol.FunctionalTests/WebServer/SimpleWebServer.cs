@@ -70,8 +70,9 @@ namespace Selenol.FunctionalTests.WebServer
                 var name = this.resourceNames.FirstOrDefault(x => x.EndsWith("." + filename));
                 if (name == null)
                 {
+                    context.Response.StatusCode = 404;
                     context.Response.OutputStream.Close();
-                    return;
+                    continue;
                 }
 
                 using (var stream = this.executingAssembly.GetManifestResourceStream(name))
