@@ -16,7 +16,7 @@ namespace Selenol.Tests.Elements
         [Test]
         public void GetText()
         {
-            this.WebElement.Stub(x => x.Text).Return("some text inside");
+            this.WebElement.Stub(x => x.GetAttribute("value")).Return("some text inside");
             this.TypedElement.Text.Should().Be("some text inside");
         }
 
@@ -25,6 +25,13 @@ namespace Selenol.Tests.Elements
         {
             this.TypedElement.TypeText("some text");
             this.WebElement.AssertWasCalled(x => x.SendKeys("some text"));
+        }
+
+        [Test]
+        public void Clear()
+        {
+            this.TypedElement.Clear();
+            this.WebElement.AssertWasCalled(x => x.Clear());
         }
 
         protected override TextboxElement CreateElement()

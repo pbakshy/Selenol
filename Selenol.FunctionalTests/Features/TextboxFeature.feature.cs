@@ -65,18 +65,41 @@ namespace Selenol.FunctionalTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Type text")]
-        public virtual void TypeText()
+        [NUnit.Framework.DescriptionAttribute("Read default text")]
+        [NUnit.Framework.TestCaseAttribute("some test value", "textbox-1", null)]
+        [NUnit.Framework.TestCaseAttribute("", "textbox-2", null)]
+        public virtual void ReadDefaultText(string text, string id, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Type text", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Read default text", exampleTags);
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 6
- testRunner.When("I type text \"sometext\" to textbox with id \"textbox\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Then(string.Format("text \"{0}\" appears in textbox with id \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 7
- testRunner.Then("text \"sometext\" appears in textbox with id \"textbox\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And(string.Format("text \"{0}\" appears in textbox with id \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Type text")]
+        [NUnit.Framework.TestCaseAttribute("textbox-1", null)]
+        [NUnit.Framework.TestCaseAttribute("textbox-2", null)]
+        public virtual void TypeText(string id, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Type text", exampleTags);
+#line 14
+this.ScenarioSetup(scenarioInfo);
+#line 15
+ testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+ testRunner.When(string.Format("I clear textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 17
+ testRunner.When(string.Format("I type text \"sometext\" to textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 18
+ testRunner.Then(string.Format("text \"sometext\" appears in textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

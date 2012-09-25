@@ -24,14 +24,13 @@ namespace Selenol.Elements
         {
             get
             {
-                return this.WebElement.Text;
+                return this.GetAttributeValue(HtmlElementAttributes.Value);
             }
         }
 
         /// <summary>Simulates typing text into the textbox.</summary>
         /// <param name="text">The text. </param>
-        /// <returns>The same textbox. </returns>
-        public TextboxElement TypeText(string text)
+        public void TypeText(string text)
         {
             if (text == null)
             {
@@ -39,7 +38,12 @@ namespace Selenol.Elements
             }
 
             this.WebElement.SendKeys(text);
-            return this;
+        }
+
+        /// <summary>Clears text in the textbox.</summary>
+        public void Clear()
+        {
+            this.WebElement.Clear();
         }
     }
 }

@@ -19,6 +19,12 @@ namespace Selenol.FunctionalTests.Steps
             Browser.Current.Textbox(By.Id(textboxId)).TypeText(text);
         }
 
+        [When(@"I clear textbox with id ""(.*)""")]
+        public void WhenIClearTextboxWithId(string textboxId)
+        {
+            Browser.Current.Textbox(By.Id(textboxId)).Clear();
+        }
+
         [Then(@"text ""(.*)"" appears in textbox with id ""(.*)""")]
         public void ThenTextAppearsInTextboxWithId(string text, string textboxId)
         {
