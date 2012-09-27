@@ -77,8 +77,6 @@ this.ScenarioSetup(scenarioInfo);
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 6
  testRunner.Then(string.Format("text \"{0}\" appears in textbox with id \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 7
- testRunner.And(string.Format("text \"{0}\" appears in textbox with id \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -90,15 +88,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void TypeText(string id, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Type text", exampleTags);
-#line 14
+#line 13
 this.ScenarioSetup(scenarioInfo);
-#line 15
+#line 14
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 16
+#line 15
  testRunner.When(string.Format("I clear textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
+#line 16
  testRunner.When(string.Format("I type text \"sometext\" to textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 18
+#line 17
  testRunner.Then(string.Format("text \"sometext\" appears in textbox with id \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();

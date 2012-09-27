@@ -4,7 +4,6 @@
 Scenario Outline: Read default text
 	Given that I am viewing "Elements" page
 	Then text "<text>" appears in textbox with id "<id>"
-	And text "<text>" appears in textbox with id "<id>"
 
 	Examples: 
 	| text            | id        |
