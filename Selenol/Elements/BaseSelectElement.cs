@@ -39,7 +39,6 @@ namespace Selenol.Elements
             }
 
             this.SelectBy(x => string.Equals(x.Text, text), "text '{0}'".F(text));
-            this.Options.First().Select();
         }
 
         /// <summary>Select option by value.</summary>

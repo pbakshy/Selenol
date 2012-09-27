@@ -41,7 +41,10 @@ namespace Selenol.Tests.Elements
         {
             this.SetSelectedAndOptions();
             this.TypedElement.SelectOptionByText("c");
+
             this.Option3.AssertWasCalled(x => x.Click());
+            this.Option1.AssertWasNotCalled(x => x.Click());
+            this.Option2.AssertWasNotCalled(x => x.Click());
         }
 
         [Test, ExpectedException(typeof(ElementNotFoundException))]
