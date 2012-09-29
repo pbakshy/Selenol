@@ -37,6 +37,18 @@ namespace Selenol.FunctionalTests.Steps
             GetSelect(id).SelectOptionByValue(value);
         }
 
+        [When(@"I clear text area with id ""(.*)""")]
+        public void WhenIClearTextAreaWithId(string id)
+        {
+            GetTextArea(id).Clear();
+        }
+
+        [When(@"I type text ""(.*)"" to text area with id ""(.*)""")]
+        public void WhenITypeTextToTextAreaWithId(string text, string id)
+        {
+            GetTextArea(id).TypeText(text);
+        }
+
         [Then(@"text ""(.*)"" appears in textbox with id ""(.*)""")]
         public void ThenTextAppearsInTextboxWithId(string text, string id)
         {
@@ -55,6 +67,12 @@ namespace Selenol.FunctionalTests.Steps
             GetSelect(id).SelectedOption.Value.Should().Be(value);
         }
 
+        [Then(@"text ""(.*)"" appears in text area with id ""(.*)""")]
+        public void ThenTextAppearsInTextAreaWithId(string text, string id)
+        {
+            GetTextArea(id).Text.Should().Be(text);
+        }
+
         private static TextboxElement GetTextbox(string id)
         {
             return Browser.Current.Textbox(By.Id(id));
@@ -63,6 +81,11 @@ namespace Selenol.FunctionalTests.Steps
         private static SelectElement GetSelect(string id)
         {
             return Browser.Current.Select(By.Id(id));
+        }
+
+        private static TextAreaElement GetTextArea(string id)
+        {
+            return Browser.Current.TextArea(By.Id(id));
         }
     }
 }

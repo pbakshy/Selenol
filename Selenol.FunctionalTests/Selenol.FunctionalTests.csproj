@@ -68,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SelectFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\TextAreaFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TextAreaFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\TextboxFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -86,6 +91,10 @@
     <None Include="Features\SelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SelectFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TextAreaFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TextAreaFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\TextboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
