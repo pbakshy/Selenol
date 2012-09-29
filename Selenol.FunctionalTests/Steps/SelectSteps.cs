@@ -1,5 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
+using System.Linq;
+
 using FluentAssertions;
 
 using OpenQA.Selenium;
@@ -35,6 +37,12 @@ namespace Selenol.FunctionalTests.Steps
         public void ThenInSelectWithIdSelectedValueIs(string id, string value)
         {
             GetSelect(id).SelectedOption.Value.Should().Be(value);
+        }
+
+        [Then(@"there are selects with id ""(.*)""")]
+        public void ThenThereAreSelectsWithId(string[] ids)
+        {
+            Browser.Current.Selects().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
         }
 
         private static SelectElement GetSelect(string id)

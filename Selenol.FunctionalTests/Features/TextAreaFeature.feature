@@ -10,6 +10,10 @@ Scenario Outline: Read default text
 	| There is some really long text. | text-area-1 |
 	|                                 | text-area-2 |
 
+Scenario: All text areas:
+	Given that I am viewing "Elements" page
+	Then there are text areas with id "text-area-1, text-area-2"
+
 Scenario Outline: Type text
 	Given that I am viewing "Elements" page
 	When I clear text area with id "<id>"

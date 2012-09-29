@@ -10,6 +10,10 @@ Scenario Outline: Read default text
 	| some test value | textbox-1 |
 	|                 | textbox-2 |
 
+Scenario: All textboxes:
+	Given that I am viewing "Elements" page
+	Then there are textboxes with id "textbox-1, textbox-2"
+
 Scenario Outline: Type text
 	Given that I am viewing "Elements" page
 	When I clear textbox with id "<id>"

@@ -25,6 +25,8 @@ namespace Selenol.Elements
 
         private const string TextboxesDefaultSelector = HtmlElements.Input + "[" + HtmlElementAttributes.Type + "='" + HtmlInputTypes.Textbox + "']";
 
+        private const string SelectDefaultSelector = HtmlElements.Select + ":not([" + HtmlElementAttributes.Multiple + "])";
+
         private const string ListboxDefaultSelector = HtmlElements.Select + "[" + HtmlElementAttributes.Multiple + "]";
 
         /// <summary>Finds a button that meets a criteria.</summary>
@@ -332,7 +334,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("context");
             }
 
-            return context.FindElements(by ?? By.CssSelector(HtmlElements.Select)).Select(x => new SelectElement(x)).ToArray();
+            return context.FindElements(by ?? By.CssSelector(SelectDefaultSelector)).Select(x => new SelectElement(x)).ToArray();
         }
 
         /// <summary>Finds a table that meets a criteria.</summary>

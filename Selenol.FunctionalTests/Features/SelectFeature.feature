@@ -11,6 +11,10 @@ Scenario Outline: Get selected element
 	| select-1 | Rat              | rat-value        |
 	| select-2 | Select an animal | Select an animal |
 
+Scenario: All selects
+	Given that I am viewing "Elements" page
+	Then there are selects with id "select-1, select-2"
+
 Scenario Outline: Select element by text
 	Given that I am viewing "Elements" page
 	When I select option with text "<text>" in select with "<id>"

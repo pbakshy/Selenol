@@ -84,21 +84,36 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("All selects")]
+        public virtual void AllSelects()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("All selects", ((string[])(null)));
+#line 14
+this.ScenarioSetup(scenarioInfo);
+#line 15
+ testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 16
+ testRunner.Then("there are selects with id \"select-1, select-2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Select element by text")]
         [NUnit.Framework.TestCaseAttribute("select-1", "Cat", "cat-value", null)]
         [NUnit.Framework.TestCaseAttribute("select-2", "Dog", "dog-value", null)]
         public virtual void SelectElementByText(string id, string text, string value, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Select element by text", exampleTags);
-#line 14
-this.ScenarioSetup(scenarioInfo);
-#line 15
- testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 16
- testRunner.When(string.Format("I select option with text \"{0}\" in select with \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 17
- testRunner.Then(string.Format("in select with id \"{0}\" selected text is \"{1}\"", id, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+ testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 20
+ testRunner.When(string.Format("I select option with text \"{0}\" in select with \"{1}\"", text, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.Then(string.Format("in select with id \"{0}\" selected text is \"{1}\"", id, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
  testRunner.And(string.Format("in select with id \"{0}\" selected value is \"{1}\"", id, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -111,15 +126,15 @@ this.ScenarioSetup(scenarioInfo);
         public virtual void SelectElementByValue(string id, string text, string value, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Select element by value", exampleTags);
-#line 25
-this.ScenarioSetup(scenarioInfo);
-#line 26
- testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 27
- testRunner.When(string.Format("I select option with value \"{0}\" in select with \"{1}\"", value, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 28
- testRunner.Then(string.Format("in select with id \"{0}\" selected text is \"{1}\"", id, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 29
+this.ScenarioSetup(scenarioInfo);
+#line 30
+ testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 31
+ testRunner.When(string.Format("I select option with value \"{0}\" in select with \"{1}\"", value, id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 32
+ testRunner.Then(string.Format("in select with id \"{0}\" selected text is \"{1}\"", id, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 33
  testRunner.And(string.Format("in select with id \"{0}\" selected value is \"{1}\"", id, value), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
