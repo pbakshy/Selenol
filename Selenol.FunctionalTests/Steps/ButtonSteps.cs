@@ -26,14 +26,5 @@ namespace Selenol.FunctionalTests.Steps
         {
             Browser.Current.Buttons().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
         }
-
-        [Then(@"I see an alert with text ""(.*)""")]
-        public void ThenISeeAnAlertWithText(string text)
-        {
-            var alert = Browser.Current.SwitchTo().Alert();
-            var actualText = alert.Text;
-            alert.Accept();
-            actualText.Should().Be(text);
-        }
     }
 }

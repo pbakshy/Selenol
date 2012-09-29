@@ -74,6 +74,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckboxFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\LinkFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LinkFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ListboxFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +108,7 @@
     <Compile Include="Steps\ButtonSteps.cs" />
     <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
+    <Compile Include="Steps\LinkSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
@@ -122,6 +128,10 @@
     <None Include="Features\CheckboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CheckboxFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\LinkFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>LinkFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ListboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
