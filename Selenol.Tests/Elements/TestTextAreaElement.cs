@@ -15,7 +15,7 @@ namespace Selenol.Tests.Elements
         [Test]
         public void GetText()
         {
-            this.WebElement.Stub(x => x.Text).Return("some text inside");
+            this.WebElement.Stub(x => x.GetAttribute("value")).Return("some text inside");
             this.TypedElement.Text.Should().Be("some text inside");
         }
 
