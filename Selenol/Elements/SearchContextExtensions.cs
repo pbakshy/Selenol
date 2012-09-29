@@ -25,6 +25,8 @@ namespace Selenol.Elements
 
         private const string TextboxesDefaultSelector = HtmlElements.Input + "[" + HtmlElementAttributes.Type + "='" + HtmlInputTypes.Textbox + "']";
 
+        private const string ListboxDefaultSelector = HtmlElements.Select + "[" + HtmlElementAttributes.Multiple + "]";
+
         /// <summary>Finds a button that meets a criteria.</summary>
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
@@ -262,7 +264,7 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("context");
             }
 
-            return context.FindElements(by ?? By.CssSelector(HtmlElements.Select)).Select(x => new ListboxElement(x)).ToArray();
+            return context.FindElements(by ?? By.CssSelector(ListboxDefaultSelector)).Select(x => new ListboxElement(x)).ToArray();
         }
 
         /// <summary>Finds a radio button that meets a criteria.</summary>

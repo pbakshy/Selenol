@@ -4,22 +4,41 @@
         <title>Elements test page</title>
     </head>
     <body>
-        <input type="text" id="textbox-1" value="some test value"/>
-        <input type="text" id="textbox-2" />
-
-        <select id="select-1">
-            <option value="dog-value">Dog</option>
-            <option value="cat-value">Cat</option>
-            <option value="rat-value" selected>Rat</option>
-        </select>
-        <select id="select-2">
-            <option>Select an animal</option>
-            <option value="dog-value">Dog</option>
-            <option value="cat-value">Cat</option>
-            <option value="rat-value">Rat</option>
-        </select>
+        <div>
+            <input type="text" id="textbox-1" value="some test value"/>
+            <input type="text" id="textbox-2" />
+        </div>
         
-        <textarea id="text-area-1">There is some really long text.</textarea>
-        <textarea id="text-area-2"></textarea>
+        <div>
+            <select id="select-1">
+                <option value="dog-value">Dog</option>
+                <option value="cat-value">Cat</option>
+                <option value="rat-value" selected>Rat</option>
+            </select>
+            <select id="select-2">
+                <option>Select an animal</option>
+                <option value="dog-value">Dog</option>
+                <option value="cat-value">Cat</option>
+                <option value="rat-value">Rat</option>
+            </select>
+        </div>
+        
+        <div>
+            <textarea id="text-area-1">There is some really long text.</textarea>
+            <textarea id="text-area-2"></textarea>
+        </div>
+        
+        <div>
+            <select id="multi-select-1" multiple>
+                <option value="dog-value" selected="">Dog</option>
+                <option value="cat-value">Cat</option>
+                <option value="rat-value" selected>Rat</option>
+            </select>
+            <select id="multi-select-2" multiple>
+                <option value="dog-value">Dog</option>
+                <option value="cat-value">Cat</option>
+                <option value="rat-value">Rat</option>
+            </select>
+        </div>
     </body>
 </html>

@@ -61,8 +61,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgumentTransforms.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Features\ListboxFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListboxFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SelectFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +93,10 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\ListboxFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ListboxFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

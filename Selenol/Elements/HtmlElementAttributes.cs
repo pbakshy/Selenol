@@ -28,5 +28,8 @@ namespace Selenol.Elements
 
         /// <summary>The hyper reference attribute name.</summary>
         public const string HyperReference = "href";
+
+        /// <summary>The multiple attribute name.</summary>
+        public const string Multiple = "multiple";
     }
 }
