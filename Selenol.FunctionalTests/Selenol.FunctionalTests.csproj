@@ -86,7 +86,10 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
-    <Compile Include="Steps\ElementSteps.cs" />
+    <Compile Include="Steps\ListboxSteps.cs" />
+    <Compile Include="Steps\SelectSteps.cs" />
+    <Compile Include="Steps\TextAreaSteps.cs" />
+    <Compile Include="Steps\TextboxSteps.cs" />
     <Compile Include="TestRunHooks.cs" />
     <Compile Include="WebServer\SimpleWebServer.cs" />
   </ItemGroup>
