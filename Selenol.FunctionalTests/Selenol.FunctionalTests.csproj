@@ -74,6 +74,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ListboxFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\RadioButtonFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RadioButtonFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SelectFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,6 +98,7 @@
     <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
+    <Compile Include="Steps\RadioButtonSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
     <Compile Include="Steps\TextAreaSteps.cs" />
     <Compile Include="Steps\TextboxSteps.cs" />
@@ -110,6 +116,10 @@
     <None Include="Features\ListboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ListboxFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\RadioButtonFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>RadioButtonFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
