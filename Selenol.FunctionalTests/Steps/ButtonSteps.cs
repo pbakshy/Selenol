@@ -18,13 +18,24 @@ namespace Selenol.FunctionalTests.Steps
         [When(@"I click on button with ""(.*)""")]
         public void WhenIClickOnButtonWith(string id)
         {
-            Browser.Current.Button(By.Id(id)).Click();
+            GetButton(id).Click();
         }
 
         [Then(@"there are buttons with id ""(.*)""")]
         public void ThenThereAreButtonsWithId(string[] ids)
         {
             Browser.Current.Buttons().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
+        }
+
+        [Then(@"button with id ""(.*)"" has text ""(.*)""")]
+        public void ThenButtonWithIdHasText(string id, string text)
+        {
+            GetButton(id).Text.Should().Be(text);
+        }
+
+        private static ButtonElement GetButton(string id)
+        {
+            return Browser.Current.Button(By.Id(id));
         }
     }
 }

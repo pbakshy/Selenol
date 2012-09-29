@@ -80,19 +80,36 @@ this.ScenarioSetup(scenarioInfo);
         }
         
         [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Get text")]
+        [NUnit.Framework.TestCaseAttribute("button-1", "Button 1", null)]
+        [NUnit.Framework.TestCaseAttribute("button-2", "Button 2", null)]
+        public virtual void GetText(string id, string text, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get text", exampleTags);
+#line 8
+this.ScenarioSetup(scenarioInfo);
+#line 9
+ testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 10
+ testRunner.Then(string.Format("button with id \"{0}\" has text \"{1}\"", id, text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Click on button")]
         [NUnit.Framework.TestCaseAttribute("button-1", "Button 1 clicked", null)]
         [NUnit.Framework.TestCaseAttribute("button-2", "Button 2 clicked", null)]
         public virtual void ClickOnButton(string id, string text, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Click on button", exampleTags);
-#line 8
+#line 17
 this.ScenarioSetup(scenarioInfo);
-#line 9
+#line 18
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 10
+#line 19
  testRunner.When(string.Format("I click on button with \"{0}\"", id), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 11
+#line 20
  testRunner.Then(string.Format("I see an alert with text \"{0}\"", text), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
