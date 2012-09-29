@@ -64,6 +64,11 @@
     <Compile Include="ArgumentTransforms.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Configuration.cs" />
+    <Compile Include="Features\CheckboxFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckboxFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\ListboxFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -85,6 +90,7 @@
       <DependentUpon>TextboxFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
@@ -96,6 +102,10 @@
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Features\CheckboxFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CheckboxFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\ListboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
