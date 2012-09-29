@@ -44,12 +44,22 @@ namespace Selenol.Elements
             }
         }
 
-        /// <summary>Select the option.</summary>
-        /// <returns>The same option.</returns>
-        public OptionElement Select()
+        /// <summary>Selects the option.</summary>
+        public void Select()
         {
-            this.WebElement.Click();
-            return this;
+            if (!this.IsSelected)
+            {
+                this.WebElement.Click();
+            }
+        }
+
+        /// <summary>Deselects the option.</summary>
+        public void Deselect()
+        {
+            if (this.IsSelected)
+            {
+                this.WebElement.Click();
+            }
         }
     }
 }

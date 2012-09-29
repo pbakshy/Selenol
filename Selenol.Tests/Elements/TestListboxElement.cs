@@ -33,7 +33,8 @@ namespace Selenol.Tests.Elements
             this.Option2.Stub(x => x.GetAttribute("selected")).Return(string.Empty);
             this.Option3.Stub(x => x.GetAttribute("selected")).Return("selected");
 
-            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
+            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(
+                new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
 
             this.TypedElement.SelectedOptions.Select(x => x.Value).Should().Equal(new[] { "b2", "c3" }.AsEnumerable());
         }
@@ -45,7 +46,8 @@ namespace Selenol.Tests.Elements
             this.Option2.Stub(x => x.GetAttribute("selected")).Return(null);
             this.Option3.Stub(x => x.GetAttribute("selected")).Return(null);
 
-            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
+            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(
+                new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
             this.TypedElement.SelectedOptions.Should().BeEmpty();
         }
 
@@ -54,6 +56,46 @@ namespace Selenol.Tests.Elements
         {
             this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement>()));
             this.TypedElement.SelectedOptions.Should().BeEmpty();
+        }
+
+        [Test]
+        public void DeselectOptionByText()
+        {
+            this.SetSelectedAndOptions();
+
+            this.TypedElement.DeselectOptionByText("b");
+
+            this.Option1.AssertWasNotCalled(x => x.Click());
+            this.Option2.AssertWasCalled(x => x.Click());
+            this.Option3.AssertWasNotCalled(x => x.Click());
+        }
+
+        [Test]
+        public void DeselectOptionByValue()
+        {
+            this.SetSelectedAndOptions();
+
+            this.TypedElement.DeselectOptionByValue("b2");
+
+            this.Option1.AssertWasNotCalled(x => x.Click());
+            this.Option2.AssertWasCalled(x => x.Click());
+            this.Option3.AssertWasNotCalled(x => x.Click());
+        }
+
+        [Test]
+        public void ClearSelection()
+        {
+            this.Option1.Stub(x => x.GetAttribute("selected")).Return(null);
+            this.Option2.Stub(x => x.GetAttribute("selected")).Return(string.Empty);
+            this.Option3.Stub(x => x.GetAttribute("selected")).Return(string.Empty);
+
+            this.WebElement.Stub(x => x.FindElements(By.TagName("option"))).Return(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { this.Option1, this.Option2, this.Option3 }));
+
+            this.TypedElement.ClearSelection();
+
+            this.Option1.AssertWasNotCalled(x => x.Click());
+            this.Option2.AssertWasCalled(x => x.Click());
+            this.Option3.AssertWasCalled(x => x.Click());
         }
 
         protected override ListboxElement CreateElement()
