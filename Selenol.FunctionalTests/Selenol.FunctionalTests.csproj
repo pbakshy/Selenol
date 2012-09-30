@@ -74,6 +74,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckboxFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\FileUploadFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileUploadFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\LinkFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -108,6 +113,7 @@
     <Compile Include="Steps\ButtonSteps.cs" />
     <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
+    <Compile Include="Steps\FileUploadSteps.cs" />
     <Compile Include="Steps\LinkSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
@@ -128,6 +134,10 @@
     <None Include="Features\CheckboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CheckboxFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\FileUploadFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FileUploadFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\LinkFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
@@ -161,7 +171,6 @@
       <Name>Selenol</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="TestPages\Elements.html" />
   </ItemGroup>
