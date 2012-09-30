@@ -28,5 +28,12 @@ namespace Selenol.FunctionalTests.Steps
             alert.Accept();
             actualText.Should().Be(text);
         }
+
+        [Then(@"I will navigate to page ""(.*)""")]
+        public void ThenIWillNavigateToPage(string page)
+        {
+            var url = PageUrlPattern.FInv(Configuration.ServerPort, page);
+            Browser.Current.Url.Should().StartWith(url);
+        }
     }
 }

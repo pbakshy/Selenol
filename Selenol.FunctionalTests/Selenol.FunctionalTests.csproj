@@ -79,6 +79,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FileUploadFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\FormFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\LinkFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -114,6 +119,7 @@
     <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
     <Compile Include="Steps\FileUploadSteps.cs" />
+    <Compile Include="Steps\FormSteps.cs" />
     <Compile Include="Steps\LinkSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
@@ -138,6 +144,10 @@
     <None Include="Features\FileUploadFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>FileUploadFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\FormFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>FormFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\LinkFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
