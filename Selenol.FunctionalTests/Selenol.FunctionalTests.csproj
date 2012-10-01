@@ -104,6 +104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SelectFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\TableFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TableFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\TextAreaFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,6 +129,7 @@
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
+    <Compile Include="Steps\TableSteps.cs" />
     <Compile Include="Steps\TextAreaSteps.cs" />
     <Compile Include="Steps\TextboxSteps.cs" />
     <Compile Include="TestRunHooks.cs" />
@@ -164,6 +170,10 @@
     <None Include="Features\SelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SelectFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\TableFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>TableFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\TextAreaFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
