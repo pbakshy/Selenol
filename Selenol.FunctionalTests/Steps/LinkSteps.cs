@@ -15,6 +15,14 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class LinkSteps
     {
+        private LinkElement link;
+
+        [When(@"I look at a link with id ""(.*)""")]
+        public void WhenILookAtALinkWithId(string id)
+        {
+            this.link = GetLink(id);
+        }
+
         [When(@"I click on link with ""(.*)""")]
         public void WhenIClickOnLinkWith(string id)
         {
@@ -27,10 +35,10 @@ namespace Selenol.FunctionalTests.Steps
             Browser.Current.Links().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
         }
 
-        [Then(@"link with id ""(.*)"" has text ""(.*)""")]
-        public void ThenLinkWithIdHasText(string id, string text)
+        [Then(@"the link has text ""(.*)""")]
+        public void ThenLinkWithIdHasText(string text)
         {
-            GetLink(id).Text.Should().Be(text);
+            this.link.Text.Should().Be(text);
         }
 
         private static LinkElement GetLink(string id)

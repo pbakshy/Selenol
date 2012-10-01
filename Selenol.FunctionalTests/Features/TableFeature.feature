@@ -7,7 +7,7 @@ Scenario: All tables
 
 Scenario: Browsing simple table
 	Given that I am viewing "Elements" page
-	When I looking at table with id "table-1"
+	When I look at table with id "table-1"
 	Then the table has 2 rows
 	And each row has 2 cells
 	And 2nd cell in 1st row has text "table 1 row 1 cell 2"
@@ -15,7 +15,7 @@ Scenario: Browsing simple table
 
 Scenario: Browsing complex table
 	Given that I am viewing "Elements" page
-	When I looking at table with id "table-2"
+	When I look at table with id "table-2"
 	Then the table has 5 rows
 	And the table has 2 rows in header
 	And the table has 2 rows in body

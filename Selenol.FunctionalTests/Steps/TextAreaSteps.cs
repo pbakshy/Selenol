@@ -15,33 +15,36 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class TextAreaSteps
     {
-        [When(@"I clear text area with id ""(.*)""")]
-        public void WhenIClearTextAreaWithId(string id)
+        private TextAreaElement textArea;
+
+        [When(@"I look at a text area with id ""(.*)""")]
+        public void WhenILookAtATextAreaWithId(string id)
         {
-            GetTextArea(id).Clear();
+            this.textArea = Browser.Current.TextArea(By.Id(id));
         }
 
-        [When(@"I type text ""(.*)"" to text area with id ""(.*)""")]
-        public void WhenITypeTextToTextAreaWithId(string text, string id)
+        [When(@"I clear the text area")]
+        public void WhenIClearTextAreaWithId()
         {
-            GetTextArea(id).TypeText(text);
+            this.textArea.Clear();
         }
 
-        [Then(@"text ""(.*)"" appears in text area with id ""(.*)""")]
-        public void ThenTextAppearsInTextAreaWithId(string text, string id)
+        [When(@"I type text ""(.*)"" to the text area")]
+        public void WhenITypeTextToTextAreaWithId(string text)
         {
-            GetTextArea(id).Text.Should().Be(text);
+            this.textArea.TypeText(text);
+        }
+
+        [Then(@"text ""(.*)"" appears in the text area")]
+        public void ThenTextAppearsInTextAreaWithId(string text)
+        {
+            this.textArea.Text.Should().Be(text);
         }
 
         [Then(@"there are text areas with id ""(.*)""")]
         public void ThenThereAreTextAreasWithId(string[] ids)
         {
             Browser.Current.TextAreas().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
-
-        private static TextAreaElement GetTextArea(string id)
-        {
-            return Browser.Current.TextArea(By.Id(id));
         }
     }
 }

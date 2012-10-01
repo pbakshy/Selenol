@@ -7,8 +7,9 @@ Scenario: All file uploads
 
 Scenario Outline: Uploading file
 	Given that I am viewing "Elements" page
-	When I choose a file for file upload with id "<id>"
-	Then the file upload with "<id>" has the file
+	When I look at file upload with id "<id>"
+	And I choose a file for the file upload
+	Then the file upload has the file
 
 	Examples: 
 	| id     |

@@ -3,7 +3,8 @@
 
 Scenario Outline: Get selected value
 	Given that I am viewing "Elements" page
-	Then radio button with id "<id>" has value "<value>"
+	When I look at a radio button with id "<id>"
+	Then the radio button has value "<value>"
 
 	Examples: 
 	| id      | value |
@@ -17,8 +18,9 @@ Scenario: All radio buttons
 
 Scenario Outline: Select an option
 	Given that I am viewing "Elements" page
-	When I select radio button with "<id>"
-	Then radio button with id "<id>" has value "true"
+	When I look at a radio button with id "<id>"
+	And I check the radio button
+	Then the radio button has value "true"
 
 	Examples: 
 	| id      |

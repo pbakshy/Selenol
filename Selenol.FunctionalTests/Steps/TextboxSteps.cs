@@ -15,33 +15,36 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class TextboxSteps
     {
-        [When(@"I type text ""(.*)"" to textbox with id ""(.*)""")]
-        public void WhenITypeTextToTextboxWithId(string text, string id)
+        private TextboxElement textbox;
+
+        [When(@"I look at a textbox with id ""(.*)""")]
+        public void WhenILookAtATextboxWithId(string id)
         {
-            GetTextbox(id).TypeText(text);
+            this.textbox = Browser.Current.Textbox(By.Id(id));
         }
 
-        [When(@"I clear textbox with id ""(.*)""")]
-        public void WhenIClearTextboxWithId(string id)
+        [When(@"I type text ""(.*)"" to the textbox")]
+        public void WhenITypeTextToTextboxWithId(string text)
         {
-            GetTextbox(id).Clear();
+            this.textbox.TypeText(text);
         }
 
-        [Then(@"text ""(.*)"" appears in textbox with id ""(.*)""")]
-        public void ThenTextAppearsInTextboxWithId(string text, string id)
+        [When(@"I clear the textbox")]
+        public void WhenIClearTextboxWithId()
         {
-            GetTextbox(id).Text.Should().Be(text);
+            this.textbox.Clear();
+        }
+
+        [Then(@"text ""(.*)"" appears in the textbox")]
+        public void ThenTextAppearsInTextboxWithId(string text)
+        {
+            this.textbox.Text.Should().Be(text);
         }
 
         [Then(@"there are textboxes with id ""(.*)""")]
         public void ThenThereAreTextboxesWithId(string[] ids)
         {
             Browser.Current.Textboxes().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
-
-        private static TextboxElement GetTextbox(string id)
-        {
-            return Browser.Current.Textbox(By.Id(id));
         }
     }
 }

@@ -15,39 +15,42 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class SelectSteps
     {
-        [When(@"I select option with text ""(.*)"" in select with ""(.*)""")]
-        public void WhenISelectOptionWithInSelectWith(string text, string id)
+        private SelectElement select;
+
+        [When(@"I look at a select with id ""(.*)""")]
+        public void WhenILookAtASelectWithId(string id)
         {
-            GetSelect(id).SelectOptionByText(text);
+            this.select = Browser.Current.Select(By.Id(id));
         }
 
-        [When(@"I select option with value ""(.*)"" in select with ""(.*)""")]
-        public void WhenISelectOptionWithValueInSelectWith(string value, string id)
+        [When(@"I select option with text ""(.*)"" in the select")]
+        public void WhenISelectOptionWithInSelectWith(string text)
         {
-            GetSelect(id).SelectOptionByValue(value);
+            this.select.SelectOptionByText(text);
         }
 
-        [Then(@"in select with id ""(.*)"" selected text is ""(.*)""")]
-        public void ThenInSelectWithIdSelectedTextIs(string id, string text)
+        [When(@"I select option with value ""(.*)"" in the select")]
+        public void WhenISelectOptionWithValueInSelectWith(string value)
         {
-            GetSelect(id).SelectedOption.Text.Should().Be(text);
+            this.select.SelectOptionByValue(value);
         }
 
-        [Then(@"in select with id ""(.*)"" selected value is ""(.*)""")]
-        public void ThenInSelectWithIdSelectedValueIs(string id, string value)
+        [Then(@"in the select selected text is ""(.*)""")]
+        public void ThenInSelectWithIdSelectedTextIs(string text)
         {
-            GetSelect(id).SelectedOption.Value.Should().Be(value);
+            this.select.SelectedOption.Text.Should().Be(text);
+        }
+
+        [Then(@"in the select selected value is ""(.*)""")]
+        public void ThenInSelectWithIdSelectedValueIs(string value)
+        {
+            this.select.SelectedOption.Value.Should().Be(value);
         }
 
         [Then(@"there are selects with id ""(.*)""")]
         public void ThenThereAreSelectsWithId(string[] ids)
         {
             Browser.Current.Selects().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
-
-        private static SelectElement GetSelect(string id)
-        {
-            return Browser.Current.Select(By.Id(id));
         }
     }
 }

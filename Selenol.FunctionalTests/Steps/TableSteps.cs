@@ -17,7 +17,7 @@ namespace Selenol.FunctionalTests.Steps
     {
         private TableElement table;
 
-        [When(@"I looking at table with id ""(.*)""")]
+        [When(@"I look at table with id ""(.*)""")]
         public void WhenIBrowsingTableWithId(string id)
         {
             this.table = Browser.Current.Table(By.Id(id));

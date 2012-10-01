@@ -3,7 +3,8 @@
 
 Scenario Outline: Read default text
 	Given that I am viewing "Elements" page
-	Then text "<text>" appears in textbox with id "<id>"
+	When I look at a textbox with id "<id>"
+	Then text "<text>" appears in the textbox
 
 	Examples: 
 	| text            | id        |
@@ -16,9 +17,10 @@ Scenario: All textboxes:
 
 Scenario Outline: Type text
 	Given that I am viewing "Elements" page
-	When I clear textbox with id "<id>"
-	When I type text "sometext" to textbox with id "<id>"
-	Then text "sometext" appears in textbox with id "<id>"
+	When I look at a textbox with id "<id>"
+	And I clear the textbox 
+	And I type text "sometext" to the textbox 
+	Then text "sometext" appears in the textbox
 
 	Examples: 
 	| id        |

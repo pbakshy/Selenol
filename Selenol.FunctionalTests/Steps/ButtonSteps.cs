@@ -15,10 +15,18 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class ButtonSteps
     {
+        private ButtonElement button;
+
         [When(@"I click on button with ""(.*)""")]
         public void WhenIClickOnButtonWith(string id)
         {
             GetButton(id).Click();
+        }
+
+        [When(@"I look at a button with id ""(.*)""")]
+        public void WhenILookAtAButtonWithId(string id)
+        {
+            this.button = GetButton(id);
         }
 
         [Then(@"there are buttons with id ""(.*)""")]
@@ -27,10 +35,10 @@ namespace Selenol.FunctionalTests.Steps
             Browser.Current.Buttons().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
         }
 
-        [Then(@"button with id ""(.*)"" has text ""(.*)""")]
-        public void ThenButtonWithIdHasText(string id, string text)
+        [Then(@"the button has text ""(.*)""")]
+        public void ThenButtonWithIdHasText(string text)
         {
-            GetButton(id).Text.Should().Be(text);
+            this.button.Text.Should().Be(text);
         }
 
         private static ButtonElement GetButton(string id)

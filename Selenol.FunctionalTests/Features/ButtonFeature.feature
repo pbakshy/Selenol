@@ -7,7 +7,8 @@ Scenario: All buttons
 
 Scenario Outline: Get text
 	Given that I am viewing "Elements" page
-	Then button with id "<id>" has text "<text>"
+	When I look at a button with id "<id>"
+	Then the button has text "<text>"
 
 	Examples: 
 	| id       | text     |

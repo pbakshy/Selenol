@@ -89,7 +89,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 9
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 10
- testRunner.When("I looking at table with id \"table-1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I look at table with id \"table-1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
  testRunner.Then("the table has 2 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 12
@@ -112,7 +112,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 17
  testRunner.Given("that I am viewing \"Elements\" page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line 18
- testRunner.When("I looking at table with id \"table-2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I look at table with id \"table-2\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 19
  testRunner.Then("the table has 5 rows", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line 20

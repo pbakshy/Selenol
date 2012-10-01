@@ -15,27 +15,30 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class RadioButtonSteps
     {
-        [When(@"I select radio button with ""(.*)""")]
-        public void WhenISelectRadionButtonWith(string id)
+        private RadioButtonElement radioButton;
+
+        [When(@"I check the radio button")]
+        public void WhenISelectRadionButtonWith()
         {
-            GetRadioButton(id).Check();
+            this.radioButton.Check();
         }
 
-        [Then(@"radio button with id ""(.*)"" has value ""(.*)""")]
-        public void ThenRadioButtonWithIdHasValue(string id, bool value)
+        [When(@"I look at a radio button with id ""(.*)""")]
+        public void WhenILookAtARadioButtonWithId(string id)
         {
-            GetRadioButton(id).IsChecked.Should().Be(value);
+            this.radioButton = Browser.Current.RadioButton(By.Id(id));
+        }
+
+        [Then(@"the radio button has value ""(.*)""")]
+        public void ThenRadioButtonWithIdHasValue(bool value)
+        {
+            this.radioButton.IsChecked.Should().Be(value);
         }
 
         [Then(@"there are radio buttons with id ""(.*)""")]
         public void ThenThereAreRadioButtonsWithId(string[] ids)
         {
             Browser.Current.RadioButtons().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
-
-        private static RadioButtonElement GetRadioButton(string id)
-        {
-            return Browser.Current.RadioButton(By.Id(id));
         }
     }
 }

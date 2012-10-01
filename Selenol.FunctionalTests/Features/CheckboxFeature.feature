@@ -3,7 +3,8 @@
 
 Scenario Outline: Get value
 	Given that I am viewing "Elements" page
-	Then checkbox with "<id>" has value "<value>"
+	When I look at a checkbox with id "<id>"
+	Then the checkbox has value "<value>"
 
 	Examples: 
 	| id         | value |
@@ -16,10 +17,11 @@ Scenario: All checkboxes
 
 Scenario Outline: Change state
 	Given that I am viewing "Elements" page
-	When I checked checkbox with id "<id>"
-	Then checkbox with "<id>" has value "true"
-	When I uncheck checkbox with id "<id>"
-	Then checkbox with "<id>" has value "false"
+	When I look at a checkbox with id "<id>"
+	And I check the checkbox
+	Then the checkbox has value "true"
+	When I uncheck the checkbox
+	Then the checkbox has value "false"
 
 	Examples: 
 	| id         |

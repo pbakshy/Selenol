@@ -17,17 +17,25 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class FileUploadSteps
     {
+        private FileUploadElement fileUpload;
+
         private string fileName;
 
-        [When(@"I choose a file for file upload with id ""(.*)""")]
-        public void WhenIChooseAFileForFileUploadWithId(string id)
+        [When(@"I look at file upload with id ""(.*)""")]
+        public void WhenILookAtFileUploadWithId(string id)
+        {
+            this.fileUpload = Browser.Current.FileUpload(By.Id(id));
+        }
+
+        [When(@"I choose a file for the file upload")]
+        public void WhenIChooseAFileForFileUploadWithId()
         {
             var assemblyPath = Path.GetDirectoryName(Assembly.GetAssembly(typeof(FileUploadSteps)).Location);
 // ReSharper disable AssignNullToNotNullAttribute
             var assemblyDirectory = new DirectoryInfo(assemblyPath);
 // ReSharper restore AssignNullToNotNullAttribute
             this.fileName = assemblyDirectory.GetFiles().First().FullName;
-            GetFileUpload(id).SelectFile(this.fileName);
+            this.fileUpload.SelectFile(this.fileName);
         }
 
         [Then(@"there are file uploads with id ""(.*)""")]
@@ -36,15 +44,10 @@ namespace Selenol.FunctionalTests.Steps
             Browser.Current.FileUploads().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
         }
 
-        [Then(@"the file upload with ""(.*)"" has the file")]
-        public void ThenTheFileUploadWithHasTheFile(string id)
+        [Then(@"the file upload has the file")]
+        public void ThenTheFileUploadWithHasTheFile()
         {
-            GetFileUpload(id).FileName.Should().Be(this.fileName);
-        }
-
-        private static FileUploadElement GetFileUpload(string id)
-        {
-            return Browser.Current.FileUpload(By.Id(id));
+            this.fileUpload.FileName.Should().Be(this.fileName);
         }
     }
 }

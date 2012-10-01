@@ -15,33 +15,36 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class CheckboxSteps
     {
-        [When(@"I checked checkbox with id ""(.*)""")]
-        public void WhenICheckedCheckboxWithId(string id)
+        private CheckboxElement checkbox;
+
+        [When(@"I look at a checkbox with id ""(.*)""")]
+        public void WhenILookAtACheckboxWithId(string id)
         {
-            GetCheckbox(id).Check();
+            this.checkbox = Browser.Current.Checkbox(By.Id(id));
         }
 
-        [When(@"I uncheck checkbox with id ""(.*)""")]
-        public void WhenIUncheckCheckboxWithId(string id)
+        [When(@"I check the checkbox")]
+        public void WhenICheckedCheckboxWithId()
         {
-            GetCheckbox(id).Uncheck();
+            this.checkbox.Check();
         }
 
-        [Then(@"checkbox with ""(.*)"" has value ""(.*)""")]
-        public void ThenChecboxWithHasValue(string id, bool value)
+        [When(@"I uncheck the checkbox")]
+        public void WhenIUncheckCheckboxWithId()
         {
-            GetCheckbox(id).IsChecked.Should().Be(value);
+            this.checkbox.Uncheck();
+        }
+
+        [Then(@"the checkbox has value ""(.*)""")]
+        public void ThenChecboxWithHasValue(bool value)
+        {
+            this.checkbox.IsChecked.Should().Be(value);
         }
 
         [Then(@"there are checkboxes with id ""(.*)""")]
         public void ThenThereAreCheckboxesWithId(string[] ids)
         {
             Browser.Current.Checkboxes().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
- 
-        private static CheckboxElement GetCheckbox(string id)
-        {
-            return Browser.Current.Checkbox(By.Id(id));
         }
     }
 }

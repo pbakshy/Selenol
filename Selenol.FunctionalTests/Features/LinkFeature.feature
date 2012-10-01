@@ -7,7 +7,8 @@ Scenario: All links
 
 Scenario Outline: Get text
 	Given that I am viewing "Elements" page
-	Then link with id "<id>" has text "<text>"
+	When I look at a link with id "<id>"
+	Then the link has text "<text>"
 
 	Examples: 
 	| id     | text   |

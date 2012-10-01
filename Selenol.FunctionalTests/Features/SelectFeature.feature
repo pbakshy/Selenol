@@ -3,8 +3,9 @@
 
 Scenario Outline: Get selected element
 	Given that I am viewing "Elements" page
-	Then in select with id "<id>" selected text is "<text>"
-	And in select with id "<id>" selected value is "<value>"
+	When I look at a select with id "<id>"
+	Then in the select selected text is "<text>"
+	And in the select selected value is "<value>"
 
 	Examples: 
 	| id       | text             | value            |
@@ -17,9 +18,10 @@ Scenario: All selects
 
 Scenario Outline: Select element by text
 	Given that I am viewing "Elements" page
-	When I select option with text "<text>" in select with "<id>"
-	Then in select with id "<id>" selected text is "<text>"
-	And in select with id "<id>" selected value is "<value>"
+	When I look at a select with id "<id>"
+	And I select option with text "<text>" in the select 
+	Then in the select selected text is "<text>"
+	And in the select selected value is "<value>"
 
 	Examples: 
 	| id       | text | value     |
@@ -28,9 +30,10 @@ Scenario Outline: Select element by text
 
 Scenario Outline: Select element by value
 	Given that I am viewing "Elements" page
-	When I select option with value "<value>" in select with "<id>"
-	Then in select with id "<id>" selected text is "<text>"
-	And in select with id "<id>" selected value is "<value>"
+	When I look at a select with id "<id>"
+	And I select option with value "<value>" in the select
+	Then in the select selected text is "<text>"
+	And in the select selected value is "<value>"
 
 	Examples: 
 	| id       | text | value     |

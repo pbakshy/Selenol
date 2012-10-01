@@ -15,45 +15,48 @@ namespace Selenol.FunctionalTests.Steps
     [Binding]
     public class ListboxSteps
     {
-        [When(@"I clear selection in listbox with id ""(.*)""")]
-        public void WhenIClearSelectionInListboxWithId(string id)
+        private ListboxElement listbox;
+
+        [When(@"I look at a listbox with id ""(.*)""")]
+        public void WhenILookAtAListboxWithId(string id)
         {
-            GetListbox(id).ClearSelection();
+            this.listbox = Browser.Current.Listbox(By.Id(id));
         }
 
-        [When(@"I select an option with text ""(.*)"" in listbox with id ""(.*)""")]
-        public void WhenISelectAnOptionWithTextInListboxWithId(string text, string id)
+        [When(@"I clear selection in the listbox")]
+        public void WhenIClearSelectionInListboxWithId()
         {
-            GetListbox(id).SelectOptionByText(text);
+            this.listbox.ClearSelection();
         }
 
-        [When(@"I select an option with value ""(.*)"" in listbox with id ""(.*)""")]
-        public void WhenISelectAnOptionWithValueInListboxWithId(string value, string id)
+        [When(@"I select an option with text ""(.*)"" in the listbox")]
+        public void WhenISelectAnOptionWithTextInListboxWithId(string text)
         {
-            GetListbox(id).SelectOptionByValue(value);
+            this.listbox.SelectOptionByText(text);
         }
 
-        [Then(@"options with text ""(.*)"" are selected in select with id ""(.*)""")]
-        public void ThenOptionsWithTextAreSelectedInSelectWithId(string[] texts, string id)
+        [When(@"I select an option with value ""(.*)"" in the listbox")]
+        public void WhenISelectAnOptionWithValueInListboxWithId(string value)
         {
-            GetListbox(id).SelectedOptions.Select(x => x.Text).Should().BeEquivalentTo(texts.AsEnumerable());
+            this.listbox.SelectOptionByValue(value);
         }
 
-        [Then(@"options with value ""(.*)"" are selected in select with id ""(.*)""")]
-        public void ThenOptionsWithValueAreSelectedInSelectWithId(string[] values, string id)
+        [Then(@"options with text ""(.*)"" are selected in the listbox")]
+        public void ThenOptionsWithTextAreSelectedInSelectWithId(string[] texts)
         {
-            GetListbox(id).SelectedOptions.Select(x => x.Value).Should().BeEquivalentTo(values.AsEnumerable());
+            this.listbox.SelectedOptions.Select(x => x.Text).Should().BeEquivalentTo(texts.AsEnumerable());
+        }
+
+        [Then(@"options with value ""(.*)"" are selected in the listbox")]
+        public void ThenOptionsWithValueAreSelectedInSelectWithId(string[] values)
+        {
+            this.listbox.SelectedOptions.Select(x => x.Value).Should().BeEquivalentTo(values.AsEnumerable());
         }
 
         [Then(@"there are lisboxes with id ""(.*)""")]
         public void ThenThereAreLisboxesWithId(string[] ids)
         {
             Browser.Current.Listboxes().Select(x => x.Id).Should().BeEquivalentTo(ids.AsEnumerable());
-        }
-
-        private static ListboxElement GetListbox(string id)
-        {
-            return Browser.Current.Listbox(By.Id(id));
-        }        
+        }   
     }
 }
