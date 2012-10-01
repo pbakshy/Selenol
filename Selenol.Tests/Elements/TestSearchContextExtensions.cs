@@ -175,9 +175,9 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.FileUploads()), "input[type='file']", "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Forms()), "form", "form", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Links()), "a", "a", null);
-            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Listboxes()), "select", "select", null);
+            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Listboxes()), "select[multiple]", "select", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.RadioButtons()), "input[type='radio']", "input", "radio");
-            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Selects()), "select", "select", null);
+            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Selects()), "select:not([multiple])", "select", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Tables()), "table", "table", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.TextAreas()), "textarea", "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Textboxes()), "input[type='text']", "input", "text");
