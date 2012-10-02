@@ -167,7 +167,7 @@ namespace Selenol.Tests.Elements
         public void GetPreviousSibling()
         {
             var sibling = MockRepository.GenerateStub<IWebElement>();
-            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Return(sibling);
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*[1]"))).Return(sibling);
             sibling.Stub(x => x.GetAttribute("id")).Return("sibling");
 
             var actualParent = this.TypedElement.PreviousSibling;
@@ -192,7 +192,7 @@ namespace Selenol.Tests.Elements
         [Test]
         public void HasPreviousSibling()
         {
-            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Return(MockRepository.GenerateStub<IWebElement>());
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*[1]"))).Return(MockRepository.GenerateStub<IWebElement>());
             this.TypedElement.HasPreviousSibling.Should().BeTrue();
         }
 
@@ -213,7 +213,7 @@ namespace Selenol.Tests.Elements
         [Test]
         public void DoesNotHasPreviousSibling()
         {
-            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*"))).Throw(new NoSuchElementException());
+            this.WebElement.Stub(x => x.FindElement(By.XPath("./preceding-sibling::*[1]"))).Throw(new NoSuchElementException());
             this.TypedElement.HasPreviousSibling.Should().BeFalse();
         }
 

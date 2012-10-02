@@ -20,7 +20,7 @@ namespace Selenol.Elements
 
         private const string NextSiblingXPathSelector = "./following-sibling::*";
 
-        private const string PreviousSiblingXPathSelector = "./preceding-sibling::*";
+        private const string PreviousSiblingXPathSelector = "./preceding-sibling::*[1]";
 
         /// <summary>Initializes a new instance of the <see cref="BaseHtmlElement"/> class.</summary>
         /// <param name="webElement">The web element.</param>
