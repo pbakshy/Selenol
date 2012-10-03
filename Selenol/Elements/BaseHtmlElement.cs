@@ -32,6 +32,7 @@ namespace Selenol.Elements
             }
 
             this.WebElement = webElement;
+            this.Styles = new ElementStyles(this.WebElement);
 
             var validators = this.GetType().GetCustomAttributes(false).OfType<IElementValidator>().ToArray();
             if (validators.Length == 0)
@@ -147,6 +148,9 @@ namespace Selenol.Elements
                 return new BasicHtmlElement(this.WebElement.FindElement(By.XPath(PreviousSiblingXPathSelector)));
             }
         }
+
+        /// <summary>Gets the element styles.</summary>
+        public ElementStyles Styles { get; private set; }
 
         /// <summary>Gets the element tag name.</summary>
         internal string TagName

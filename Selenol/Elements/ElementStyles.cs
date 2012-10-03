@@ -26,6 +26,10 @@ namespace Selenol.Elements
             @"^rgb\s*\(\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\s*\)$", 
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+        private static readonly Regex rgbaColorRx = new Regex(
+            @"^rgba\s*\(\s*(\d{1,3}),\s*(\d{1,3}),\s*(\d{1,3})\s*,\s*(1|0\.\d+)\s*\)$",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
         private readonly IWebElement webElement;
 
         /// <summary>Initializes a new instance of the <see cref="ElementStyles"/> class.</summary>
@@ -120,6 +124,17 @@ namespace Selenol.Elements
                 return Color.FromArgb(
                     ParseInteger(match.Groups[1].Value, false), 
                     ParseInteger(match.Groups[2].Value, false), 
+                    ParseInteger(match.Groups[3].Value, false));
+            }
+
+            match = rgbaColorRx.Match(styleValue);
+            if (match.Success)
+            {
+                var alpha = (int)Math.Round(double.Parse(match.Groups[4].Value, CultureInfo.InvariantCulture) * 255);
+                return Color.FromArgb(
+                    alpha,
+                    ParseInteger(match.Groups[1].Value, false),
+                    ParseInteger(match.Groups[2].Value, false),
                     ParseInteger(match.Groups[3].Value, false));
             }
 

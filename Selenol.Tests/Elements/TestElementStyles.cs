@@ -79,6 +79,27 @@ namespace Selenol.Tests.Elements
             accessor(this.styles).Should().Be(Color.FromArgb(112, 80, 250));
         }
 
+        [Test, TestCaseSource("GetColorProperty")]
+        public void GetColorRGBA(string style, Func<ElementStyles, Color> accessor)
+        {
+            this.webElement.Expect(x => x.GetCssValue(style)).Return("rgba(112, 80, 0, 0.7)");
+            accessor(this.styles).Should().Be(Color.FromArgb(178, 112, 80, 0));
+        }
+
+        [Test, TestCaseSource("GetColorProperty"), Ignore("Was not implemented yet.")]
+        public void GetColorRGBPercents(string style, Func<ElementStyles, Color> accessor)
+        {
+            this.webElement.Expect(x => x.GetCssValue(style)).Return("rgb(50%, 0, 25%)");
+            accessor(this.styles).Should().Be(Color.FromArgb(128, 0, 64));
+        }
+
+        [Test, TestCaseSource("GetColorProperty"), Ignore("Was not implemented yet.")]
+        public void GetColorRGBAPercents(string style, Func<ElementStyles, Color> accessor)
+        {
+            this.webElement.Expect(x => x.GetCssValue(style)).Return("rgba(50%, 0, 25%, 0.5)");
+            accessor(this.styles).Should().Be(Color.FromArgb(128, 128, 0, 64));
+        }
+
         [Test, TestCaseSource("GetColorProperty"), Ignore("Was not implemented yet.")]
         public void GetColorHSL(string style, Func<ElementStyles, Color> accessor)
         {
