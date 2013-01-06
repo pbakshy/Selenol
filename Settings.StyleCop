@@ -101,7 +101,11 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+      <AnalyzerSettings>
+        <CollectionProperty Name="Hungarian">
+          <Value>js</Value>
+        </CollectionProperty>
+      </AnalyzerSettings>
     </Analyzer>
   </Analyzers>
 </StyleCopSettings>
