@@ -107,7 +107,7 @@ namespace Selenol.Page
 
         private void Validate()
         {
-            var validators = this.GetType().GetCustomAttributes(false).OfType<IPageUrlValidator>().ToArray();
+            var validators = this.GetType().GetCustomAttributes(true).OfType<IPageUrlValidator>().ToArray();
             if (validators.Length == 0)
             {
                 throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add an Url validation.".F(this.GetType()));
