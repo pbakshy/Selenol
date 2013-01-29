@@ -20,7 +20,7 @@ namespace Selenol.FunctionalTests.Steps
         [When(@"I look at an element with id ""(.*)""")]
         public void WhenILookAtAnElementWithId(string id)
         {
-            this.element = Browser.Current.Element(By.Id(id));
+            this.element = Browser.Current.Container(By.Id(id));
         }
 
         [When(@"I go to a parent of the element")]

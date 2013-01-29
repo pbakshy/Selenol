@@ -96,7 +96,7 @@ namespace Selenol.Tests.Elements
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
-            this.context.Control<UserControlForTestWithoutVerification>(selector);
+            this.context.Element<UserControlForTestWithoutVerification>(selector);
         }
 
         [Test, ExpectedException(typeof(ValidationAbsenceException))]
@@ -104,7 +104,7 @@ namespace Selenol.Tests.Elements
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
-            this.context.Controls<UserControlForTestWithoutVerification>(selector);
+            this.context.Elements<UserControlForTestWithoutVerification>(selector);
         }
 
         [Test, ExpectedException(typeof(MissingMethodException))]
@@ -112,7 +112,7 @@ namespace Selenol.Tests.Elements
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
-            this.context.Control<UserControlForTestWithoutProperConstructor>(selector);
+            this.context.Element<UserControlForTestWithoutProperConstructor>(selector);
         }
 
         [Test, ExpectedException(typeof(MissingMethodException))]
@@ -120,14 +120,14 @@ namespace Selenol.Tests.Elements
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
-            this.context.Controls<UserControlForTestWithoutProperConstructor>(selector);
+            this.context.Elements<UserControlForTestWithoutProperConstructor>(selector);
         }
 
         protected static IEnumerable<TestCaseData> SingleElementFactory()
         {
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Button(by)), "button", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Checkbox(by)), "input", "checkbox");
-            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Element(by)), "p", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Container(by)), "p", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.FileUpload(by)), "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Form(by)), "form", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Link(by)), "a", null);
@@ -137,14 +137,14 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Table(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.TextArea(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Textbox(by)), "input", "text");
-            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Control<UserControlForTest>(by)), "div", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Element<UserControlForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsFactory()
         {
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Buttons(by)), "button", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Checkboxes(by)), "input", "checkbox");
-            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Elements(by)), "p", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Containers(by)), "p", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.FileUploads(by)), "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Forms(by)), "form", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Links(by)), "a", null);
@@ -154,7 +154,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Tables(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.TextAreas(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Textboxes(by)), "input", "text");
-            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Controls<UserControlForTest>(by)), "div", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Elements<UserControlForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsDefaultFactory()
@@ -171,7 +171,7 @@ namespace Selenol.Tests.Elements
                     "input",
                     "checkbox");
 
-            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Elements()), "*", "p", null);
+            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Containers()), "*", "p", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.FileUploads()), "input[type='file']", "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Forms()), "form", "form", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Links()), "a", "a", null);

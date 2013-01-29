@@ -169,7 +169,7 @@ namespace Selenol.Elements
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
         /// <returns>The found element.</returns>
-        public static ContainerElement Element(this ISearchContext context, By by)
+        public static ContainerElement Container(this ISearchContext context, By by)
         {
             if (context == null)
             {
@@ -189,7 +189,7 @@ namespace Selenol.Elements
         /// <param name="by">The criteria.</param>
         /// <returns>The found elements.</returns>
         /// <remarks>If <paramref name="by"/> is skipped all elements will be returned.</remarks>
-        public static IEnumerable<ContainerElement> Elements(this ISearchContext context, By by = null)
+        public static IEnumerable<ContainerElement> Containers(this ISearchContext context, By by = null)
         {
             if (context == null)
             {
@@ -439,12 +439,12 @@ namespace Selenol.Elements
             return context.FindElements(by ?? By.CssSelector(TextboxesDefaultSelector)).Select(x => new TextboxElement(x)).ToArray();
         }
 
-        /// <summary>Finds a user defined control that meets a criteria.</summary>
-        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <summary>Finds a user defined element that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined element.</typeparam>
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
-        /// <returns>The found a user defined control.</returns>
-        public static TControl Control<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
+        /// <returns>The found a user defined element.</returns>
+        public static TControl Element<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
         {
             if (context == null)
             {
@@ -459,12 +459,12 @@ namespace Selenol.Elements
             return new BasicHtmlElement(context.FindElement(by)).As<TControl>();
         }
 
-        /// <summary>Finds user defined controls that meets a criteria.</summary>
-        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <summary>Finds user defined elements that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined element.</typeparam>
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
-        /// <returns>The found user defined controls.</returns>
-        public static IEnumerable<TControl> Controls<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
+        /// <returns>The found user defined elements.</returns>
+        public static IEnumerable<TControl> Elements<TControl>(this ISearchContext context, By by) where TControl : BaseHtmlElement
         {
             if (context == null)
             {
