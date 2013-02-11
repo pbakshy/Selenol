@@ -66,13 +66,6 @@ namespace Selenol.Tests.Validation.Page
         }
 
         [Test]
-        [ExpectedException(typeof(ValidationAbsenceException))]
-        public void ValidationDoesNotInherit()
-        {
-            PageFactory.Create<DerivedPage>(this.webDriver, this.javaScriptExecutor);
-        }
-
-        [Test]
         public void HttpsCheckFails()
         {
             this.webDriver.Url = "http://mysite/school/class.aspx";
@@ -100,28 +93,28 @@ namespace Selenol.Tests.Validation.Page
             Assert.DoesNotThrow(() => PageFactory.Create<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
         }
 
-        private class PageWithoutValidation : BasePage
+        public class PageWithoutValidation : BasePage
         {
         }
 
         [Url("/home/page.aspx", Https = false)]
-        private class PageWithSingleValidation : BasePage
+        public class PageWithSingleValidation : BasePage
         {
         }
 
         [Url("/school/class.aspx", Https = true)]
-        private class PageWithHttps : BasePage
+        public class PageWithHttps : BasePage
         {
         }
 
         [Url("/mountains/everest.aspx")]
         [Url("/sweets/icecream.aspx")]
         [Url("/mytest/page.aspx", Https = true)]
-        private class PageWithSeveralValidations : BasePage
+        public class PageWithSeveralValidations : BasePage
         {
         }
 
-        private class DerivedPage : PageWithSingleValidation
+        public class DerivedPage : PageWithSingleValidation
         {
         }
     }

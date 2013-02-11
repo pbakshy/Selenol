@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using Selenol.Extensions;
 using Selenol.Validation;
@@ -110,7 +111,8 @@ namespace Selenol.Page
             var validators = this.GetType().GetCustomAttributes(true).OfType<IPageUrlValidator>().ToArray();
             if (validators.Length == 0)
             {
-                throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add an Url validation.".F(this.GetType()));
+                throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add an Url validation."
+                    .F(ProxyUtil.GetUnproxiedType(this).FullName));
             }
 
             var currentUrl = this.webDriver.Url;
