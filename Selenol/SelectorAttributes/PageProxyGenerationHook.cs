@@ -6,6 +6,7 @@ using System.Reflection;
 using Castle.DynamicProxy;
 using Selenol.Elements;
 using Selenol.Extensions;
+using Selenol.Page;
 
 namespace Selenol.SelectorAttributes
 {
@@ -24,7 +25,7 @@ namespace Selenol.SelectorAttributes
             {
                 var message = this.errorParts.Join("\r\n");
                 this.errorParts = null;
-                throw new Exception(message);
+                throw new PageInitializationException(message);
             }
         }
 
@@ -43,7 +44,7 @@ namespace Selenol.SelectorAttributes
             var property = type.GetProperty(methodInfo);
             if (property.IsPropertyWithSelectorAttribute())
             {
-                this.AppendError("'{0}' is not virtual. Selector attributes can be used only for virtual properties.".F(property.Name));
+                this.AppendError(type, "'{0}' is not virtual. Selector attributes can be used only for virtual properties.".F(property.Name));
             }
         }
 
@@ -67,32 +68,32 @@ namespace Selenol.SelectorAttributes
 
             if (!propertyInfo.IsAutoProperty())
             {
-                this.AppendError("'{0}' is not an auto property. Selector attributes can be used only for auto properties.".F(propertyInfo.Name));
+                this.AppendError(type, "'{0}' is not an auto property. Selector attributes can be used only for auto properties.".F(propertyInfo.Name));
 
                 return false;
             }
 
             if (!typeof(BaseHtmlElement).IsAssignableFrom(propertyInfo.PropertyType))
             {
-                this.AppendError("'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement."
-                    .F(propertyInfo.Name));
+                var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement.".F(propertyInfo.Name);
+                this.AppendError(type, errorMessage);
                 return false;
             }
 
             if (propertyInfo.PropertyType.IsAbstract)
             {
-                this.AppendError("'{0}' property has invalid type. Selector attributes can not be used for abstract types.".F(propertyInfo.Name));
+                this.AppendError(type, "'{0}' property has invalid type. Selector attributes can not be used for abstract types.".F(propertyInfo.Name));
                 return false;
             }
 
             return true;
         }
 
-        private void AppendError(string errorMessage)
+        private void AppendError(Type type, string errorMessage)
         {
             if (this.errorParts == null)
             {
-                this.errorParts = new List<string>();
+                this.errorParts = new List<string> { "The page '{0}' can not be initialized.".F(type.FullName) };
             }
 
             if (!this.errorParts.Contains(errorMessage))
