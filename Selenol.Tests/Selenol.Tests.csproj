@@ -87,6 +87,7 @@
     <Compile Include="Elements\TestTextboxElement.cs" />
     <Compile Include="Page\TestPageInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectorAttributes\TestIdAttribute.cs" />
     <Compile Include="SimplePageForTest.cs" />
     <Compile Include="Validation\Element\ElementForTest.cs" />
     <Compile Include="Validation\Element\IgnoreValidationForTestAttribute.cs" />

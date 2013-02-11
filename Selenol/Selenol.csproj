@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -79,9 +82,15 @@
     <Compile Include="Elements\TableRowElement.cs" />
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Page\BasePage.cs" />
     <Compile Include="Page\PageFactory.cs" />
     <Compile Include="Page\PageInitializationException.cs" />
+    <Compile Include="SelectorAttributes\BaseSelectorAttribute.cs" />
+    <Compile Include="SelectorAttributes\IdAttribute.cs" />
+    <Compile Include="SelectorAttributes\PageProxyGenerationHook.cs" />
+    <Compile Include="SelectorAttributes\SelectorInterceptor.cs" />
+    <Compile Include="SelectorAttributes\InterseptorSelector.cs" />
     <Compile Include="Validation\Element\WrongElementException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
