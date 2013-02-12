@@ -94,6 +94,7 @@
     <Compile Include="SelectorAttributes\PageProxyGenerationHook.cs" />
     <Compile Include="SelectorAttributes\SelectorInterceptor.cs" />
     <Compile Include="SelectorAttributes\InterseptorSelector.cs" />
+    <Compile Include="SelectorAttributes\TagNameAttribute.cs" />
     <Compile Include="SelectorAttributes\XPathAttribute.cs" />
     <Compile Include="Validation\Element\WrongElementException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
