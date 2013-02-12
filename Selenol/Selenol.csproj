@@ -88,6 +88,7 @@
     <Compile Include="Page\PageInitializationException.cs" />
     <Compile Include="SelectorAttributes\BaseSelectorAttribute.cs" />
     <Compile Include="SelectorAttributes\ClassAttribute.cs" />
+    <Compile Include="SelectorAttributes\CssAttribute.cs" />
     <Compile Include="SelectorAttributes\IdAttribute.cs" />
     <Compile Include="SelectorAttributes\PageProxyGenerationHook.cs" />
     <Compile Include="SelectorAttributes\SelectorInterceptor.cs" />
