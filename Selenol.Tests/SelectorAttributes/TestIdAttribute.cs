@@ -1,6 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using NUnit.Framework;
+using OpenQA.Selenium;
 using Selenol.Elements;
 using Selenol.Page;
 using Selenol.SelectorAttributes;
@@ -8,27 +9,11 @@ using Selenol.SelectorAttributes;
 namespace Selenol.Tests.SelectorAttributes
 {
     [TestFixture]
-    public class TestIdAttribute : BaseSelectorAttributeTest<TestIdAttribute.PageWithSelectorAttribute,
-                                       TestIdAttribute.PageInheritsPropertiesWithSelectorAttribute>
+    public class TestIdAttribute : BaseSelectorAttributeTest
     {
-        protected override ButtonElement GetButton(PageWithSelectorAttribute page)
+        protected override By GetByCriteria(string selectorValue)
         {
-            return page.Button;
-        }
-
-        protected override BasePage CreatePageWithIncorrectAttributeUsage()
-        {
-            return PageFactory.Create<PageWithIncorrectSelectorAttributeUsage>(this.WebDriver, this.JavaScriptExecutor);
-        }
-
-        protected override BasePage CreatePageWithNullSelector()
-        {
-            return PageFactory.Create<PageWithNullSelector>(this.WebDriver, this.JavaScriptExecutor);
-        }
-
-        protected override BasePage CreatePageWithEmptySelector()
-        {
-            return PageFactory.Create<PageWithEmptySelector>(this.WebDriver, this.JavaScriptExecutor);
+            return By.Id(selectorValue);
         }
 
         public class PageWithSelectorAttribute : SimplePageForTest
