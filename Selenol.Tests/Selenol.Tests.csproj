@@ -91,6 +91,7 @@
     <Compile Include="SelectorAttributes\TestClassAttribute.cs" />
     <Compile Include="SelectorAttributes\TestCssAttribute.cs" />
     <Compile Include="SelectorAttributes\TestIdAttribute.cs" />
+    <Compile Include="SelectorAttributes\TestXPathAttribute.cs" />
     <Compile Include="SimplePageForTest.cs" />
     <Compile Include="Validation\Element\ElementForTest.cs" />
     <Compile Include="Validation\Element\IgnoreValidationForTestAttribute.cs" />
