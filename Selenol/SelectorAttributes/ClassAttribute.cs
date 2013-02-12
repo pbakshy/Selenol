@@ -8,7 +8,7 @@ namespace Selenol.SelectorAttributes
 {
     /// <summary>
     /// The Class selector attribute. Can be used for dynamic selection of elements by their class name. 
-    /// Element must derived from <see cref="BaseHtmlElement"/> and used as an auto-property of class derived from <see cref="BasePage"/>
+    /// Element must be derived from <see cref="BaseHtmlElement"/> and used as an auto-property of class derived from <see cref="BasePage"/>
     /// </summary>
     public class ClassAttribute : BaseSelectorAttribute
     {

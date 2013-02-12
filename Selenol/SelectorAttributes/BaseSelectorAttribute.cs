@@ -8,8 +8,8 @@ using Selenol.Page;
 namespace Selenol.SelectorAttributes
 {
     /// <summary>
-    /// The base selector attribute. Should be used for dynamic mapping element derived from <see cref="BaseHtmlElement"/>
-    /// to properties of classes derived from <see cref="BasePage"/>.
+    /// The base selector attribute. Can be used for dynamic selection of elements. 
+    /// Element must be derived from <see cref="BaseHtmlElement"/> and used as an auto-property of class derived from <see cref="BasePage"/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
     public abstract class BaseSelectorAttribute : Attribute
