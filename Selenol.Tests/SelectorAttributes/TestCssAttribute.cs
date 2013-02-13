@@ -69,6 +69,14 @@ namespace Selenol.Tests.SelectorAttributes
                     this.notAuthoProperty = value;
                 }
             }
+
+            [Css(TestSelector)]
+            internal RadioButtonElement InternalProperty { get; set; }
+
+            [Css(TestSelector)]
+// ReSharper disable UnusedMember.Local
+            private CheckboxElement PrivateProperty { get; set; }
+// ReSharper restore UnusedMember.Local
         }
 
         public class PageWithNullSelector : SimplePageForTest
@@ -81,6 +89,12 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Css("")]
             public virtual FormElement FormElement { get; set; }
+        }
+
+        public class PageWithProtectedProperty : SimplePageForTest
+        {
+            [Css(TestSelector)]
+            protected virtual ButtonElement Button { get; set; }
         }
     }
 }

@@ -49,6 +49,13 @@ namespace Selenol.Tests.SelectorAttributes
         }
 
         [Test]
+        public void ShouldProxyProtectedProperty()
+        {
+            var page = this.CreatePageUsingFactory("PageWithProtectedProperty");
+            this.AssertCorrectSelectorAttributeUsage(page);
+        }
+
+        [Test]
         public void IncorrectAttributeUsage()
         {
             var realException = Assert.Throws<TargetInvocationException>(() => this.CreatePageUsingFactory("PageWithIncorrectSelectorAttributeUsage"))
@@ -67,12 +74,18 @@ namespace Selenol.Tests.SelectorAttributes
                      .And
                      .Contain("'NotVirtualProperty' is not virtual. Selector attributes can be used only for virtual properties.")
                      .And
-                     .Contain("'PropertyWithoutGetter' is not an auto property. Selector attributes can be used only for auto properties.");
+                     .Contain("'PropertyWithoutGetter' is not an auto property. Selector attributes can be used only for auto properties.")
+                     .And
+                     .Contain("Selector attributes can not be used for private or internal property 'InternalProperty'. Make property public or protected.")
+                     .And
+                     .Contain("Selector attributes can not be used for private or internal property 'PrivateProperty'. Make property public or protected.");
 
             AssertSinglePropertyError(realException, "NotAuthoProperty");
             AssertSinglePropertyError(realException, "NotVirtualProperty");
             AssertSinglePropertyError(realException, "AbstractElement");
             AssertSinglePropertyError(realException, "NotElement");
+            AssertSinglePropertyError(realException, "InternalProperty");
+            AssertSinglePropertyError(realException, "PrivateProperty");
         }
 
         [Test]
@@ -103,10 +116,10 @@ namespace Selenol.Tests.SelectorAttributes
 
         private static ButtonElement GetButton(SimplePageForTest page)
         {
-            var buttonProperty = page.GetType().GetProperty("Button");
+            var buttonProperty = page.GetType().GetProperty("Button", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             if (buttonProperty == null)
             {
-                Assert.Fail("Page '{0}' does not cointain property Button which requires for the tests.".F(page.GetType().FullName));
+                Assert.Fail("Page '{0}' does not cointain property Button which required for the tests.".F(page.GetType().FullName));
             }
 
             return (ButtonElement)buttonProperty.GetValue(page, null);
@@ -118,7 +131,7 @@ namespace Selenol.Tests.SelectorAttributes
             var validPageType = Type.GetType(typeName);
             if (validPageType == null)
             {
-                Assert.Fail("Unable to finde page with type '{0}' which requires for the tests".F(typeName));
+                Assert.Fail("Unable to finde page with type '{0}' which required for the tests".F(typeName));
             }
 
             var typedCreateMethod = factoryMethod.MakeGenericMethod(validPageType);

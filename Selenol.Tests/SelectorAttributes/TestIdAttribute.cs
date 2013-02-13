@@ -3,7 +3,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenol.Elements;
-using Selenol.Page;
 using Selenol.SelectorAttributes;
 
 namespace Selenol.Tests.SelectorAttributes
@@ -70,6 +69,14 @@ namespace Selenol.Tests.SelectorAttributes
                     this.notAuthoProperty = value;
                 }
             }
+
+            [Id(TestSelector)]
+            internal RadioButtonElement InternalProperty { get; set; }
+
+            [Id(TestSelector)]
+            // ReSharper disable UnusedMember.Local
+            private CheckboxElement PrivateProperty { get; set; }
+            // ReSharper restore UnusedMember.Local
         }
 
         public class PageWithNullSelector : SimplePageForTest
@@ -82,6 +89,12 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Id("")]
             public virtual FormElement FormElement { get; set; }
+        }
+
+        public class PageWithProtectedProperty : SimplePageForTest
+        {
+            [Id(TestSelector)]
+            protected virtual ButtonElement Button { get; set; }
         }
     }
 }

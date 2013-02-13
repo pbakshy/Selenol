@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
 using Selenol.Elements;
@@ -14,6 +15,8 @@ namespace Selenol.SelectorAttributes
     internal class PageProxyGenerationHook : IProxyGenerationHook
     {
         private List<string> errorParts;
+        private Type proxiedType;
+        private List<PropertyInfo> processedProperties;
 
         /// <summary>
         /// Invoked by the generation process to notify 
@@ -21,6 +24,17 @@ namespace Selenol.SelectorAttributes
         /// </summary>
         public void MethodsInspected()
         {
+            var notPublicProperties = this.proxiedType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Except(this.processedProperties)
+                .Where(notPublicProperty => notPublicProperty.IsPropertyWithSelectorAttribute());
+            foreach (var notPublicProperty in notPublicProperties)
+            {
+                this.AppendError("Selector attributes can not be used for private or internal property '{0}'. Make property public or protected."
+                    .F(notPublicProperty.Name));
+            }
+
+            this.proxiedType = null;
+            this.processedProperties = null;
             if (this.errorParts != null)
             {
                 var message = this.errorParts.Join("\r\n");
@@ -35,6 +49,7 @@ namespace Selenol.SelectorAttributes
         /// <param name="memberInfo">The member Info.</param>
         public void NonProxyableMemberNotification(Type type, MemberInfo memberInfo)
         {
+            this.SetProxiedTypeIfNeed(type);
             var methodInfo = memberInfo as MethodInfo;
             if (methodInfo == null || !methodInfo.IsGetter())
             {
@@ -42,9 +57,10 @@ namespace Selenol.SelectorAttributes
             }
 
             var property = type.GetProperty(methodInfo);
+            this.AppedProcessedProperty(property);
             if (property.IsPropertyWithSelectorAttribute())
             {
-                this.AppendError(type, "'{0}' is not virtual. Selector attributes can be used only for virtual properties.".F(property.Name));
+                this.AppendError("'{0}' is not virtual. Selector attributes can be used only for virtual properties.".F(property.Name));
             }
         }
 
@@ -55,12 +71,14 @@ namespace Selenol.SelectorAttributes
         /// <returns>The true if should otherwise false.</returns>
         public bool ShouldInterceptMethod(Type type, MethodInfo methodInfo) 
         {
+            this.SetProxiedTypeIfNeed(type);
             if (!methodInfo.IsGetter() && !methodInfo.IsSetter())
             {
                 return false;
             }
 
             var propertyInfo = type.GetProperty(methodInfo);
+            this.AppedProcessedProperty(propertyInfo);
             if (!propertyInfo.IsPropertyWithSelectorAttribute())
             {
                 return false;
@@ -68,7 +86,7 @@ namespace Selenol.SelectorAttributes
 
             if (!propertyInfo.IsAutoProperty())
             {
-                this.AppendError(type, "'{0}' is not an auto property. Selector attributes can be used only for auto properties.".F(propertyInfo.Name));
+                this.AppendError("'{0}' is not an auto property. Selector attributes can be used only for auto properties.".F(propertyInfo.Name));
 
                 return false;
             }
@@ -76,24 +94,42 @@ namespace Selenol.SelectorAttributes
             if (!typeof(BaseHtmlElement).IsAssignableFrom(propertyInfo.PropertyType))
             {
                 var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement.".F(propertyInfo.Name);
-                this.AppendError(type, errorMessage);
+                this.AppendError(errorMessage);
                 return false;
             }
 
             if (propertyInfo.PropertyType.IsAbstract)
             {
-                this.AppendError(type, "'{0}' property has invalid type. Selector attributes can not be used for abstract types.".F(propertyInfo.Name));
+                this.AppendError("'{0}' property has invalid type. Selector attributes can not be used for abstract types.".F(propertyInfo.Name));
                 return false;
             }
 
             return true;
         }
 
-        private void AppendError(Type type, string errorMessage)
+        private void SetProxiedTypeIfNeed(Type type)
+        {
+            if (this.proxiedType == null)
+            {
+                this.proxiedType = type;
+            }
+        }
+
+        private void AppedProcessedProperty(PropertyInfo processedProperty)
+        {
+            if (this.processedProperties == null)
+            {
+                this.processedProperties = new List<PropertyInfo>();
+            }
+
+            this.processedProperties.Add(processedProperty);
+        }
+
+        private void AppendError(string errorMessage)
         {
             if (this.errorParts == null)
             {
-                this.errorParts = new List<string> { "The page '{0}' can not be initialized.".F(type.FullName) };
+                this.errorParts = new List<string> { "The page '{0}' can not be initialized.".F(this.proxiedType.FullName) };
             }
 
             if (!this.errorParts.Contains(errorMessage))
