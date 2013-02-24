@@ -8,32 +8,12 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Rhino.Mocks;
 using Selenol.Elements;
-using Selenol.Extensions;
 using Selenol.Page;
 
 namespace Selenol.Tests.SelectorAttributes
 {
-    public abstract class BaseSelectorAttributeTest
+    public abstract class BaseSelectorAttributeTest : SelectorAttributeTestSupport
     {
-        protected const string TestSelector = "test-selector";
-        private static readonly MethodInfo factoryMethod = typeof(PageFactory).GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
-
-        protected IWebDriver WebDriver { get; private set; }
-
-        protected IJavaScriptExecutor JavaScriptExecutor { get; private set; }
-
-        protected IWebElement WebElement { get; private set; }
-
-        [SetUp]
-        public void Init()
-        {
-            this.WebDriver = MockRepository.GenerateStub<IWebDriver>();
-            this.JavaScriptExecutor = MockRepository.GenerateStub<IJavaScriptExecutor>();
-            this.WebElement = MockRepository.GenerateStub<IWebElement>();
-
-            this.WebDriver.Url = "/myhome/page.aspx";
-        }
-
         [Test]
         public void CanBeUsedForAutoProperty()
         {
@@ -68,7 +48,7 @@ namespace Selenol.Tests.SelectorAttributes
                      .Contain("'PropertyWithoutSetter' is not an auto property. Selector attributes can be used only for auto properties.")
                      .And
                      .Contain(
-                         "'NotElement' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement.")
+                         "'NotElement' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement or assignable from ReadOnlyCollection<T> where T : BaseHtmlElement.")
                      .And
                      .Contain("'AbstractElement' property has invalid type. Selector attributes can not be used for abstract types.")
                      .And
@@ -114,28 +94,9 @@ namespace Selenol.Tests.SelectorAttributes
             count.Should().Be(1);
         }
 
-        private static ButtonElement GetButton(SimplePageForTest page)
+        private ButtonElement GetButton(SimplePageForTest page)
         {
-            var buttonProperty = page.GetType().GetProperty("Button", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            if (buttonProperty == null)
-            {
-                Assert.Fail("Page '{0}' does not cointain property Button which required for the tests.".F(page.GetType().FullName));
-            }
-
-            return (ButtonElement)buttonProperty.GetValue(page, null);
-        }
-
-        private SimplePageForTest CreatePageUsingFactory(string pageClassName)
-        {
-            var typeName = "{0}+{1}".FInv(this.GetType().FullName, pageClassName);
-            var validPageType = Type.GetType(typeName);
-            if (validPageType == null)
-            {
-                Assert.Fail("Unable to finde page with type '{0}' which required for the tests".F(typeName));
-            }
-
-            var typedCreateMethod = factoryMethod.MakeGenericMethod(validPageType);
-            return (SimplePageForTest)typedCreateMethod.Invoke(null, new object[] { this.WebDriver, this.JavaScriptExecutor });
+            return this.GetPropertyValue<ButtonElement>(page, "Button");
         }
 
         private void AssertCorrectSelectorAttributeUsage(SimplePageForTest page)
@@ -144,10 +105,10 @@ namespace Selenol.Tests.SelectorAttributes
             this.WebDriver.Stub(x => x.FindElement(this.GetByCriteria(TestSelector))).Return(this.WebElement);
             this.WebElement.Stub(x => x.Text).Return("abcd");
 
-            var button = GetButton(page);
+            var button = this.GetButton(page);
 
             button.Text.Should().Be("abcd");
-            button.Should().NotBeSameAs(GetButton(page));
+            button.Should().NotBeSameAs(this.GetButton(page));
         }
     }
 }

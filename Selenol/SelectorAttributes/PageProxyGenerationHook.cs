@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
@@ -91,20 +92,54 @@ namespace Selenol.SelectorAttributes
                 return false;
             }
 
-            if (!typeof(BaseHtmlElement).IsAssignableFrom(propertyInfo.PropertyType))
+            var propertyType = propertyInfo.PropertyType;
+            var isValidCollectionType = IsValidCollectionType(propertyType);
+            if (isValidCollectionType && propertyType.GetGenericArguments().Single().IsAbstract)
             {
-                var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement.".F(propertyInfo.Name);
+                var errorMessage = "'{0}' property has invalid type. Generic type argument can not be abstract. For example use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>."
+                    .F(propertyInfo.Name);
                 this.AppendError(errorMessage);
                 return false;
             }
 
-            if (propertyInfo.PropertyType.IsAbstract)
+            if (!isValidCollectionType && !typeof(BaseHtmlElement).IsAssignableFrom(propertyType))
+            {
+                var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement or assignable from ReadOnlyCollection<T> where T : BaseHtmlElement."
+                    .F(propertyInfo.Name);
+                this.AppendError(errorMessage);
+                return false;
+            }
+
+            if (!isValidCollectionType && propertyType.IsAbstract)
             {
                 this.AppendError("'{0}' property has invalid type. Selector attributes can not be used for abstract types.".F(propertyInfo.Name));
                 return false;
             }
 
             return true;
+        }
+
+        private static bool IsValidCollectionType(Type type)
+        {
+            if (!type.IsGenericType)
+            {
+                return false;
+            }
+
+            var genericTypeDefinition = type.GetGenericTypeDefinition();
+            if (!genericTypeDefinition.IsAssignableFromGenericType(typeof(ReadOnlyCollection<>)))
+            {
+                return false;
+            }
+
+            var genericArguments = type.GetGenericArguments();
+            if (genericArguments.Length != 1)
+            {
+                return false;
+            }
+
+            var genericArgument = genericArguments.Single();
+            return typeof(BaseHtmlElement).IsAssignableFrom(genericArgument);
         }
 
         private void SetProxiedTypeIfNeed(Type type)

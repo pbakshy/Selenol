@@ -70,5 +70,29 @@ namespace Selenol.Extensions
         {
             return Attribute.GetCustomAttributes(propertyInfo).OfType<BaseSelectorAttribute>().Any();
         }
+
+        /// <summary>
+        /// Determines whether an instance of the current <see cref="Type"/> can be assigned from an instance of the specified Type.
+        /// </summary>
+        /// <param name="currentType">The current type.</param>
+        /// <param name="givenType">The type to compare with the current type.</param>
+        /// <returns>True if the current Type is in the inheritance hierarchy of givenType. Otherwise false.</returns>
+        public static bool IsAssignableFromGenericType(this Type currentType, Type givenType)
+        {
+            var interfaceTypes = givenType.GetInterfaces();
+
+            if (interfaceTypes.Any(it => it.IsGenericType && it.GetGenericTypeDefinition() == currentType))
+            {
+                return true;
+            }
+
+            if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == currentType)
+            {
+                return true;
+            }
+
+            var baseType = givenType.BaseType;
+            return baseType != null && currentType.IsAssignableFromGenericType(baseType);
+        }
     }
 }

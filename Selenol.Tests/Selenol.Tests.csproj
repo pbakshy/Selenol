@@ -88,6 +88,14 @@
     <Compile Include="Page\TestPageInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectorAttributes\BaseSelectorAttributeTest.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\BaseSelectorAttributeForCollectionTest.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestClassAttribute.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestCssAttribute.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestIdAttribute.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestNameAttribute.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestTagNameAttribute.cs" />
+    <Compile Include="SelectorAttributes\ForCollections\TestXPathAttribute.cs" />
+    <Compile Include="SelectorAttributes\SelectorAttributeTestSupport.cs" />
     <Compile Include="SelectorAttributes\TestClassAttribute.cs" />
     <Compile Include="SelectorAttributes\TestCssAttribute.cs" />
     <Compile Include="SelectorAttributes\TestIdAttribute.cs" />
