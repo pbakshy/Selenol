@@ -13,7 +13,7 @@ namespace Selenol.Page
 
         private static readonly ProxyGenerationOptions proxyGenerationOptions = new ProxyGenerationOptions(new PageProxyGenerationHook())
             {
-                Selector = new InterseptorSelector()
+                Selector = new InterceptorSelector()
             };
 
         /// <summary>The create.</summary>
