@@ -31,6 +31,9 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
 
             [Class(TestSelector)]
             public virtual ReadOnlyCollection<FormElement> ReadOnlyCollection { get; set; }
+
+            [Class(TestSelector, CacheValue = true)]
+            public virtual IEnumerable<LinkElement> Links { get; set; }
         }
 
         public class PageWithIncorrectPropertyCollectionTypes : SimplePageForTest

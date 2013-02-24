@@ -29,6 +29,9 @@ namespace Selenol.SelectorAttributes
             this.Value = selectorValue;
         }
 
+        /// <summary>Gets or sets a value indicating whether cache value after first call or not.</summary>
+        public bool CacheValue { get; set; }
+
         /// <summary>Gets the instance <see cref="By"/> selector with corresponding value.</summary>
         public abstract By Selector { get; }
 

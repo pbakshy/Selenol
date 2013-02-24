@@ -32,6 +32,8 @@ namespace Selenol.SelectorAttributes
         private static readonly IDictionary<Type, MethodInfo> typeToGenericToListMethod = new Dictionary<Type, MethodInfo>();
         private static readonly IDictionary<Type, Type> typeToReadOnlyCollectionType = new Dictionary<Type, Type>();
 
+        private IDictionary<PropertyInfo, object> propertyValueCache;
+
         /// <summary>The intercept.</summary>
         /// <param name="invocation">The invocation.</param>
         public void Intercept(IInvocation invocation)
@@ -43,9 +45,10 @@ namespace Selenol.SelectorAttributes
             var propertyType = propertyInfo.PropertyType;
 
             var page = (BasePage)invocation.InvocationTarget;
-            invocation.ReturnValue = typeof(BaseHtmlElement).IsAssignableFrom(propertyType)
-                                         ? SelectScalarElement(propertyType, page, selectorAttribute.Selector)
-                                         : SelectReadOnlyCollection(propertyType, page, selectorAttribute.Selector);
+            Func<object> valueGetter = () => typeof(BaseHtmlElement).IsAssignableFrom(propertyType)
+                                                 ? SelectScalarElement(propertyType, page, selectorAttribute.Selector)
+                                                 : SelectReadOnlyCollection(propertyType, page, selectorAttribute.Selector);
+            invocation.ReturnValue = this.UseCacheIfNeed(propertyInfo, valueGetter, selectorAttribute.CacheValue);                                         
         }
 
         private static object SelectScalarElement(Type propertyType, BasePage page, By selector)
@@ -100,6 +103,26 @@ namespace Selenol.SelectorAttributes
             }
 
             return Activator.CreateInstance(typeToReadOnlyCollectionType[genericArgType], list);
+        }
+
+        private object UseCacheIfNeed(PropertyInfo propertyInfo, Func<object> funcToGetValue, bool cacheValue)
+        {
+            if (!cacheValue)
+            {
+                return funcToGetValue();
+            }
+
+            if (this.propertyValueCache == null)
+            {
+                this.propertyValueCache = new Dictionary<PropertyInfo, object>();
+            }
+
+            if (!this.propertyValueCache.ContainsKey(propertyInfo))
+            {
+                this.propertyValueCache[propertyInfo] = funcToGetValue();
+            }
+
+            return this.propertyValueCache[propertyInfo];
         }
     }
 }

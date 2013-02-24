@@ -41,6 +41,20 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
         }
 
         [Test]
+        public void Caching()
+        {
+            var page = this.CreatePageUsingFactory("PageWithCollectionTypeProperties");
+            this.WebElement.Stub(x => x.TagName).Return("a");
+            this.WebDriver.Stub(x => x.FindElements(this.GetByCriteria(TestSelector)))
+                .Return(new ReadOnlyCollection<IWebElement>(new[] { this.WebElement }));
+
+            var links = this.GetPropertyValue<IEnumerable<LinkElement>>(page, "Links");
+
+            var cachedLinks = this.GetPropertyValue<IEnumerable<LinkElement>>(page, "Links");
+            Assert.AreSame(links, cachedLinks);
+        }
+
+        [Test]
         public void IncorrectAttributeUsage()
         {
             var realException = Assert.Throws<TargetInvocationException>(() => this.CreatePageUsingFactory("PageWithIncorrectPropertyCollectionTypes"))

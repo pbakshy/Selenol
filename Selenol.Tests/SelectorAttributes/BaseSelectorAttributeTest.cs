@@ -22,6 +22,18 @@ namespace Selenol.Tests.SelectorAttributes
         }
 
         [Test]
+        public void Caching()
+        {
+            var page = this.CreatePageUsingFactory("PageWithSelectorAttribute");
+            this.WebDriver.Stub(x => x.FindElement(this.GetByCriteria(TestSelector))).Return(this.WebElement);
+            this.WebElement.Stub(x => x.TagName).Return("select");
+
+            var select = this.GetSelect(page);
+
+            select.Should().BeSameAs(this.GetSelect(page));
+        }
+
+        [Test]
         public void ShouldProxyPropertyFromBaseClass()
         {
             var page = this.CreatePageUsingFactory("PageInheritsPropertiesWithSelectorAttribute");
@@ -97,6 +109,11 @@ namespace Selenol.Tests.SelectorAttributes
         private ButtonElement GetButton(SimplePageForTest page)
         {
             return this.GetPropertyValue<ButtonElement>(page, "Button");
+        }
+
+        private SelectElement GetSelect(SimplePageForTest page)
+        {
+            return this.GetPropertyValue<SelectElement>(page, "Select");
         }
 
         private void AssertCorrectSelectorAttributeUsage(SimplePageForTest page)

@@ -17,6 +17,9 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Name(TestSelector)]
             public virtual ButtonElement Button { get; private set; }
+
+            [Name(TestSelector, CacheValue = true)]
+            public virtual SelectElement Select { get; private set; }
         }
 
         public class PageInheritsPropertiesWithSelectorAttribute : PageWithSelectorAttribute
