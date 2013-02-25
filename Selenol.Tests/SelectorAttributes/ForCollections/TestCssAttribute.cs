@@ -48,5 +48,11 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
             [Css(TestSelector)]
             public virtual IEnumerable<BaseHtmlElement> AbstractCollection { get; set; }
         }
+
+        public class PageWithWritableProperty : BasePageWithWritableProperty
+        {
+            [Css(TestSelector)]
+            public override IEnumerable<RadioButtonElement> RadioButtons { get; set; }
+        }
     }
 }

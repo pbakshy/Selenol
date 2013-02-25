@@ -99,5 +99,11 @@ namespace Selenol.Tests.SelectorAttributes
             [Id(TestSelector)]
             protected virtual ButtonElement Button { get; set; }
         }
+
+        public class PageWithWritableProperty : BasePageWithWritableProperty
+        {
+            [Id(TestSelector)]
+            public override LinkElement Link { get; set; }
+        }
     }
 }

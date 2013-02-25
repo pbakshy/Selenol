@@ -91,6 +91,7 @@
     <Compile Include="SelectorAttributes\CssAttribute.cs" />
     <Compile Include="SelectorAttributes\IdAttribute.cs" />
     <Compile Include="SelectorAttributes\NameAttribute.cs" />
+    <Compile Include="SelectorAttributes\InvalidWriteOperationInterceptor.cs" />
     <Compile Include="SelectorAttributes\PageProxyGenerationHook.cs" />
     <Compile Include="SelectorAttributes\SelectorInterceptor.cs" />
     <Compile Include="SelectorAttributes\InterceptorSelector.cs" />

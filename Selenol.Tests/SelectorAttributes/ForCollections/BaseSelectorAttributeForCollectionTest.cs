@@ -1,5 +1,6 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -71,6 +72,18 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
                              "'AbstractCollection' property has invalid type. Generic type argument can not be abstract. For example use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>");
         }
 
+        [Test]
+        public void ThrowsWhenUsingSetter()
+        {
+            var page = (BasePageWithWritableProperty)this.CreatePageUsingFactory("PageWithWritableProperty");
+            this.WebElement.Stub(x => x.TagName).Return("input");
+            this.WebElement.Stub(x => x.GetAttribute("type")).Return("radio");
+
+            var exception = Assert.Throws<InvalidOperationException>(() => page.RadioButtons = new[] { new RadioButtonElement(this.WebElement) });
+
+            exception.Message.Should().Contain("Can not set value for the property 'RadioButtons' because it is used with selector attribute.");
+        }
+
         protected abstract By GetByCriteria(string selectorValue);
 
         private string PrepareTypeErrorString(string propertyName)
@@ -93,6 +106,11 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
             forms.First().Text.Should().Be("abcd");
             var uncachedElements = this.GetPropertyValue<TProperty>(page, propertyName);
             forms.Should().NotBeEquivalentTo(uncachedElements);
+        }
+
+        public class BasePageWithWritableProperty : SimplePageForTest
+        {
+            public virtual IEnumerable<RadioButtonElement> RadioButtons { get; set; }
         }
     }
 }

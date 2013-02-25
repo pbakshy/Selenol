@@ -98,6 +98,17 @@ namespace Selenol.Tests.SelectorAttributes
             realException.Message.Should().Contain("Parameter can not be null or empty.");
         }
 
+        [Test]
+        public void ThrowsWhenUsingSetter()
+        {
+            var page = (BasePageWithWritableProperty)this.CreatePageUsingFactory("PageWithWritableProperty");
+            this.WebElement.Stub(x => x.TagName).Return("a");
+
+            var exception = Assert.Throws<InvalidOperationException>(() => page.Link = new LinkElement(this.WebElement));
+
+            exception.Message.Should().Contain("Can not set value for the property 'Link' because it is used with selector attribute.");
+        }
+
         protected abstract By GetByCriteria(string selectorValue);
 
         private static void AssertSinglePropertyError(Exception exception, string propertyName)
@@ -126,6 +137,11 @@ namespace Selenol.Tests.SelectorAttributes
 
             button.Text.Should().Be("abcd");
             button.Should().NotBeSameAs(this.GetButton(page));
+        }
+
+        public class BasePageWithWritableProperty : SimplePageForTest
+        {
+            public virtual LinkElement Link { get; set; }
         }
     }
 }

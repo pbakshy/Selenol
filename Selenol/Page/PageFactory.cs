@@ -23,7 +23,7 @@ namespace Selenol.Page
         /// <returns>The TPage. </returns>
         public static TPage Create<TPage>(IWebDriver webDriver, IJavaScriptExecutor javaScriptExecutor) where TPage : BasePage, new()
         {
-            var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions, new SelectorInterceptor());
+            var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions, new SelectorInterceptor(), new InvalidWriteOperationInterceptor());
             page.Initialize(webDriver, javaScriptExecutor);
             return page;
         }

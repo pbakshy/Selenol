@@ -14,7 +14,7 @@ namespace Selenol.Tests.SelectorAttributes
         {
             return By.XPath(selectorValue);
         }
-
+        
         public class PageWithSelectorAttribute : SimplePageForTest
         {
             [XPath(TestSelector)]
@@ -98,6 +98,12 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [XPath(TestSelector)]
             protected virtual ButtonElement Button { get; set; }
+        }
+
+        public class PageWithWritableProperty : BasePageWithWritableProperty
+        {
+            [XPath(TestSelector)]
+            public override LinkElement Link { get; set; }
         }
     }
 }

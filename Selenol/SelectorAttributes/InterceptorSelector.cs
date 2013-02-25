@@ -27,7 +27,16 @@ namespace Selenol.SelectorAttributes
                 }
             }
 
-            return interceptors.Where(x => !(x is SelectorInterceptor)).ToArray();
+            if (method.IsSetter())
+            {
+                var propertyInfo = type.GetProperty(method);
+                if (propertyInfo.IsPropertyWithSelectorAttribute())
+                {
+                    return interceptors.Where(x => x is InvalidWriteOperationInterceptor).ToArray();
+                }
+            }
+
+            return interceptors.Where(x => !(x is SelectorInterceptor) && !(x is InvalidWriteOperationInterceptor)).ToArray();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Selenol.Tests.SelectorAttributes
         {
             return By.CssSelector(selectorValue);
         }
-
+        
         public class PageWithSelectorAttribute : SimplePageForTest
         {
             [Css(TestSelector)]
@@ -98,6 +98,12 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Css(TestSelector)]
             protected virtual ButtonElement Button { get; set; }
+        }
+
+        public class PageWithWritableProperty : BasePageWithWritableProperty
+        {
+            [Css(TestSelector)]
+            public override LinkElement Link { get; set; }
         }
     }
 }
