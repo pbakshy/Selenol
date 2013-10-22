@@ -50,9 +50,9 @@
     <Reference Include="TechTalk.SpecFlow">
       <HintPath>..\packages\SpecFlow.1.9.0\lib\net35\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver, Version=2.30.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.30.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.37.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SelectFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\PasswordboxFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PasswordboxFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\StylesFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -133,6 +138,7 @@
     <Compile Include="Steps\FormSteps.cs" />
     <Compile Include="Steps\LinkSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
+    <Compile Include="Steps\PasswordboxSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
     <Compile Include="Steps\TableSteps.cs" />
@@ -176,6 +182,10 @@
     <None Include="Features\SelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>SelectFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\PasswordboxFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PasswordboxFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\StylesFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

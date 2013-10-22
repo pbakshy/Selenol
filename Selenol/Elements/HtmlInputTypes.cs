@@ -23,5 +23,8 @@
 
         /// <summary>The file input type name.</summary>
         public const string File = "file";
+
+        /// <summary>The password box type name.</summary>
+        public const string Passwordbox = "password";
     }
 }

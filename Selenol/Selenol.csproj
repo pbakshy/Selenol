@@ -45,15 +45,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=2.30.0.0, Culture=neutral, PublicKeyToken=1c2bd1631853048f, processorArchitecture=MSIL">
+    <Reference Include="WebDriver, Version=2.37.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Selenium.WebDriver.2.30.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\packages\Selenium.WebDriver.2.37.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="Elements\BaseHtmlElement.cs" />
     <Compile Include="Elements\BaseSelectElement.cs" />
+    <Compile Include="Elements\BaseTextInputElement.cs" />
     <Compile Include="Elements\ButtonElement.cs" />
     <Compile Include="Elements\CheckboxElement.cs" />
     <Compile Include="Elements\CssStyles.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Elements\LinkElement.cs" />
     <Compile Include="Elements\ListboxElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
+    <Compile Include="Elements\PasswordboxElement.cs" />
     <Compile Include="Elements\RadioButtonElement.cs" />
     <Compile Include="Elements\SearchContextExtensions.cs" />
     <Compile Include="Elements\SelectElement.cs" />

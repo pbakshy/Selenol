@@ -137,6 +137,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Table(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.TextArea(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Textbox(by)), "input", "text");
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Passwordbox(by)), "input", "password");
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Element<UserControlForTest>(by)), "div", null);
         }
 
@@ -154,6 +155,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Tables(by)), "table", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.TextAreas(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Textboxes(by)), "input", "text");
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Passwordboxes(by)), "input", "password");
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Elements<UserControlForTest>(by)), "div", null);
         }
 
@@ -181,6 +183,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Tables()), "table", "table", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.TextAreas()), "textarea", "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Textboxes()), "input[type='text']", "input", "text");
+            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Passwordboxes()), "input[type='password']", "input", "password");
         }
 
 // ReSharper disable ClassNeverInstantiated.Local

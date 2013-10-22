@@ -25,6 +25,8 @@ namespace Selenol.Elements
 
         private const string TextboxesDefaultSelector = HtmlElements.Input + "[" + HtmlElementAttributes.Type + "='" + HtmlInputTypes.Textbox + "']";
 
+        private const string PasswordboxesDefaultSelector = HtmlElements.Input + "[" + HtmlElementAttributes.Type + "='" + HtmlInputTypes.Passwordbox + "']";
+
         private const string SelectDefaultSelector = HtmlElements.Select + ":not([" + HtmlElementAttributes.Multiple + "])";
 
         private const string ListboxDefaultSelector = HtmlElements.Select + "[" + HtmlElementAttributes.Multiple + "]";
@@ -477,6 +479,40 @@ namespace Selenol.Elements
             }
 
             return context.FindElements(by).Select(x => new BasicHtmlElement(x).As<TControl>()).ToArray();
+        }
+
+        /// <summary>Finds a password box that meets a criteria.</summary>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found password box.</returns>
+        public static PasswordboxElement Passwordbox(this ISearchContext context, By by)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (@by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return new PasswordboxElement(context.FindElement(by));
+        }
+
+        /// <summary>Finds password boxes that meets a criteria.</summary>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found password boxes.</returns>
+        /// <remarks>If <paramref name="by"/> is skipped all password boxes will be returned.</remarks>
+        public static IEnumerable<PasswordboxElement> Passwordboxes(this ISearchContext context, By by = null)
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            return context.FindElements(by ?? By.CssSelector(PasswordboxesDefaultSelector)).Select(x => new PasswordboxElement(x)).ToArray();
         }
     }
 }
