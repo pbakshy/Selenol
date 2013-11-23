@@ -129,6 +129,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TraversingFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\WebDriverNavigation.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebDriverNavigation.feature</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjects\ElementsPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\ButtonSteps.cs" />
     <Compile Include="Steps\CheckboxSteps.cs" />
@@ -139,6 +145,7 @@
     <Compile Include="Steps\LinkSteps.cs" />
     <Compile Include="Steps\ListboxSteps.cs" />
     <Compile Include="Steps\PasswordboxSteps.cs" />
+    <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
     <Compile Include="Steps\SelectSteps.cs" />
     <Compile Include="Steps\TableSteps.cs" />
@@ -206,6 +213,10 @@
     <None Include="Features\TraversingFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>TraversingFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\WebDriverNavigation.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>WebDriverNavigation.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

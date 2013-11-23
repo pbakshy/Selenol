@@ -5,7 +5,7 @@ using System.Linq;
 using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using Selenol.Extensions;
-using Selenol.Validation;
+using Selenol.Utils;
 using Selenol.Validation.Page;
 
 namespace Selenol.Page
@@ -25,6 +25,24 @@ namespace Selenol.Page
                 this.CheckIsInitialized();
                 this.Validate();
                 return this.webDriver;
+            }
+        }
+
+        internal IWebDriver WebDriver
+        {
+            get
+            {
+                this.CheckIsInitialized();
+                return this.webDriver;
+            }
+        }
+
+        internal IJavaScriptExecutor JavaScriptExecutor
+        {
+            get
+            {
+                this.CheckIsInitialized();
+                return this.javaScriptExecutor;
             }
         }
 
@@ -76,7 +94,7 @@ namespace Selenol.Page
 
         /// <summary>Initializes the page.</summary>
         /// <param name="driver">The web driver. </param>
-        /// <param name="jsExecutor">The javascript executor. </param>
+        /// <param name="jsExecutor">The JavaScript executor. </param>
         internal void Initialize(IWebDriver driver, IJavaScriptExecutor jsExecutor)
         {
             if (driver == null)
@@ -108,19 +126,15 @@ namespace Selenol.Page
 
         private void Validate()
         {
-            var validators = this.GetType().GetCustomAttributes(true).OfType<IPageUrlValidator>().ToArray();
-            if (validators.Length == 0)
+            var currentUrl = this.webDriver.Url;
+            if (PageUtil.IsValid(ProxyUtil.GetUnproxiedType(this), currentUrl))
             {
-                throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add an Url validation."
-                    .F(ProxyUtil.GetUnproxiedType(this).FullName));
+                return;
             }
 
-            var currentUrl = this.webDriver.Url;
-            if (!validators.Any(x => x.Validate(this, currentUrl)))
-            {
-                var message = validators.Select(x => x.GetErrorMessage(this, currentUrl)).Join(" Or ");
-                throw new PageValidationException(message, this);
-            }
+            var validators = this.GetType().GetCustomAttributes(true).OfType<IPageUrlValidator>().ToArray();
+            var message = validators.Select(x => x.GetErrorMessage(currentUrl)).Join(" Or ");
+            throw new PageValidationException(message, this);
         }
     }
 }

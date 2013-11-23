@@ -3,11 +3,10 @@
 using System;
 
 using Selenol.Extensions;
-using Selenol.Page;
 
 namespace Selenol.Validation.Page
 {
-    /// <summary>The attribute thats validate page by an url part. When multiple attributes are specified validation is performed by "Or" clause.</summary>
+    /// <summary>The attribute that validate page by an url part. When multiple attributes are specified validation is performed by "Or" clause.</summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class UrlAttribute : Attribute, IPageUrlValidator
     {
@@ -32,30 +31,18 @@ namespace Selenol.Validation.Page
         public bool Https { get; set; }
 
         /// <summary>Validates the page url. Checks that a page url contains a url part.</summary>
-        /// <param name="page">The page. </param>
         /// <param name="currentUrl">The current Url. </param>
         /// <returns>True if page url is valid otherwise false. </returns>
-        public bool Validate(BasePage page, string currentUrl)
+        public bool Validate(string currentUrl)
         {
-            if (page == null)
-            {
-                throw new ArgumentNullException("page");
-            }
-
-            return this.CheckHttps(currentUrl) && currentUrl.Contains(this.urlPart);
+            return this.CheckHttps(currentUrl) && currentUrl.IndexOf(this.urlPart, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         /// <summary>Gets an error message for an invalid page.</summary>
-        /// <param name="page">The page. </param>
         /// <param name="currentUrl">The current Url. </param>
         /// <returns>The error message. </returns>
-        public string GetErrorMessage(BasePage page, string currentUrl)
+        public string GetErrorMessage(string currentUrl)
         {
-            if (page == null)
-            {
-                throw new ArgumentNullException("page");
-            }
-
             return this.CheckHttps(currentUrl) 
                 ? "Current url '{0}' does not contain '{1}' part.".F(currentUrl, this.urlPart)
                 : "Current url '{0}' must be accessed by HTTPS protocol.".F(currentUrl);

@@ -7,7 +7,7 @@ using System.Globalization;
 namespace Selenol.Extensions
 {
     /// <summary>The string extensions.</summary>
-    public static class StringExtensions
+    internal static class StringExtensions
     {
         /// <summary>Extension method for <see cref="string.IsNullOrEmpty"/>.</summary>
         /// <param name="value">The value. </param>

@@ -82,6 +82,7 @@
     <Compile Include="Elements\TestTableRowElement.cs" />
     <Compile Include="Elements\TestTextAreaElement.cs" />
     <Compile Include="Elements\TestTextboxElement.cs" />
+    <Compile Include="Extensions\TestNavigationExtensions.cs" />
     <Compile Include="Page\TestPageInitialization.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectorAttributes\BaseSelectorAttributeTest.cs" />

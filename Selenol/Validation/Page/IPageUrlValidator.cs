@@ -7,16 +7,14 @@ namespace Selenol.Validation.Page
     /// <summary>The interface that used to validate a page url.</summary>
     public interface IPageUrlValidator
     {
-        /// <summary>Validates a page.</summary>
-        /// <param name="page">The page. </param>
+        /// <summary>Validates a page for which attribute is applied.</summary>
         /// <param name="currentUrl">The current Url. </param>
         /// <returns>True if page is valid otherwise false. </returns>
-        bool Validate(BasePage page, string currentUrl);
+        bool Validate(string currentUrl);
 
         /// <summary>Gets an error message for an invalid page.</summary>
-        /// <param name="page">The page. </param>
         /// <param name="currentUrl">The current Url. </param>
         /// <returns>The error message. </returns>
-        string GetErrorMessage(BasePage page, string currentUrl);
+        string GetErrorMessage(string currentUrl);
     }
 }
