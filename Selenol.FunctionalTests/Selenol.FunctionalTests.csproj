@@ -69,6 +69,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckboxFeature.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\DynamicElementBindingFeature.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DynamicElementBindingFeature.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\FileUploadFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,6 +145,7 @@
     <Compile Include="Steps\CheckboxSteps.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
     <Compile Include="Steps\ContainerElementSteps.cs" />
+    <Compile Include="Steps\DynamicBindingSteps.cs" />
     <Compile Include="Steps\FileUploadSteps.cs" />
     <Compile Include="Steps\FormSteps.cs" />
     <Compile Include="Steps\LinkSteps.cs" />
@@ -165,6 +171,10 @@
     <None Include="Features\CheckboxFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>CheckboxFeature.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\DynamicElementBindingFeature.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DynamicElementBindingFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\FileUploadFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
