@@ -34,7 +34,7 @@ namespace Selenol.FunctionalTests.Steps
 // ReSharper disable AssignNullToNotNullAttribute
             var assemblyDirectory = new DirectoryInfo(assemblyPath);
 // ReSharper restore AssignNullToNotNullAttribute
-            this.fileName = assemblyDirectory.GetFiles().First().FullName;
+            this.fileName = Path.GetFileName(assemblyDirectory.GetFiles().First().FullName);
             this.fileUpload.SelectFile(this.fileName);
         }
 
@@ -47,7 +47,7 @@ namespace Selenol.FunctionalTests.Steps
         [Then(@"the file upload has the file")]
         public void ThenTheFileUploadWithHasTheFile()
         {
-            this.fileUpload.FileName.Should().Be(this.fileName);
+            Path.GetFileName(this.fileUpload.FileName).Should().Be(this.fileName);
         }
     }
 }
