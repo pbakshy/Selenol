@@ -1,7 +1,7 @@
 ﻿Feature: DynamicElementsBinding
 	As an user I want to have ability to work with dynamically initialized members of page object.
 
-Scenario: Dynamically initialize listbox by id
+Scenario: Dynamically initialize multi select by id
 	When I am acessing "Elements" page using page object
 	Then value of FirstSelect must be 'rat-value'
 

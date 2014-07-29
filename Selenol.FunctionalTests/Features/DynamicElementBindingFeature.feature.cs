@@ -66,10 +66,10 @@ namespace Selenol.FunctionalTests.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Dynamically initialize listbox by id")]
-        public virtual void DynamicallyInitializeListboxById()
+        [NUnit.Framework.DescriptionAttribute("Dynamically initialize multi select by id")]
+        public virtual void DynamicallyInitializeMultiSelectById()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Dynamically initialize listbox by id", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Dynamically initialize multi select by id", ((string[])(null)));
 #line 4
 this.ScenarioSetup(scenarioInfo);
 #line 5

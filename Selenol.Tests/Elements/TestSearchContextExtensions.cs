@@ -131,7 +131,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.FileUpload(by)), "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Form(by)), "form", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Link(by)), "a", null);
-            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Listbox(by)), "select", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.MultiSelect(by)), "select", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.RadioButton(by)), "input", "radio");
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Select(by)), "select", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Table(by)), "table", null);
@@ -149,7 +149,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.FileUploads(by)), "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Forms(by)), "form", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Links(by)), "a", null);
-            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Listboxes(by)), "select", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.MultiSelects(by)), "select", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.RadioButtons(by)), "input", "radio");
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Selects(by)), "select", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Tables(by)), "table", null);
@@ -177,7 +177,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.FileUploads()), "input[type='file']", "input", "file");
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Forms()), "form", "form", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Links()), "a", "a", null);
-            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Listboxes()), "select[multiple]", "select", null);
+            yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.MultiSelects()), "select[multiple]", "select", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.RadioButtons()), "input[type='radio']", "input", "radio");
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Selects()), "select:not([multiple])", "select", null);
             yield return new TestCaseData(new Func<ISearchContext, IEnumerable<BaseHtmlElement>>(x => x.Tables()), "table", "table", null);

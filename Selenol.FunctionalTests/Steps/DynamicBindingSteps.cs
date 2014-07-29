@@ -22,7 +22,7 @@ namespace Selenol.FunctionalTests.Steps
         }
 
         [Then(@"value of FirstSelect must be '(.*)'")]
-        public void ThenValueOfFirstListboxMustBe(string expectedValue)
+        public void ThenValueOfFirstMultiSelectMustBe(string expectedValue)
         {
             this.elementsPage.FirstSelect.SelectedOption.Value.Should().Be(expectedValue);
         }

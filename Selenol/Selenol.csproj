@@ -69,7 +69,7 @@
     <Compile Include="Elements\HtmlInputTypes.cs" />
     <Compile Include="Elements\InvalidValueException.cs" />
     <Compile Include="Elements\LinkElement.cs" />
-    <Compile Include="Elements\ListboxElement.cs" />
+    <Compile Include="Elements\MultiSelectElement.cs" />
     <Compile Include="Elements\OptionElement.cs" />
     <Compile Include="Elements\PasswordboxElement.cs" />
     <Compile Include="Elements\RadioButtonElement.cs" />

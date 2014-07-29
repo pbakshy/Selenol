@@ -29,7 +29,7 @@ namespace Selenol.Elements
 
         private const string SelectDefaultSelector = HtmlElements.Select + ":not([" + HtmlElementAttributes.Multiple + "])";
 
-        private const string ListboxDefaultSelector = HtmlElements.Select + "[" + HtmlElementAttributes.Multiple + "]";
+        private const string MultiSelectDefaultSelector = HtmlElements.Select + "[" + HtmlElementAttributes.Multiple + "]";
 
         /// <summary>Finds a button that meets a criteria.</summary>
         /// <param name="context">The search context.</param>
@@ -235,12 +235,12 @@ namespace Selenol.Elements
             return context.FindElements(by ?? By.CssSelector(HtmlElements.Link)).Select(x => new LinkElement(x)).ToArray();
         }
 
-        /// <summary>Finds a listbox that meets a criteria.</summary>
+        /// <summary>Finds a multi select that meets a criteria.</summary>
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
-        /// <returns>The found listbox.</returns>
+        /// <returns>The found multi select.</returns>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        public static ListboxElement Listbox(this ISearchContext context, By by)
+        public static MultiSelectElement MultiSelect(this ISearchContext context, By by)
         {
             if (context == null)
             {
@@ -252,23 +252,23 @@ namespace Selenol.Elements
                 throw new ArgumentNullException("by");
             }
 
-            return new ListboxElement(context.FindElement(by));
+            return new MultiSelectElement(context.FindElement(by));
         }
 
-        /// <summary>Finds listboxes that meets a criteria.</summary>
+        /// <summary>Finds multi selects that meets a criteria.</summary>
         /// <param name="context">The search context.</param>
         /// <param name="by">The criteria.</param>
-        /// <returns>The found listboxes.</returns>
-        /// <remarks>If <paramref name="by"/> is skipped all listboxes will be returned.</remarks>
+        /// <returns>The found multi selects.</returns>
+        /// <remarks>If <paramref name="by"/> is skipped all multi selects will be returned.</remarks>
         [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
-        public static IEnumerable<ListboxElement> Listboxes(this ISearchContext context, By by = null)
+        public static IEnumerable<MultiSelectElement> MultiSelects(this ISearchContext context, By by = null)
         {
             if (context == null)
             {
                 throw new ArgumentNullException("context");
             }
 
-            return context.FindElements(by ?? By.CssSelector(ListboxDefaultSelector)).Select(x => new ListboxElement(x)).ToArray();
+            return context.FindElements(by ?? By.CssSelector(MultiSelectDefaultSelector)).Select(x => new MultiSelectElement(x)).ToArray();
         }
 
         /// <summary>Finds a radio button that meets a criteria.</summary>

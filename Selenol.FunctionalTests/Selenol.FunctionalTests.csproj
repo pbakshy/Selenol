@@ -89,10 +89,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LinkFeature.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\ListboxFeature.feature.cs">
+    <Compile Include="Features\MultiSelectFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ListboxFeature.feature</DependentUpon>
+      <DependentUpon>MultiSelectFeature.feature</DependentUpon>
     </Compile>
     <Compile Include="Features\RadioButtonFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -149,7 +149,7 @@
     <Compile Include="Steps\FileUploadSteps.cs" />
     <Compile Include="Steps\FormSteps.cs" />
     <Compile Include="Steps\LinkSteps.cs" />
-    <Compile Include="Steps\ListboxSteps.cs" />
+    <Compile Include="Steps\MultiSelectSteps.cs" />
     <Compile Include="Steps\PasswordboxSteps.cs" />
     <Compile Include="Steps\NavigationSteps.cs" />
     <Compile Include="Steps\RadioButtonSteps.cs" />
@@ -188,9 +188,9 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>LinkFeature.feature.cs</LastGenOutput>
     </None>
-    <None Include="Features\ListboxFeature.feature">
+    <None Include="Features\MultiSelectFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ListboxFeature.feature.cs</LastGenOutput>
+      <LastGenOutput>MultiSelectFeature.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\RadioButtonFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
