@@ -21,7 +21,7 @@ namespace Selenol.Utils
             var validators = pageType.GetCustomAttributes(true).OfType<IPageUrlValidator>().ToArray();
             if (validators.Length == 0)
             {
-                throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add an Url validation."
+                throw new ValidationAbsenceException("Page '{0}' does not have any Url validation. Please add Url validation."
                     .F(pageType.FullName));
             }
 
