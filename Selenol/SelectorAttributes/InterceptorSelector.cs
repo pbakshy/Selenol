@@ -4,11 +4,13 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Castle.DynamicProxy;
+using Selenol.Elements;
 using Selenol.Extensions;
+using Selenol.SelectorAttributes.Interceptors;
 
 namespace Selenol.SelectorAttributes
 {
-    /// <summary>The interceptor selector which selects <see cref="SelectorInterceptor"/> only where it needs.</summary>
+    /// <summary>The interceptor selector which selects appropriate interceptor where it needs.</summary>
     internal class InterceptorSelector : IInterceptorSelector
     {
         /// <summary>Select interceptors which must be applied to the method.</summary>
@@ -23,7 +25,12 @@ namespace Selenol.SelectorAttributes
                 var propertyInfo = type.GetProperty(method);
                 if (propertyInfo.IsPropertyWithSelectorAttribute())
                 {
-                    return interceptors.Where(x => x is SelectorInterceptor).ToArray();
+                    if (typeof(BaseHtmlElement).IsAssignableFrom(method.ReturnType))
+                    {
+                        return interceptors.Where(x => x is ElementPropertyInterceptor).ToArray();
+                    }
+
+                    return interceptors.Where(x => x is ElementCollectionPropertyInterceptor).ToArray();
                 }
             }
 
@@ -36,7 +43,9 @@ namespace Selenol.SelectorAttributes
                 }
             }
 
-            return interceptors.Where(x => !(x is SelectorInterceptor) && !(x is InvalidWriteOperationInterceptor)).ToArray();
+            return interceptors.Where(x => !(x is ElementPropertyInterceptor) 
+                && !(x is ElementCollectionPropertyInterceptor)
+                && !(x is InvalidWriteOperationInterceptor)).ToArray();
         }
     }
 }

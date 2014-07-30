@@ -5,64 +5,35 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
-using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using Selenol.Elements;
-using Selenol.Extensions;
 using Selenol.Page;
 
-namespace Selenol.SelectorAttributes
+namespace Selenol.SelectorAttributes.Interceptors
 {
     /// <summary>
     /// The selector interceptor. It intercepts property getter and select elements by selector from <see cref="BaseSelectorAttribute"/>.
+    /// Used for properties with generic collection type based on <see cref="ReadOnlyCollection{T}"/>. 
+    /// With generic argument based on <see cref="BaseHtmlElement"/>
     /// Can cache the result if need.
     /// </summary>
-    internal class SelectorInterceptor : IInterceptor
+    internal class ElementCollectionPropertyInterceptor : BaseElementPropertyInterceptor
     {
-        private static readonly MethodInfo elementMethod = typeof(SearchContextExtensions).GetMethod("Element",
-            BindingFlags.Public | BindingFlags.Static);
-
         private static readonly MethodInfo collectionMethod = typeof(SearchContextExtensions).GetMethod("Elements",
             BindingFlags.Public | BindingFlags.Static);
 
         private static readonly MethodInfo toListMethod = typeof(Enumerable).GetMethod("ToList", BindingFlags.Public | BindingFlags.Static);
 
-        private static readonly IDictionary<Type, MethodInfo> typeToGenericElementMethod = new Dictionary<Type, MethodInfo>();
         private static readonly IDictionary<Type, MethodInfo> typeToGenericCollectionMethod = new Dictionary<Type, MethodInfo>();
         private static readonly IDictionary<Type, MethodInfo> typeToGenericToListMethod = new Dictionary<Type, MethodInfo>();
         private static readonly IDictionary<Type, Type> typeToReadOnlyCollectionType = new Dictionary<Type, Type>();
 
-        private IDictionary<PropertyInfo, object> propertyValueCache;
-
-        /// <summary>The intercept.</summary>
-        /// <param name="invocation">The invocation.</param>
-        public void Intercept(IInvocation invocation)
-        {
-            var methodInfo = invocation.Method;
-            var propertyInfo = invocation.TargetType.GetProperty(methodInfo);
-            var selectorAttribute = Attribute.GetCustomAttributes(propertyInfo).OfType<BaseSelectorAttribute>().First();
-
-            var propertyType = propertyInfo.PropertyType;
-
-            var page = (BasePage)invocation.InvocationTarget;
-            Func<object> valueGetter = () => typeof(BaseHtmlElement).IsAssignableFrom(propertyType)
-                                                 ? SelectScalarElement(propertyType, page, selectorAttribute.Selector)
-                                                 : SelectReadOnlyCollection(propertyType, page, selectorAttribute.Selector);
-            invocation.ReturnValue = this.UseCacheIfNeed(propertyInfo, valueGetter, selectorAttribute.CacheValue);                                         
-        }
-
-        private static object SelectScalarElement(Type propertyType, BasePage page, By selector)
-        {
-            if (!typeToGenericElementMethod.ContainsKey(propertyType))
-            {
-                typeToGenericElementMethod[propertyType] = elementMethod.MakeGenericMethod(propertyType);
-            }
-
-            var typedEmelementMethod = typeToGenericElementMethod[propertyType];
-            return typedEmelementMethod.Invoke(null, new object[] { page.Context, selector });
-        }
-
-        private static object SelectReadOnlyCollection(Type propertyType, BasePage page, By selector)
+        /// <summary>Selects value for the proxied property.</summary>
+        /// <param name="propertyType">The property type.</param>
+        /// <param name="page">The page.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns>The property value.</returns>
+        protected override object SelectPropertyValue(Type propertyType, BasePage page, By selector)
         {
             var genericArgType = propertyType.GetGenericArguments().Single();
             var elements = SelectElements(page, selector, genericArgType);
@@ -103,26 +74,6 @@ namespace Selenol.SelectorAttributes
             }
 
             return Activator.CreateInstance(typeToReadOnlyCollectionType[genericArgType], list);
-        }
-
-        private object UseCacheIfNeed(PropertyInfo propertyInfo, Func<object> funcToGetValue, bool cacheValue)
-        {
-            if (!cacheValue)
-            {
-                return funcToGetValue();
-            }
-
-            if (this.propertyValueCache == null)
-            {
-                this.propertyValueCache = new Dictionary<PropertyInfo, object>();
-            }
-
-            if (!this.propertyValueCache.ContainsKey(propertyInfo))
-            {
-                this.propertyValueCache[propertyInfo] = funcToGetValue();
-            }
-
-            return this.propertyValueCache[propertyInfo];
         }
     }
 }

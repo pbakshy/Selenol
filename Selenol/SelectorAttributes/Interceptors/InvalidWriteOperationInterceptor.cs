@@ -4,7 +4,7 @@ using System;
 using Castle.DynamicProxy;
 using Selenol.Extensions;
 
-namespace Selenol.SelectorAttributes
+namespace Selenol.SelectorAttributes.Interceptors
 {
     /// <summary>The not supported interceptor which throws <see cref="NotSupportedException"/>.</summary>
     internal class InvalidWriteOperationInterceptor : IInterceptor

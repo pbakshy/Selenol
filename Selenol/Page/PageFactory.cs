@@ -3,6 +3,7 @@
 using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using Selenol.SelectorAttributes;
+using Selenol.SelectorAttributes.Interceptors;
 
 namespace Selenol.Page
 {
@@ -23,7 +24,10 @@ namespace Selenol.Page
         /// <returns>The TPage. </returns>
         public static TPage Create<TPage>(IWebDriver webDriver, IJavaScriptExecutor javaScriptExecutor) where TPage : BasePage, new()
         {
-            var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions, new SelectorInterceptor(), new InvalidWriteOperationInterceptor());
+            var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions,
+                new ElementPropertyInterceptor(),
+                new ElementCollectionPropertyInterceptor(),
+                new InvalidWriteOperationInterceptor());
             page.Initialize(webDriver, javaScriptExecutor);
             return page;
         }
