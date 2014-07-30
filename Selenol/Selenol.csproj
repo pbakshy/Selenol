@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Control.cs" />
     <Compile Include="ElementNotFoundException.cs" />
     <Compile Include="Elements\BaseHtmlElement.cs" />
     <Compile Include="Elements\BaseSelectElement.cs" />
