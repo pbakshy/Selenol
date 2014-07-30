@@ -36,6 +36,14 @@ namespace Selenol.Elements
             this.WebElement.SendKeys(text);
         }
 
+        /// <summary>
+        /// Sends Enter key to the input.
+        /// </summary>
+        public void SendEnter()
+        {
+            this.WebElement.SendKeys(Keys.Enter);
+        }
+
         /// <summary>Clears text in the text input.</summary>
         public void Clear()
         {
