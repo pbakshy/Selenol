@@ -48,6 +48,8 @@ namespace Selenol.Extensions
         {
             var webDriver = currentPage.WebDriver;
             var newPageType = typeof(TNewPage);
+
+            navigationAction(currentPage);
             //TODO move default timeout to config
             Wait.For(() => PageUtil.IsValid(newPageType, webDriver.Url), TimeSpan.FromSeconds(5), "url matched '{0}' page.".F(newPageType.Name));
 
