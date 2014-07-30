@@ -62,7 +62,7 @@ namespace Selenol.Tests.Validation.Page
                 () => PageFactory.Create<PageWithoutValidation>(this.webDriver, this.javaScriptExecutor));
 
             exception.Message.Should().Be(
-                "Page 'Selenol.Tests.Validation.Page.TestPageUrlValidation+PageWithoutValidation' does not have any Url validation. Please add an Url validation.");
+                "Page 'Selenol.Tests.Validation.Page.TestPageUrlValidation+PageWithoutValidation' does not have any Url validation. Please add Url validation.");
         }
 
         [Test]

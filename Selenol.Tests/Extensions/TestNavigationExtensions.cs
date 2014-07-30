@@ -62,7 +62,7 @@ namespace Selenol.Tests.Extensions
             this.navigation.AssertWasCalled(x => x.GoToUrl(ValidUrl));
         }
 
-        [Test]
+        [Test, Ignore("Need to decide whether separate timeout and validation errors or not")]
         public void GoToValidPageUsingPageObject()
         {
             var currentPage = this.MakeCurrentPage();
@@ -73,7 +73,7 @@ namespace Selenol.Tests.Extensions
             newPage.Should().NotBeNull();
         }
 
-        [Test]
+        [Test, Ignore("Need to decide whether separate timeout and validation errors or not")]
         public void GoToInvidPageUsingPageObjectThrowsTimeout()
         {
             var currentPage = this.MakeCurrentPage();
