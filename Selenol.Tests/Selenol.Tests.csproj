@@ -114,7 +114,7 @@
     <Compile Include="Validation\Element\TestNotInputAttribute.cs" />
     <Compile Include="Validation\Element\TestTagAttribute.cs" />
     <Compile Include="Validation\Page\TestPageUrlValidation.cs" />
-    <Compile Include="Validation\Page\TestPageValidationAfterCreation.cs" />
+    <Compile Include="Validation\Page\TestPageCreation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selenol\Selenol.csproj">

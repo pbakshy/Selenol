@@ -12,7 +12,7 @@ using Selenol.Validation.Page;
 namespace Selenol.Tests.Validation.Page
 {
     [TestFixture]
-    public class TestPage
+    public class TestPageCreation
     {
         private BasePage page;
         private IWebDriver webDriver;
