@@ -84,7 +84,7 @@
     <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Page\BasePage.cs" />
-    <Compile Include="Page\PageFactory.cs" />
+    <Compile Include="Page\ContainerFactory.cs" />
     <Compile Include="Page\PageInitializationException.cs" />
     <Compile Include="SelectorAttributes\BaseSelectorAttribute.cs" />
     <Compile Include="SelectorAttributes\ClassAttribute.cs" />

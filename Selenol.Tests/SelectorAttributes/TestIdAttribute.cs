@@ -2,6 +2,7 @@
 
 using NUnit.Framework;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.SelectorAttributes;
 
@@ -22,6 +23,12 @@ namespace Selenol.Tests.SelectorAttributes
 
             [Id(TestSelector, CacheValue = true)]
             public virtual SelectElement Select { get; private set; }
+
+            [Id(TestSelector)]
+            public virtual TableControl TableControl { get; private set; }
+
+            [Id(TestSelector, CacheValue = true)]
+            public virtual TableControl CachedControl { get; private set; }
         }
 
         public class PageInheritsPropertiesWithSelectorAttribute : PageWithSelectorAttribute
@@ -56,10 +63,13 @@ namespace Selenol.Tests.SelectorAttributes
             }
 
             [Id(TestSelector)]
-            public virtual int NotElement { get; set; }
+            public virtual int InvalidType { get; set; }
 
             [Id(TestSelector)]
             public virtual BaseHtmlElement AbstractElement { get; set; }
+
+            [Id(TestSelector)]
+            public virtual Control AbstractControl { get; set; }
 
             [Id(TestSelector)]
             public SelectElement NotVirtualProperty { get; set; }
@@ -98,6 +108,9 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Id(TestSelector)]
             protected virtual ButtonElement Button { get; set; }
+
+            [Id(TestSelector)]
+            protected virtual TableControl TableControl { get; set; }
         }
 
         public class PageWithWritableProperty : BasePageWithWritableProperty

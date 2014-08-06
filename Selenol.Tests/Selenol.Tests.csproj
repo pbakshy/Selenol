@@ -101,6 +101,7 @@
     <Compile Include="SelectorAttributes\ForCollections\TestXPathAttribute.cs" />
     <Compile Include="SelectorAttributes\SelectorAttributeTestSupport.cs" />
     <Compile Include="SelectorAttributes\TestClassAttribute.cs" />
+    <Compile Include="SelectorAttributes\TestControlCreation.cs" />
     <Compile Include="SelectorAttributes\TestCssAttribute.cs" />
     <Compile Include="SelectorAttributes\TestIdAttribute.cs" />
     <Compile Include="SelectorAttributes\TestNameAttribute.cs" />

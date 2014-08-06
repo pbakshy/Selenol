@@ -25,12 +25,9 @@ namespace Selenol.SelectorAttributes
                 var propertyInfo = type.GetProperty(method);
                 if (propertyInfo.IsPropertyWithSelectorAttribute())
                 {
-                    if (typeof(BaseHtmlElement).IsAssignableFrom(method.ReturnType))
-                    {
-                        return interceptors.Where(x => x is ElementPropertyInterceptor).ToArray();
-                    }
-
-                    return interceptors.Where(x => x is ElementCollectionPropertyInterceptor).ToArray();
+                    return typeof(BaseHtmlElement).IsAssignableFrom(method.ReturnType) 
+                        ? interceptors.Where(x => x is ElementPropertyInterceptor).ToArray() 
+                        : interceptors.Where(x => x is ElementCollectionPropertyInterceptor).ToArray();
                 }
             }
 

@@ -9,6 +9,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Rhino.Mocks;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Extensions;
 using Selenol.Page;
@@ -24,9 +25,21 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
         }
 
         [Test]
+        public void CanBeUsedForIEnumerableOfControls()
+        {
+            this.AssertCorrectSelectorAttributeUsageForCollection<IEnumerable<FormControl>>("ControlEnumerable");
+        }
+
+        [Test]
         public void CanBeUsedForICollection()
         {
             this.AssertCorrectSelectorAttributeUsageForCollection<ICollection<FormElement>>("Collection");
+        }
+
+        [Test]
+        public void CanBeUsedForICollectionOfControls()
+        {
+            this.AssertCorrectSelectorAttributeUsageForCollection<ICollection<FormControl>>("ControlCollection");
         }
 
         [Test]
@@ -36,9 +49,21 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
         }
 
         [Test]
+        public void CanBeUsedForIListOfControls()
+        {
+            this.AssertCorrectSelectorAttributeUsageForCollection<IList<FormControl>>("ControlList");
+        }
+
+        [Test]
         public void CanBeUsedForReadOnlyCollection()
         {
             this.AssertCorrectSelectorAttributeUsageForCollection<ReadOnlyCollection<FormElement>>("ReadOnlyCollection");
+        }
+
+        [Test]
+        public void CanBeUsedForControlReadOnlyCollection()
+        {
+            this.AssertCorrectSelectorAttributeUsageForCollection<ReadOnlyCollection<FormControl>>("ControlReadOnlyCollection");
         }
 
         [Test]
@@ -68,8 +93,13 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
                          .And
                          .Contain(this.PrepareTypeErrorString("Enumerable"))
                          .And
-                         .Contain(
-                             "'AbstractCollection' property has invalid type. Generic type argument can not be abstract. For example use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>");
+                         .Contain("'AbstractElementCollection' property has invalid type. Generic type argument can not be abstract. " +
+                                  "For Elements use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>. " +
+                                  "For Controls use non abstract Control type as generic argument for collection.")
+                         .And
+                         .Contain("'AbstractControlCollection' property has invalid type. Generic type argument can not be abstract. " +
+                                  "For Elements use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>. " +
+                                  "For Controls use non abstract Control type as generic argument for collection.");
         }
 
         [Test]
@@ -88,22 +118,22 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
 
         private string PrepareTypeErrorString(string propertyName)
         {
-            return "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement or assignable from ReadOnlyCollection<T> where T : BaseHtmlElement."
+            return "'{0}' property has invalid type. Selector attributes can be used only for properties: \r\n - with type derived from BaseHtmlElement or Contro<T>\r\n - assignable from ReadOnlyCollection<T> where T : BaseHtmlElement or Control<T>"
                 .F(propertyName);
         }
 
-        private void AssertCorrectSelectorAttributeUsageForCollection<TProperty>(string propertyName) where TProperty : IEnumerable<FormElement>
+        private void AssertCorrectSelectorAttributeUsageForCollection<TProperty>(string propertyName) where TProperty : IEnumerable<BaseHtmlElement>
         {
             var page = this.CreatePageUsingFactory("PageWithCollectionTypeProperties");
             this.WebElement.Stub(x => x.TagName).Return("form");
             this.WebDriver.Stub(x => x.FindElements(this.GetByCriteria(TestSelector)))
                 .Return(new ReadOnlyCollection<IWebElement>(new[] { this.WebElement }));
-            this.WebElement.Stub(x => x.Text).Return("abcd");
+            this.WebElement.Stub(x => x.Displayed).Return(true);
 
             var forms = this.GetPropertyValue<TProperty>(page, propertyName).ToArray();
 
             forms.Should().HaveCount(1);
-            forms.First().Text.Should().Be("abcd");
+            forms.First().IsDisplayed.Should().Be(true);
             var uncachedElements = this.GetPropertyValue<TProperty>(page, propertyName);
             forms.Should().NotBeEquivalentTo(uncachedElements);
         }
@@ -111,6 +141,14 @@ namespace Selenol.Tests.SelectorAttributes.ForCollections
         public class BasePageWithWritableProperty : SimplePageForTest
         {
             public virtual IEnumerable<RadioButtonElement> RadioButtons { get; set; }
+        }
+
+        public class FormControl : Control
+        {
+            public FormControl(IWebElement webElement)
+                : base(webElement)
+            {
+            }
         }
     }
 }

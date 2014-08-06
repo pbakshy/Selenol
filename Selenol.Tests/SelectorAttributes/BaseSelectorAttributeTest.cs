@@ -7,6 +7,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Rhino.Mocks;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
@@ -22,6 +23,13 @@ namespace Selenol.Tests.SelectorAttributes
         }
 
         [Test]
+        public void CanBeUsedForControlAutoProperty()
+        {
+            var page = this.CreatePageUsingFactory("PageWithSelectorAttribute");
+            this.AssertCorrectSelectorAttributeUsageForControl(page);
+        }
+
+        [Test]
         public void Caching()
         {
             var page = this.CreatePageUsingFactory("PageWithSelectorAttribute");
@@ -34,6 +42,17 @@ namespace Selenol.Tests.SelectorAttributes
         }
 
         [Test]
+        public void CachingControl()
+        {
+            var page = this.CreatePageUsingFactory("PageWithSelectorAttribute");
+            this.WebDriver.Stub(x => x.FindElement(this.GetByCriteria(TestSelector))).Return(this.WebElement);
+
+            var cashedControl = this.GetTableControl(page, "CachedControl");
+
+            cashedControl.Should().BeSameAs(this.GetTableControl(page, "CachedControl"));
+        }
+
+        [Test]
         public void ShouldProxyPropertyFromBaseClass()
         {
             var page = this.CreatePageUsingFactory("PageInheritsPropertiesWithSelectorAttribute");
@@ -41,10 +60,24 @@ namespace Selenol.Tests.SelectorAttributes
         }
 
         [Test]
+        public void ShouldProxyControlPropertyFromBaseClass()
+        {
+            var page = this.CreatePageUsingFactory("PageInheritsPropertiesWithSelectorAttribute");
+            this.AssertCorrectSelectorAttributeUsageForControl(page);
+        }
+
+        [Test]
         public void ShouldProxyProtectedProperty()
         {
             var page = this.CreatePageUsingFactory("PageWithProtectedProperty");
             this.AssertCorrectSelectorAttributeUsage(page);
+        }
+
+        [Test]
+        public void ShouldProxyProtectedControlProperty()
+        {
+            var page = this.CreatePageUsingFactory("PageWithProtectedProperty");
+            this.AssertCorrectSelectorAttributeUsageForControl(page);
         }
 
         [Test]
@@ -59,10 +92,13 @@ namespace Selenol.Tests.SelectorAttributes
                      .And
                      .Contain("'PropertyWithoutSetter' is not an auto property. Selector attributes can be used only for auto properties.")
                      .And
-                     .Contain(
-                         "'NotElement' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement or assignable from ReadOnlyCollection<T> where T : BaseHtmlElement.")
+                     .Contain("'InvalidType' property has invalid type. Selector attributes can be used only for properties: " +
+                              "\r\n - with type derived from BaseHtmlElement or Contro<T>" +
+                              "\r\n - assignable from ReadOnlyCollection<T> where T : BaseHtmlElement or Control<T>")
                      .And
                      .Contain("'AbstractElement' property has invalid type. Selector attributes can not be used for abstract types.")
+                     .And
+                     .Contain("'AbstractControl' property has invalid type. Selector attributes can not be used for abstract types.")
                      .And
                      .Contain("'NotVirtualProperty' is not virtual. Selector attributes can be used only for virtual properties.")
                      .And
@@ -74,8 +110,9 @@ namespace Selenol.Tests.SelectorAttributes
 
             AssertSinglePropertyError(realException, "NotAuthoProperty");
             AssertSinglePropertyError(realException, "NotVirtualProperty");
-            AssertSinglePropertyError(realException, "AbstractElement");
-            AssertSinglePropertyError(realException, "NotElement");
+            AssertSinglePropertyError(realException, "'AbstractElement'");
+            AssertSinglePropertyError(realException, "'AbstractControl'");
+            AssertSinglePropertyError(realException, "InvalidType");
             AssertSinglePropertyError(realException, "InternalProperty");
             AssertSinglePropertyError(realException, "PrivateProperty");
         }
@@ -127,6 +164,11 @@ namespace Selenol.Tests.SelectorAttributes
             return this.GetPropertyValue<SelectElement>(page, "Select");
         }
 
+        private TableControl GetTableControl(SimplePageForTest page, string propertyName = "TableControl")
+        {
+            return this.GetPropertyValue<TableControl>(page, propertyName);
+        }
+
         private void AssertCorrectSelectorAttributeUsage(SimplePageForTest page)
         {
             this.WebElement.Stub(x => x.TagName).Return("button");
@@ -139,9 +181,35 @@ namespace Selenol.Tests.SelectorAttributes
             button.Should().NotBeSameAs(this.GetButton(page));
         }
 
+        private void AssertCorrectSelectorAttributeUsageForControl(SimplePageForTest page)
+        {
+            this.WebDriver.Stub(x => x.FindElement(this.GetByCriteria(TestSelector))).Return(this.WebElement);
+            this.WebElement.Stub(x => x.Text).Return("table text");
+            var tableControl = this.GetTableControl(page);
+
+            tableControl.Text.Should().Be("table text");
+            tableControl.Should().NotBeSameAs(this.GetTableControl(page));
+        }
+
         public class BasePageWithWritableProperty : SimplePageForTest
         {
             public virtual LinkElement Link { get; set; }
+        }
+
+        public class TableControl : Control
+        {
+            public TableControl(IWebElement webElement)
+                : base(webElement)
+            {
+            }
+
+            public string Text
+            {
+                get
+                {
+                    return this.WebElement.Text;
+                }
+            }
         }
     }
 }

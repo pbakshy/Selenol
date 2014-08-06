@@ -7,7 +7,6 @@ using System.Reflection;
 using Castle.DynamicProxy;
 using OpenQA.Selenium;
 using Selenol.Extensions;
-using Selenol.Page;
 
 namespace Selenol.SelectorAttributes.Interceptors
 {
@@ -27,22 +26,22 @@ namespace Selenol.SelectorAttributes.Interceptors
             var propertyInfo = invocation.TargetType.GetProperty(methodInfo);
             var selectorAttribute = Attribute.GetCustomAttributes(propertyInfo).OfType<BaseSelectorAttribute>().First();
 
-            var page = (BasePage)invocation.InvocationTarget;
+            var page = invocation.InvocationTarget;
             invocation.ReturnValue = this.UseCacheIfNeed(propertyInfo, page, selectorAttribute);
         }
 
         /// <summary>Selects value for the proxied property.</summary>
         /// <param name="propertyType">The property type.</param>
-        /// <param name="page">The page.</param>
+        /// <param name="context">The invocation context, can be page or control.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The property value.</returns>
-        protected abstract object SelectPropertyValue(Type propertyType, BasePage page, By selector);
+        protected abstract object SelectPropertyValue(Type propertyType, object context, By selector);
 
-        private object UseCacheIfNeed(PropertyInfo propertyInfo, BasePage page, BaseSelectorAttribute selectorAttribute)
+        private object UseCacheIfNeed(PropertyInfo propertyInfo, object context, BaseSelectorAttribute selectorAttribute)
         {
             if (!selectorAttribute.CacheValue)
             {
-                return this.SelectPropertyValue(propertyInfo.PropertyType, page, selectorAttribute.Selector);
+                return this.SelectPropertyValue(propertyInfo.PropertyType, context, selectorAttribute.Selector);
             }
 
             if (this.propertyValueCache == null)
@@ -52,7 +51,7 @@ namespace Selenol.SelectorAttributes.Interceptors
 
             if (!this.propertyValueCache.ContainsKey(propertyInfo))
             {
-                this.propertyValueCache[propertyInfo] = this.SelectPropertyValue(propertyInfo.PropertyType, page, selectorAttribute.Selector);
+                this.propertyValueCache[propertyInfo] = this.SelectPropertyValue(propertyInfo.PropertyType, context, selectorAttribute.Selector);
             }
 
             return this.propertyValueCache[propertyInfo];

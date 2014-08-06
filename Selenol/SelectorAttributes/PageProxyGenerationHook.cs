@@ -96,7 +96,7 @@ namespace Selenol.SelectorAttributes
             var isValidCollectionType = IsValidCollectionType(propertyType);
             if (isValidCollectionType && propertyType.GetGenericArguments().Single().IsAbstract)
             {
-                var errorMessage = "'{0}' property has invalid type. Generic type argument can not be abstract. For example use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>."
+                var errorMessage = "'{0}' property has invalid type. Generic type argument can not be abstract. For Elements use ReadOnlyCollection<ButtonElement> instead of ReadOnlyCollection<BaseHtmlElement>. For Controls use non abstract Control type as generic argument for collection."
                     .F(propertyInfo.Name);
                 this.AppendError(errorMessage);
                 return false;
@@ -104,7 +104,7 @@ namespace Selenol.SelectorAttributes
 
             if (!isValidCollectionType && !typeof(BaseHtmlElement).IsAssignableFrom(propertyType))
             {
-                var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties with type derived from BaseHtmlElement or assignable from ReadOnlyCollection<T> where T : BaseHtmlElement."
+                var errorMessage = "'{0}' property has invalid type. Selector attributes can be used only for properties: \r\n - with type derived from BaseHtmlElement or Contro<T>\r\n - assignable from ReadOnlyCollection<T> where T : BaseHtmlElement or Control<T>"
                     .F(propertyInfo.Name);
                 this.AppendError(errorMessage);
                 return false;

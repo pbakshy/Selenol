@@ -24,7 +24,7 @@ namespace Selenol.Tests.Validation.Page
             this.webDriver = MockRepository.GenerateStub<IWebDriver>();
             this.javaScriptExecutor = MockRepository.GenerateStub<IJavaScriptExecutor>();
             this.webDriver.Url = "http://supersite.com/myhome/page.aspx";
-            this.page = PageFactory.Create<SimplePageForTest>(this.webDriver, this.javaScriptExecutor);
+            this.page = ContainerFactory.Create<SimplePageForTest>(this.webDriver, this.javaScriptExecutor);
         }
 
         [Test, TestCaseSource("WithValidationActionsFactory")]
@@ -63,11 +63,11 @@ namespace Selenol.Tests.Validation.Page
 
         protected static IEnumerable<TestCaseData> WithValidationActionsFactory()
         {
-#pragma warning disable 168
+            // ReSharper disable UnusedVariable
             yield return new TestCaseData(new Action<BasePage>(x => { var context = x.Context; }));
             yield return new TestCaseData(new Action<BasePage>(x => { var result = x.ExecuteScript("return 1 == 1"); }));
             yield return new TestCaseData(new Action<BasePage>(x => { var result = x.ExecuteAsyncScript("return '1' === 1"); }));
-#pragma warning restore 168
+            // ReSharper restore UnusedVariable
         }
     }
 }

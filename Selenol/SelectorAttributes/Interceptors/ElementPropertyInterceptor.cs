@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
@@ -19,22 +20,31 @@ namespace Selenol.SelectorAttributes.Interceptors
         private static readonly MethodInfo elementMethod = typeof(SearchContextExtensions).GetMethod("Element",
             BindingFlags.Public | BindingFlags.Static);
 
+        private static readonly MethodInfo controlMethod = typeof(SearchContextExtensions).GetMethod("Control",
+            BindingFlags.Public | BindingFlags.Static);
+
         private static readonly IDictionary<Type, MethodInfo> typeToGenericElementMethod = new Dictionary<Type, MethodInfo>();
 
         /// <summary>Selects value for the proxied property.</summary>
         /// <param name="propertyType">The property type.</param>
-        /// <param name="page">The page.</param>
+        /// <param name="context">The page.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The property value.</returns>
-        protected override object SelectPropertyValue(Type propertyType, BasePage page, By selector)
+        protected override object SelectPropertyValue(Type propertyType, object context, By selector)
         {
             if (!typeToGenericElementMethod.ContainsKey(propertyType))
             {
-                typeToGenericElementMethod[propertyType] = elementMethod.MakeGenericMethod(propertyType);
+                var factoryMethod = typeof(Control).IsAssignableFrom(propertyType)
+                                        ? controlMethod
+                                        : elementMethod;
+                typeToGenericElementMethod[propertyType] = factoryMethod.MakeGenericMethod(propertyType);
             }
 
             var typedEmelementMethod = typeToGenericElementMethod[propertyType];
-            return typedEmelementMethod.Invoke(null, new object[] { page.Context, selector });
+            var searchContext = context is ISearchContext
+                                    ? context
+                                    : ((BasePage)context).Context;
+            return typedEmelementMethod.Invoke(null, new[] { searchContext, selector });
         }
     }
 }

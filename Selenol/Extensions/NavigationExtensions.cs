@@ -33,7 +33,7 @@ namespace Selenol.Extensions
                         .F(webDriver.GetType().Name));
             }
 
-            return PageFactory.Create<TPage>(webDriver, jsExecutor);
+            return ContainerFactory.Create<TPage>(webDriver, jsExecutor);
         }
 
         /// <summary>Navigates to the new page after some action on the current page will be performed.</summary>
@@ -53,7 +53,7 @@ namespace Selenol.Extensions
             //TODO move default timeout to config
             Wait.For(() => PageUtil.IsValid(newPageType, webDriver.Url), TimeSpan.FromSeconds(5), "url matched '{0}' page.".F(newPageType.Name));
 
-            return PageFactory.Create<TNewPage>(currentPage.WebDriver, currentPage.JavaScriptExecutor);
+            return ContainerFactory.Create<TNewPage>(currentPage.WebDriver, currentPage.JavaScriptExecutor);
         }
     }
 }

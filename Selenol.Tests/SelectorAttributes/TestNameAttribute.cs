@@ -1,6 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.SelectorAttributes;
 
@@ -20,6 +21,12 @@ namespace Selenol.Tests.SelectorAttributes
 
             [Name(TestSelector, CacheValue = true)]
             public virtual SelectElement Select { get; private set; }
+
+            [Name(TestSelector)]
+            public virtual TableControl TableControl { get; private set; }
+
+            [Name(TestSelector, CacheValue = true)]
+            public virtual TableControl CachedControl { get; private set; }
         }
 
         public class PageInheritsPropertiesWithSelectorAttribute : PageWithSelectorAttribute
@@ -54,10 +61,13 @@ namespace Selenol.Tests.SelectorAttributes
             }
 
             [Name(TestSelector)]
-            public virtual int NotElement { get; set; }
+            public virtual int InvalidType { get; set; }
 
             [Name(TestSelector)]
             public virtual BaseHtmlElement AbstractElement { get; set; }
+
+            [Name(TestSelector)]
+            public virtual Control AbstractControl { get; set; }
 
             [Name(TestSelector)]
             public SelectElement NotVirtualProperty { get; set; }
@@ -96,6 +106,9 @@ namespace Selenol.Tests.SelectorAttributes
         {
             [Name(TestSelector)]
             protected virtual ButtonElement Button { get; set; }
+
+            [Name(TestSelector)]
+            protected virtual TableControl TableControl { get; set; }
         }
 
         public class PageWithWritableProperty : BasePageWithWritableProperty

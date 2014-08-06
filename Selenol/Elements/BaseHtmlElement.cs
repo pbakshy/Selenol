@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 
 using OpenQA.Selenium;
-
+using Selenol.Controls;
 using Selenol.Extensions;
 using Selenol.Validation;
 using Selenol.Validation.Element;
@@ -37,6 +37,11 @@ namespace Selenol.Elements
             var validators = this.GetType().GetCustomAttributes(false).OfType<IElementValidator>().ToArray();
             if (validators.Length == 0)
             {
+                if (this is Control)
+                {
+                    return;
+                }
+
                 throw new ValidationAbsenceException("Element '{0}' does not have any validation. Please add a validation.".F(this.GetType()));
             }
 

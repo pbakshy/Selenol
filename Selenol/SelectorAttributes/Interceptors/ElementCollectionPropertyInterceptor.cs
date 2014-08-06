@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
@@ -19,7 +20,10 @@ namespace Selenol.SelectorAttributes.Interceptors
     /// </summary>
     internal class ElementCollectionPropertyInterceptor : BaseElementPropertyInterceptor
     {
-        private static readonly MethodInfo collectionMethod = typeof(SearchContextExtensions).GetMethod("Elements",
+        private static readonly MethodInfo elementsMethod = typeof(SearchContextExtensions).GetMethod("Elements",
+            BindingFlags.Public | BindingFlags.Static);
+
+        private static readonly MethodInfo controlsMethod = typeof(SearchContextExtensions).GetMethod("Controls",
             BindingFlags.Public | BindingFlags.Static);
 
         private static readonly MethodInfo toListMethod = typeof(Enumerable).GetMethod("ToList", BindingFlags.Public | BindingFlags.Static);
@@ -30,28 +34,34 @@ namespace Selenol.SelectorAttributes.Interceptors
 
         /// <summary>Selects value for the proxied property.</summary>
         /// <param name="propertyType">The property type.</param>
-        /// <param name="page">The page.</param>
+        /// <param name="context">The page.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The property value.</returns>
-        protected override object SelectPropertyValue(Type propertyType, BasePage page, By selector)
+        protected override object SelectPropertyValue(Type propertyType, object context, By selector)
         {
             var genericArgType = propertyType.GetGenericArguments().Single();
-            var elements = SelectElements(page, selector, genericArgType);
+            var elements = SelectElements(context, selector, genericArgType);
 
             var list = ToList(genericArgType, elements);
 
             return CreateReadOnlyCollection(genericArgType, list);
         }
 
-        private static object SelectElements(BasePage page, By selector, Type genericArgType)
+        private static object SelectElements(object invocationContext, By selector, Type genericArgType)
         {
             if (!typeToGenericCollectionMethod.ContainsKey(genericArgType))
             {
-                typeToGenericCollectionMethod[genericArgType] = collectionMethod.MakeGenericMethod(genericArgType);
+                var factoryMethod = typeof(Control).IsAssignableFrom(genericArgType)
+                                        ? controlsMethod
+                                        : elementsMethod;
+                typeToGenericCollectionMethod[genericArgType] = factoryMethod.MakeGenericMethod(genericArgType);
             }
 
             var typedCollectionMethod = typeToGenericCollectionMethod[genericArgType];
-            return typedCollectionMethod.Invoke(null, new object[] { page.Context, selector });
+            var searchContext = invocationContext is ISearchContext
+                                    ? invocationContext
+                                    : ((BasePage)invocationContext).Context;
+            return typedCollectionMethod.Invoke(null, new[] { searchContext, selector });
         }
 
         private static object ToList(Type genericArgType, object elements)

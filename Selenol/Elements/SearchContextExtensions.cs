@@ -6,6 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using OpenQA.Selenium;
+using Selenol.Controls;
+using Selenol.Page;
 
 namespace Selenol.Elements
 {
@@ -479,6 +481,46 @@ namespace Selenol.Elements
             }
 
             return context.FindElements(by).Select(x => new BasicHtmlElement(x).As<TControl>()).ToArray();
+        }
+
+        /// <summary>Finds a user defined controls that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found a user defined control.</returns>
+        public static TControl Control<TControl>(this ISearchContext context, By by) where TControl : Control
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (@by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return ContainerFactory.Control<TControl>(context.FindElement(by));
+        }
+
+        /// <summary>Finds user defined controls that meets a criteria.</summary>
+        /// <typeparam name="TControl">The type of user defined control.</typeparam>
+        /// <param name="context">The search context.</param>
+        /// <param name="by">The criteria.</param>
+        /// <returns>The found user defined controls.</returns>
+        public static IEnumerable<TControl> Controls<TControl>(this ISearchContext context, By by) where TControl : Control
+        {
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
+            if (@by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return context.FindElements(by).Select(ContainerFactory.Control<TControl>);
         }
 
         /// <summary>Finds a password box that meets a criteria.</summary>
