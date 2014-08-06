@@ -68,7 +68,7 @@ namespace Selenol.Tests.Extensions
             var currentPage = this.MakeCurrentPage();
             this.webDriver.Stub(x => x.Url).Return(ValidUrl);
 
-            var newPage = currentPage.GoTo<CurrentPageForTest, SimplePageForTest>(p => p.Button.Click());
+            var newPage = currentPage.Go(p => p.Button.Click()).To<SimplePageForTest>();
 
             newPage.Should().NotBeNull();
         }
@@ -79,7 +79,7 @@ namespace Selenol.Tests.Extensions
             var currentPage = this.MakeCurrentPage();
             this.webDriver.Stub(x => x.Url).Return(InvalidUrl);
 
-            var exception = Assert.Throws<TimeoutException>(() => currentPage.GoTo<CurrentPageForTest, SimplePageForTest>(p => p.Button.Click()));
+            var exception = Assert.Throws<TimeoutException>(() => currentPage.Go(p => p.Button.Click()).To<SimplePageForTest>());
             exception.Message.Should().Contain("Waited for url matched 'SimplePageForTest' page.");
         }
 

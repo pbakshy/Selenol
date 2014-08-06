@@ -17,14 +17,14 @@ namespace Selenol.Sample
                 var mainPage = firefox.GoTo<MainPage>("https://github.com");
                 mainPage.SearchBox.TypeText("Seleno");
 
-                var searchPage = mainPage.GoTo<MainPage, SearchPage>(x => x.SearchBox.SendEnter());
+                var searchPage = mainPage.Go(x => x.SearchBox.SendEnter()).To<SearchPage>();
                 searchPage.Results.ToList().ForEach(x => Console.WriteLine(x.Text));
 
                 searchPage.SearchElement.Clear();
                 searchPage.SearchElement.TypeText("selenol");
-                searchPage = searchPage.GoTo<SearchPage, SearchPage>(x => x.SearchButton.Click());
+                searchPage = searchPage.Go(x => x.SearchButton.Click()).To<SearchPage>();
 
-                var repoPage = searchPage.GoTo<SearchPage, RepositoryPage>(x => x.Results.First().Click());
+                var repoPage = searchPage.Go(x => x.Results.First().Click()).To<RepositoryPage>();
 
                 Debug.Assert(string.Equals("pbakshy", repoPage.Author.Text), "Wrong author");
                 Debug.Assert(string.Equals("Selenol", repoPage.RepositoryName.Text), "Wrong repo");

@@ -81,6 +81,7 @@
     <Compile Include="Elements\TableRowElement.cs" />
     <Compile Include="Elements\TextAreaElement.cs" />
     <Compile Include="Elements\TextboxElement.cs" />
+    <Compile Include="NavigationContext.cs" />
     <Compile Include="Extensions\NavigationExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Page\BasePage.cs" />
