@@ -13,7 +13,7 @@ namespace Selenol.Tests.SelectorAttributes
     public class SelectorAttributeTestSupport
     {
         protected const string TestSelector = "test-selector";
-        private static readonly MethodInfo factoryMethod = typeof(ContainerFactory).GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
+        private static readonly MethodInfo factoryMethod = typeof(ContainerFactory).GetMethod("Page", BindingFlags.Public | BindingFlags.Static);
 
         protected IWebDriver WebDriver { get; private set; }
 

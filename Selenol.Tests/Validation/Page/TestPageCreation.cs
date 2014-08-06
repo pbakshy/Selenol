@@ -24,7 +24,7 @@ namespace Selenol.Tests.Validation.Page
             this.webDriver = MockRepository.GenerateStub<IWebDriver>();
             this.javaScriptExecutor = MockRepository.GenerateStub<IJavaScriptExecutor>();
             this.webDriver.Url = "http://supersite.com/myhome/page.aspx";
-            this.page = ContainerFactory.Create<SimplePageForTest>(this.webDriver, this.javaScriptExecutor);
+            this.page = ContainerFactory.Page<SimplePageForTest>(this.webDriver, this.javaScriptExecutor);
         }
 
         [Test, TestCaseSource("WithValidationActionsFactory")]

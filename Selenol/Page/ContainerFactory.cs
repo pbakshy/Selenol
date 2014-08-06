@@ -20,12 +20,12 @@ namespace Selenol.Page
                 Selector = new InterceptorSelector()
             };
 
-        /// <summary>The create.</summary>
-        /// <param name="webDriver">The driver. </param>
+        /// <summary>Creates user defined page.</summary>
+        /// <param name="webDriver">The web driver. </param>
         /// <param name="javaScriptExecutor">The js executor. </param>
         /// <typeparam name="TPage">The page type. </typeparam>
-        /// <returns>The TPage. </returns>
-        public static TPage Create<TPage>(IWebDriver webDriver, IJavaScriptExecutor javaScriptExecutor) where TPage : BasePage, new()
+        /// <returns>The new instance of user defined page. </returns>
+        public static TPage Page<TPage>(IWebDriver webDriver, IJavaScriptExecutor javaScriptExecutor) where TPage : BasePage, new()
         {
             var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions,
                 new PropertyInterceptor(),

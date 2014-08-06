@@ -118,7 +118,7 @@ namespace Selenol.Page
             if (!this.isInitialized)
             {
                 var message =
-                    "The page '{0}' has not been initialized yet. It can happen if you have created the page by constructor. Please use PageFactory.Create method instead."
+                    "The page '{0}' has not been initialized yet. It can happen if you have created the page by constructor. Please use PageFactory.Page method instead."
                         .F(this.GetType().Name);
                 throw new PageInitializationException(message);
             }

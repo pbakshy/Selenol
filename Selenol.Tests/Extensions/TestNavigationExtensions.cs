@@ -86,7 +86,7 @@ namespace Selenol.Tests.Extensions
         private CurrentPageForTest MakeCurrentPage()
         {
             this.webDriver.Stub(x => x.Url).Return("http://localhost/current/page.html").Repeat.Once();
-            return ContainerFactory.Create<CurrentPageForTest>(this.webDriver, this.javaScriptExecutor);
+            return ContainerFactory.Page<CurrentPageForTest>(this.webDriver, this.javaScriptExecutor);
         }
 
         [Url("/current/page.html")]

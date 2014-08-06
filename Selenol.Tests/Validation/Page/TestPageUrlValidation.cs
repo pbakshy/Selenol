@@ -28,7 +28,7 @@ namespace Selenol.Tests.Validation.Page
         {
             this.webDriver.Url = "http://mysite/home/page.aspx";
 
-            Assert.DoesNotThrow(() => ContainerFactory.Create<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
+            Assert.DoesNotThrow(() => ContainerFactory.Page<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace Selenol.Tests.Validation.Page
             this.webDriver.Url = "http://mysite/work/index.aspx";
 
             var excepion = Assert.Throws<PageValidationException>(
-                    () => ContainerFactory.Create<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
+                    () => ContainerFactory.Page<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
 
             excepion.Message.Should().Be("Current url 'http://mysite/work/index.aspx' does not contain '/home/page.aspx' part.");
         }
@@ -48,7 +48,7 @@ namespace Selenol.Tests.Validation.Page
             this.webDriver.Url = "http://mysite/work/index.aspx";
 
             var excepion = Assert.Throws<PageValidationException>(
-                () => ContainerFactory.Create<PageWithSeveralValidations>(this.webDriver, this.javaScriptExecutor));
+                () => ContainerFactory.Page<PageWithSeveralValidations>(this.webDriver, this.javaScriptExecutor));
 
             excepion.Message.Should().Contain("Current url 'http://mysite/work/index.aspx' does not contain '/mountains/everest.aspx' part.")
                 .And.Contain("Current url 'http://mysite/work/index.aspx' does not contain '/sweets/icecream.aspx' part.")
@@ -59,7 +59,7 @@ namespace Selenol.Tests.Validation.Page
         public void ValidationIsAbsent()
         {
             var exception = Assert.Throws<ValidationAbsenceException>(
-                () => ContainerFactory.Create<PageWithoutValidation>(this.webDriver, this.javaScriptExecutor));
+                () => ContainerFactory.Page<PageWithoutValidation>(this.webDriver, this.javaScriptExecutor));
 
             exception.Message.Should().Be(
                 "Page 'Selenol.Tests.Validation.Page.TestPageUrlValidation+PageWithoutValidation' does not have any Url validation. Please add Url validation.");
@@ -71,7 +71,7 @@ namespace Selenol.Tests.Validation.Page
             this.webDriver.Url = "http://mysite/school/class.aspx";
 
             var excepion = Assert.Throws<PageValidationException>(
-                () => ContainerFactory.Create<PageWithHttps>(this.webDriver, this.javaScriptExecutor));
+                () => ContainerFactory.Page<PageWithHttps>(this.webDriver, this.javaScriptExecutor));
 
             excepion.Message.Should().Be("Current url 'http://mysite/school/class.aspx' must be accessed by HTTPS protocol.");
         }
@@ -81,7 +81,7 @@ namespace Selenol.Tests.Validation.Page
         {
             this.webDriver.Url = "https://mysite/school/class.aspx";
 
-            Assert.DoesNotThrow(() => ContainerFactory.Create<PageWithHttps>(this.webDriver, this.javaScriptExecutor));
+            Assert.DoesNotThrow(() => ContainerFactory.Page<PageWithHttps>(this.webDriver, this.javaScriptExecutor));
         }
         
         [TestCase("http://mysite/home/page.aspx")]
@@ -90,7 +90,7 @@ namespace Selenol.Tests.Validation.Page
         {
             this.webDriver.Url = currentUrl;
 
-            Assert.DoesNotThrow(() => ContainerFactory.Create<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
+            Assert.DoesNotThrow(() => ContainerFactory.Page<PageWithSingleValidation>(this.webDriver, this.javaScriptExecutor));
         }
 
         public class PageWithoutValidation : BasePage
