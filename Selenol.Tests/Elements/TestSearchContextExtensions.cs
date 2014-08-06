@@ -92,35 +92,35 @@ namespace Selenol.Tests.Elements
         }
 
         [Test, ExpectedException(typeof(ValidationAbsenceException))]
-        public void FindUserControlWithoutVerification()
+        public void FindUserElementWithoutVerification()
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
-            this.context.Element<UserControlForTestWithoutVerification>(selector);
+            this.context.Element<UserElementForTestWithoutVerification>(selector);
         }
 
         [Test, ExpectedException(typeof(ValidationAbsenceException))]
-        public void FindUserControlsWithoutVerification()
+        public void FindUserElementsWithoutVerification()
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
-            this.context.Elements<UserControlForTestWithoutVerification>(selector);
+            this.context.Elements<UserElementForTestWithoutVerification>(selector);
         }
 
         [Test, ExpectedException(typeof(MissingMethodException))]
-        public void FindUserControlWithoutProperConctructor()
+        public void FindUserElementWithoutProperConctructor()
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElement(selector)).Return(this.element1);
-            this.context.Element<UserControlForTestWithoutProperConstructor>(selector);
+            this.context.Element<UserElementForTestWithoutProperConstructor>(selector);
         }
 
         [Test, ExpectedException(typeof(MissingMethodException))]
-        public void FindUserControlsWithoutProperConctructor()
+        public void FindUserElementsWithoutProperConctructor()
         {
             var selector = By.CssSelector("div");
             this.context.Stub(x => x.FindElements(selector)).Return(new List<IWebElement> { this.element1, this.element2 }.AsReadOnly());
-            this.context.Elements<UserControlForTestWithoutProperConstructor>(selector);
+            this.context.Elements<UserElementForTestWithoutProperConstructor>(selector);
         }
 
         protected static IEnumerable<TestCaseData> SingleElementFactory()
@@ -138,7 +138,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.TextArea(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Textbox(by)), "input", "text");
             yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Passwordbox(by)), "input", "password");
-            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Element<UserControlForTest>(by)), "div", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, BaseHtmlElement>((sc, by) => sc.Element<UserElementForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsFactory()
@@ -156,7 +156,7 @@ namespace Selenol.Tests.Elements
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.TextAreas(by)), "textarea", null);
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Textboxes(by)), "input", "text");
             yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Passwordboxes(by)), "input", "password");
-            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Elements<UserControlForTest>(by)), "div", null);
+            yield return new TestCaseData(new Func<ISearchContext, By, IEnumerable<BaseHtmlElement>>((sc, by) => sc.Elements<UserElementForTest>(by)), "div", null);
         }
 
         protected static IEnumerable<TestCaseData> MultiElementsDefaultFactory()
@@ -188,17 +188,17 @@ namespace Selenol.Tests.Elements
 
 // ReSharper disable ClassNeverInstantiated.Local
         [Tag("div")]
-        private class UserControlForTest : BaseHtmlElement
+        private class UserElementForTest : BaseHtmlElement
         {
-            public UserControlForTest(IWebElement webElement)
+            public UserElementForTest(IWebElement webElement)
                 : base(webElement)
             {
             }
         }
 
-        private class UserControlForTestWithoutVerification : BaseHtmlElement
+        private class UserElementForTestWithoutVerification : BaseHtmlElement
         {
-            public UserControlForTestWithoutVerification(IWebElement webElement)
+            public UserElementForTestWithoutVerification(IWebElement webElement)
                 : base(webElement)
             {
             }
@@ -206,9 +206,9 @@ namespace Selenol.Tests.Elements
         
 // ReSharper disable UnusedParameter.Local
         [Tag("div")]
-        private class UserControlForTestWithoutProperConstructor : BaseHtmlElement
+        private class UserElementForTestWithoutProperConstructor : BaseHtmlElement
         {
-            public UserControlForTestWithoutProperConstructor(IWebElement webElement, int index)
+            public UserElementForTestWithoutProperConstructor(IWebElement webElement, int index)
                 : base(webElement)
             {
             }
