@@ -3,15 +3,18 @@
 using System;
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
 namespace Selenol.SelectorAttributes
 {
     /// <summary>
-    /// The base selector attribute. Can be used for dynamic selection of elements. 
+    /// The base selector attribute. Can be used for dynamic selection of elements or controls. 
     /// An Element must be derived from <see cref="BaseHtmlElement"/> 
-    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{TElement}"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{TElement}"/>.
+    /// A Control must be derived from <see cref="Control"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{TControl}"/>.
     /// And used as an auto-property of class derived from <see cref="BasePage"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]

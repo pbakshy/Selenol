@@ -2,15 +2,18 @@
 
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
 namespace Selenol.SelectorAttributes
 {
     /// <summary>
-    /// The Id selector attribute. Can be used for dynamic selection of elements by their Id. 
+    /// The Id selector attribute. Can be used for dynamic selection of elements or controls by their Id. 
     /// An Element must be derived from <see cref="BaseHtmlElement"/> 
-    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{T}"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{T}"/>.
+    /// A Control must be derived from <see cref="Control"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{TControl}"/>.
     /// And used as an auto-property of class derived from <see cref="BasePage"/>.
     /// </summary>
     public class IdAttribute : BaseSelectorAttribute

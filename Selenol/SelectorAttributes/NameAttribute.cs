@@ -2,16 +2,19 @@
 
 using System.Collections.ObjectModel;
 using OpenQA.Selenium;
+using Selenol.Controls;
 using Selenol.Elements;
 using Selenol.Page;
 
 namespace Selenol.SelectorAttributes
 {
     /// <summary>
-    /// The Name selector attribute. Can be used for dynamic selection of elements by their name. 
+    /// The Name selector attribute. Can be used for dynamic selection of elements or controls by their name. 
     /// An Element must be derived from <see cref="BaseHtmlElement"/> 
-    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{T}"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{T}"/>.
     /// And used as an auto-property of class derived from <see cref="BasePage"/>.
+    /// A Control must be derived from <see cref="Control"/> 
+    /// or it can be a collection assignable from <see cref="ReadOnlyCollection{TControl}"/>.
     /// </summary>
     public class NameAttribute : BaseSelectorAttribute
     {
