@@ -18,7 +18,7 @@ namespace Selenol.SelectorAttributes.Interceptors
     /// With generic argument based on <see cref="BaseHtmlElement"/>
     /// Can cache the result if need.
     /// </summary>
-    internal class ElementCollectionPropertyInterceptor : BaseElementPropertyInterceptor
+    internal class CollectionPropertyInterceptor : BasePropertyInterceptor
     {
         private static readonly MethodInfo elementsMethod = typeof(SearchContextExtensions).GetMethod("Elements",
             BindingFlags.Public | BindingFlags.Static);

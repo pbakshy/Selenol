@@ -15,7 +15,7 @@ namespace Selenol.SelectorAttributes.Interceptors
     /// Used for properties with type based on <see cref="BaseHtmlElement"/>.
     /// Can cache the result if need.
     /// </summary>
-    internal class ElementPropertyInterceptor : BaseElementPropertyInterceptor
+    internal class PropertyInterceptor : BasePropertyInterceptor
     {
         private static readonly MethodInfo elementMethod = typeof(SearchContextExtensions).GetMethod("Element",
             BindingFlags.Public | BindingFlags.Static);

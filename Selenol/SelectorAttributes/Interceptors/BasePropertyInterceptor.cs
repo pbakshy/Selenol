@@ -14,7 +14,7 @@ namespace Selenol.SelectorAttributes.Interceptors
     /// The base selector interceptor. It intercepts property getter and select elements by selector from <see cref="BaseSelectorAttribute"/>.
     /// Can cache the result if need.
     /// </summary>
-    internal abstract class BaseElementPropertyInterceptor : IInterceptor
+    internal abstract class BasePropertyInterceptor : IInterceptor
     {
         private IDictionary<PropertyInfo, object> propertyValueCache;
 

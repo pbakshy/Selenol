@@ -26,8 +26,8 @@ namespace Selenol.SelectorAttributes
                 if (propertyInfo.IsPropertyWithSelectorAttribute())
                 {
                     return typeof(BaseHtmlElement).IsAssignableFrom(method.ReturnType) 
-                        ? interceptors.Where(x => x is ElementPropertyInterceptor).ToArray() 
-                        : interceptors.Where(x => x is ElementCollectionPropertyInterceptor).ToArray();
+                        ? interceptors.Where(x => x is PropertyInterceptor).ToArray() 
+                        : interceptors.Where(x => x is CollectionPropertyInterceptor).ToArray();
                 }
             }
 
@@ -40,8 +40,8 @@ namespace Selenol.SelectorAttributes
                 }
             }
 
-            return interceptors.Where(x => !(x is ElementPropertyInterceptor) 
-                && !(x is ElementCollectionPropertyInterceptor)
+            return interceptors.Where(x => !(x is PropertyInterceptor) 
+                && !(x is CollectionPropertyInterceptor)
                 && !(x is InvalidWriteOperationInterceptor)).ToArray();
         }
     }

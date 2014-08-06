@@ -28,8 +28,8 @@ namespace Selenol.Page
         public static TPage Create<TPage>(IWebDriver webDriver, IJavaScriptExecutor javaScriptExecutor) where TPage : BasePage, new()
         {
             var page = proxyGenerator.CreateClassProxy<TPage>(proxyGenerationOptions,
-                new ElementPropertyInterceptor(),
-                new ElementCollectionPropertyInterceptor(),
+                new PropertyInterceptor(),
+                new CollectionPropertyInterceptor(),
                 new InvalidWriteOperationInterceptor());
             page.Initialize(webDriver, javaScriptExecutor);
             return page;
@@ -55,8 +55,8 @@ namespace Selenol.Page
             return (TControl)proxyGenerator.CreateClassProxy(controlType,
                                                              proxyGenerationOptions,
                                                              new object[] { webElement },
-                                                             new ElementPropertyInterceptor(),
-                                                             new ElementCollectionPropertyInterceptor(),
+                                                             new PropertyInterceptor(),
+                                                             new CollectionPropertyInterceptor(),
                                                              new InvalidWriteOperationInterceptor());
         }
     }

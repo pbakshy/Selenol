@@ -90,9 +90,9 @@
     <Compile Include="SelectorAttributes\ClassAttribute.cs" />
     <Compile Include="SelectorAttributes\CssAttribute.cs" />
     <Compile Include="SelectorAttributes\IdAttribute.cs" />
-    <Compile Include="SelectorAttributes\Interceptors\BaseElementPropertyInterceptor.cs" />
-    <Compile Include="SelectorAttributes\Interceptors\ElementPropertyInterceptor.cs" />
-    <Compile Include="SelectorAttributes\Interceptors\ElementCollectionPropertyInterceptor.cs" />
+    <Compile Include="SelectorAttributes\Interceptors\BasePropertyInterceptor.cs" />
+    <Compile Include="SelectorAttributes\Interceptors\PropertyInterceptor.cs" />
+    <Compile Include="SelectorAttributes\Interceptors\CollectionPropertyInterceptor.cs" />
     <Compile Include="SelectorAttributes\NameAttribute.cs" />
     <Compile Include="SelectorAttributes\Interceptors\InvalidWriteOperationInterceptor.cs" />
     <Compile Include="SelectorAttributes\PageProxyGenerationHook.cs" />
