@@ -1,7 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System;
-
+using System.Diagnostics.CodeAnalysis;
 using Selenol.Extensions;
 
 namespace Selenol.Validation.Page
@@ -17,6 +17,7 @@ namespace Selenol.Validation.Page
         /// <example>
         ///     For the web page which accessable by "http://mysite.com/admin/index.aspx" the parameter should be "/admin/index.aspx".</example>
         /// </param>
+        [SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1650:ElementDocumentationMustBeSpelledCorrectly", Justification = "Reviewed. Suppression is OK here.")]
         public UrlAttribute(string urlPart)
         {
             if (string.IsNullOrWhiteSpace(urlPart))

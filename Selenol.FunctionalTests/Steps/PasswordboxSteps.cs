@@ -35,7 +35,5 @@ namespace Selenol.FunctionalTests.Steps
         {
             this.element.Clear();
         }
-
-
     }
 }

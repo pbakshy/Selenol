@@ -28,6 +28,7 @@ namespace Selenol.Page
             }
         }
 
+        /// <summary>Gets the web driver.</summary>
         internal IWebDriver WebDriver
         {
             get
@@ -37,6 +38,7 @@ namespace Selenol.Page
             }
         }
 
+        /// <summary>Gets the java script executor.</summary>
         internal IJavaScriptExecutor JavaScriptExecutor
         {
             get

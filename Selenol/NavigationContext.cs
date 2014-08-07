@@ -1,4 +1,6 @@
-﻿using System;
+﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
+
+using System;
 using Selenol.Extensions;
 using Selenol.Page;
 using Selenol.Utils;
