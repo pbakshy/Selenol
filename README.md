@@ -13,7 +13,7 @@ Just clone the repository and reference it to your existing project.
 
 #Getting started
 First of all we need to define your page. Lets say it will be Github home page.
-```
+```csharp
 using Selenol.Elements;
 using Selenol.Page;
 using Selenol.SelectorAttributes;
@@ -34,16 +34,16 @@ Page can contains web elements and controls. Controls are reusable sets of web e
 Web elements have to be marked with a selector attribute. There are bunch of them Id, Class, Name, Tag, Css, XPath. 
 
 Now you can create a browser object and open the page.
-```
+```csharp
 var firefox = new FirefoxDriver();
 var mainPage = firefox.GoTo<MainPage>("https://github.com");
 ```
 And search repositories using top search box.
-```
+```csharp
 mainPage.SearchBox.TypeText("Seleno");
 ```
 Next need to press Enter and navigates to next page.
-```
+```csharp
 var searchPage = mainPage.Go(x => x.SearchBox.SendEnter()).To<SearchPage>();
 ```
 
