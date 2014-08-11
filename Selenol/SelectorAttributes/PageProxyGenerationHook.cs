@@ -26,7 +26,7 @@ namespace Selenol.SelectorAttributes
         public void MethodsInspected()
         {
             var notPublicProperties = this.proxiedType.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Except(this.processedProperties)
+                .Except(this.processedProperties ?? new List<PropertyInfo>())
                 .Where(notPublicProperty => notPublicProperty.IsPropertyWithSelectorAttribute());
             foreach (var notPublicProperty in notPublicProperties)
             {

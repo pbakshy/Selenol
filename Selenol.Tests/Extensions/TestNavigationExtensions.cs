@@ -96,7 +96,7 @@ namespace Selenol.Tests.Extensions
             {
                 get
                 {
-                    return this.Context.Button(By.Id("test-button"));
+                    return this.Button(By.Id("test-button"));
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿// ﻿Copyright (c) Pavel Bakshy, Valeriy Ogiy. All rights reserved. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Castle.DynamicProxy;
 using OpenQA.Selenium;
@@ -11,22 +12,11 @@ using Selenol.Validation.Page;
 namespace Selenol.Page
 {
     /// <summary>A Page class represents content of a web page or frame.</summary>
-    public abstract class BasePage : IJavaScriptExecutor
+    public abstract class BasePage : ISearchContext, IJavaScriptExecutor
     {
         private IWebDriver webDriver;
         private IJavaScriptExecutor javaScriptExecutor;
         private bool isInitialized;
-
-        /// <summary>Gets the context which holds the page or frame content.</summary>
-        public ISearchContext Context
-        {
-            get
-            {
-                this.CheckIsInitialized();
-                this.Validate();
-                return this.webDriver;
-            }
-        }
 
         /// <summary>Gets the web driver.</summary>
         internal IWebDriver WebDriver
@@ -46,6 +36,38 @@ namespace Selenol.Page
                 this.CheckIsInitialized();
                 return this.javaScriptExecutor;
             }
+        }
+
+        /// <summary>
+        /// Finds the first <see cref="T:OpenQA.Selenium.IWebElement"/> using the given method. 
+        /// </summary>
+        /// <param name="by">The locating mechanism to use.</param>
+        /// <returns>
+        /// The first matching <see cref="T:OpenQA.Selenium.IWebElement"/> on the current context.
+        /// </returns>
+        /// <exception cref="T:OpenQA.Selenium.NoSuchElementException">If no element matches the criteria.</exception>
+        public IWebElement FindElement(By @by)
+        {
+            this.CheckIsInitialized();
+            this.Validate();
+            return this.webDriver.FindElement(by);
+        }
+
+        /// <summary>
+        ///     Finds all <see cref="T:OpenQA.Selenium.IWebElement">IWebElements</see> within the current context
+        ///     using the given mechanism.
+        /// </summary>
+        /// <param name="by">The locating mechanism to use.</param>
+        /// <returns>
+        ///     A <see cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" /> of all
+        ///     <see cref="T:OpenQA.Selenium.IWebElement">WebElements</see>
+        ///     matching the current criteria, or an empty list if nothing matches.
+        /// </returns>
+        public ReadOnlyCollection<IWebElement> FindElements(By @by)
+        {
+            this.CheckIsInitialized();
+            this.Validate();
+            return this.webDriver.FindElements(by);
         }
 
         /// <summary>Executes JavaScript in the context of the current Page.</summary>

@@ -64,7 +64,8 @@ namespace Selenol.Tests.Validation.Page
         protected static IEnumerable<TestCaseData> WithValidationActionsFactory()
         {
             // ReSharper disable UnusedVariable
-            yield return new TestCaseData(new Action<BasePage>(x => { var context = x.Context; }));
+            yield return new TestCaseData(new Action<BasePage>(x => { var element = x.FindElement(By.ClassName("test")); }));
+            yield return new TestCaseData(new Action<BasePage>(x => { var element = x.FindElements(By.Id("test")); }));
             yield return new TestCaseData(new Action<BasePage>(x => { var result = x.ExecuteScript("return 1 == 1"); }));
             yield return new TestCaseData(new Action<BasePage>(x => { var result = x.ExecuteAsyncScript("return '1' === 1"); }));
             // ReSharper restore UnusedVariable

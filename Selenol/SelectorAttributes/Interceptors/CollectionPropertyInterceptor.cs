@@ -8,7 +8,6 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Selenol.Controls;
 using Selenol.Elements;
-using Selenol.Page;
 
 namespace Selenol.SelectorAttributes.Interceptors
 {
@@ -47,7 +46,7 @@ namespace Selenol.SelectorAttributes.Interceptors
             return CreateReadOnlyCollection(genericArgType, list);
         }
 
-        private static object SelectElements(object invocationContext, By selector, Type genericArgType)
+        private static object SelectElements(object context, By selector, Type genericArgType)
         {
             if (!typeToGenericCollectionMethod.ContainsKey(genericArgType))
             {
@@ -58,10 +57,7 @@ namespace Selenol.SelectorAttributes.Interceptors
             }
 
             var typedCollectionMethod = typeToGenericCollectionMethod[genericArgType];
-            var searchContext = invocationContext is ISearchContext
-                                    ? invocationContext
-                                    : ((BasePage)invocationContext).Context;
-            return typedCollectionMethod.Invoke(null, new[] { searchContext, selector });
+            return typedCollectionMethod.Invoke(null, new[] { context, selector });
         }
 
         private static object ToList(Type genericArgType, object elements)

@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using FluentAssertions;
 using NUnit.Framework;
+using OpenQA.Selenium;
 using Selenol.Page;
 
 namespace Selenol.Tests.Page
@@ -31,7 +32,9 @@ namespace Selenol.Tests.Page
             var publicMethodCallExpressions = new Expression<Action<BasePage>>[]
                 {
                     x => x.ExecuteScript("return 1;"),
-                    x => x.ExecuteAsyncScript("return 2;")
+                    x => x.ExecuteAsyncScript("return 2;"),
+                    x => x.FindElement(By.Id("start")),
+                    x => x.FindElements(By.ClassName("end"))
                 };
             var page = new SimplePageForTest();
             var methods = typeof(BasePage).GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)

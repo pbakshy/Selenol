@@ -6,7 +6,6 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Selenol.Controls;
 using Selenol.Elements;
-using Selenol.Page;
 
 namespace Selenol.SelectorAttributes.Interceptors
 {
@@ -41,10 +40,7 @@ namespace Selenol.SelectorAttributes.Interceptors
             }
 
             var typedEmelementMethod = typeToGenericElementMethod[propertyType];
-            var searchContext = context is ISearchContext
-                                    ? context
-                                    : ((BasePage)context).Context;
-            return typedEmelementMethod.Invoke(null, new[] { searchContext, selector });
+            return typedEmelementMethod.Invoke(null, new[] { context, selector });
         }
     }
 }
