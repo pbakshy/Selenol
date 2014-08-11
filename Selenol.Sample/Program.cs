@@ -20,9 +20,7 @@ namespace Selenol.Sample
                 var searchPage = mainPage.Go(x => x.SearchBox.SendEnter()).To<SearchPage>();
                 searchPage.Results.ToList().ForEach(x => Console.WriteLine(x.Text));
 
-                searchPage.SearchElement.Clear();
-                searchPage.SearchElement.TypeText("selenol");
-                searchPage = searchPage.Go(x => x.SearchButton.Click()).To<SearchPage>();
+                searchPage = searchPage.Go(x => x.SearchForm.Search("selenol")).To<SearchPage>();
 
                 var repoPage = searchPage.Go(x => x.Results.First().Click()).To<RepositoryPage>();
 

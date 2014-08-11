@@ -55,6 +55,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryPage.cs" />
+    <Compile Include="SearchControl.cs" />
     <Compile Include="SearchPage.cs" />
   </ItemGroup>
   <ItemGroup>

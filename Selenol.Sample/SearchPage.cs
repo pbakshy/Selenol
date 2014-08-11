@@ -11,11 +11,8 @@ namespace Selenol.Sample
     [Url("/search")]
     public class SearchPage : BasePage
     {
-        [Class("search-page-input")]
-        public virtual TextboxElement SearchElement { get; set; }
-
-        [Css("#search_form button")]
-        public virtual ButtonElement SearchButton { get; set; }
+        [Id("search_form")]
+        public virtual SearchFormControl SearchForm { get; set; }
 
         [Css("h3.repolist-name a")]
         public virtual IEnumerable<LinkElement> Results { get; set; } 
