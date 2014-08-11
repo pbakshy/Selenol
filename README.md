@@ -30,7 +30,7 @@ namespace Selenol.Sample
 }
 ```
 All pages have to inherit BasePage and have an validation attribute. In our case it's Url which will check that page locates in the root of the site.
-Page can contains web elements and controls. Controls are reusable sets of web elements. You can read about controls on [wiki](...)
+Page can contains web elements and controls. Controls are reusable sets of web elements. You can read about controls on [wiki](https://github.com/pbakshy/Selenol/wiki/Controls)
 Web elements have to be marked with a selector attribute. There are bunch of them Id, Class, Name, Tag, Css, XPath. 
 
 Now you can create a browser object and open the page.
