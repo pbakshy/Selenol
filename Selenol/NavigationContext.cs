@@ -40,11 +40,17 @@ namespace Selenol
         {
             var webDriver = this.currentPage.WebDriver;
             var newPageType = typeof(TNewPage);
+            var beforeActionUrl = webDriver.Url;
 
             this.navigationAction(this.currentPage);
             
             //TODO: move default timeout to config
-            Wait.For(() => PageUtil.IsValid(newPageType, webDriver.Url), TimeSpan.FromSeconds(5), "url matched '{0}' page.".F(newPageType.Name));
+            var timeout = TimeSpan.FromSeconds(5);
+            var isWaitSucceed = TryWait.For(() => PageUtil.IsValid(newPageType, webDriver.Url), timeout);
+            if (!isWaitSucceed && webDriver.Url.Equals(beforeActionUrl))
+            {
+                throw new TimeoutException("Timed out after {0}. Waited for url matched '{1}' page.".F(timeout, newPageType.Name));
+            }
 
             return ContainerFactory.Page<TNewPage>(this.currentPage.WebDriver, this.currentPage.JavaScriptExecutor);
         }

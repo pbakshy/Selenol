@@ -102,6 +102,7 @@
     <Compile Include="SelectorAttributes\XPathAttribute.cs" />
     <Compile Include="TimeoutException.cs" />
     <Compile Include="Utils\PageUtil.cs" />
+    <Compile Include="Utils\TryWait.cs" />
     <Compile Include="Utils\Wait.cs" />
     <Compile Include="Validation\Element\WrongElementException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />

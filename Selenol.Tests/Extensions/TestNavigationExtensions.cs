@@ -14,6 +14,7 @@ namespace Selenol.Tests.Extensions
     [TestFixture]
     public class TestNavigationExtensions
     {
+        private const string StartUrl = "http://localhost/current/page.html";
         private const string ValidUrl = "http://localhost/myhome/page.aspx?id=1";
         private const string InvalidUrl = "http://my.home.site/home/index";
 
@@ -62,10 +63,12 @@ namespace Selenol.Tests.Extensions
             this.navigation.AssertWasCalled(x => x.GoToUrl(ValidUrl));
         }
 
-        [Test, Ignore("Need to decide whether separate timeout and validation errors or not")]
+        [Test]
         public void GoToValidPageUsingPageObject()
         {
             var currentPage = this.MakeCurrentPage();
+            this.StubButton();
+            this.StubStartUrl();
             this.webDriver.Stub(x => x.Url).Return(ValidUrl);
 
             var newPage = currentPage.Go(p => p.Button.Click()).To<SimplePageForTest>();
@@ -73,11 +76,24 @@ namespace Selenol.Tests.Extensions
             newPage.Should().NotBeNull();
         }
 
-        [Test, Ignore("Need to decide whether separate timeout and validation errors or not")]
-        public void GoToInvidPageUsingPageObjectThrowsTimeout()
+        [Test]
+        public void GoToInvidPageUsingPageObjectThrowsValidation()
         {
             var currentPage = this.MakeCurrentPage();
+            this.StubButton();
+            this.StubStartUrl();
             this.webDriver.Stub(x => x.Url).Return(InvalidUrl);
+
+            var exception = Assert.Throws<PageValidationException>(() => currentPage.Go(p => p.Button.Click()).To<SimplePageForTest>());
+            exception.Message.Should().Contain("'http://my.home.site/home/index' does not contain '/myhome/page.aspx' part.");
+        }
+
+        [Test]
+        public void GoToWithoutNavigationUsingPageObjectThrowsValidation()
+        {
+            var currentPage = this.MakeCurrentPage();
+            this.StubButton();
+            this.webDriver.Stub(x => x.Url).Return(StartUrl);
 
             var exception = Assert.Throws<TimeoutException>(() => currentPage.Go(p => p.Button.Click()).To<SimplePageForTest>());
             exception.Message.Should().Contain("Waited for url matched 'SimplePageForTest' page.");
@@ -85,18 +101,33 @@ namespace Selenol.Tests.Extensions
 
         private CurrentPageForTest MakeCurrentPage()
         {
-            this.webDriver.Stub(x => x.Url).Return("http://localhost/current/page.html").Repeat.Once();
+            this.StubStartUrl();
             return ContainerFactory.Page<CurrentPageForTest>(this.webDriver, this.javaScriptExecutor);
+        }
+
+        private void StubStartUrl()
+        {
+            this.webDriver.Stub(x => x.Url).Return(StartUrl).Repeat.Once();
+        }
+
+        private void StubButton()
+        {
+            this.StubStartUrl();
+            var button = MockRepository.GenerateStub<IWebElement>();
+            this.webDriver.Stub(x => x.FindElement(By.Id(CurrentPageForTest.ButtonId))).Return(button);
+            button.Stub(x => x.TagName).Return("button");
         }
 
         [Url("/current/page.html")]
         public class CurrentPageForTest : BasePage
         {
+            public const string ButtonId = "test-button";
+
             public ButtonElement Button
             {
                 get
                 {
-                    return this.Button(By.Id("test-button"));
+                    return this.Button(By.Id(ButtonId));
                 }
             }
         }
