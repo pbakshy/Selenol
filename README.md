@@ -8,8 +8,6 @@ Selenol allows you to write web tests easily and quickly. It heavy propagandizes
 ```
 Install-Package Selenol
 ```
-##Building from source
-Just clone the repository and reference it to your existing project.
 
 #Getting started
 First of all we need to define your page. Lets say it will be Github home page.
