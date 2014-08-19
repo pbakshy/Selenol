@@ -8,11 +8,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Selenol")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription(".net library for Web-application testing based on Page pattern and Selenium Web driver")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Leetex")]
+[assembly: AssemblyCompany("Pavel Bakshy, Valeriy Ogiy")]
 [assembly: AssemblyProduct("Selenol")]
-[assembly: AssemblyCopyright("Copyright © Leetex 2012")]
+[assembly: AssemblyCopyright("Copyright Pavel Bakshy, Valeriy Ogiy.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>https://github.com/pbakshy/Selenol</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright Pavel Bakshy, Valeriy Ogiy 2014.</copyright>
+    <tags>Selenol Selenium WebDriver browser automation testing</tags>
+	<dependencies>
+      <dependency id="Castle.Core" version="[3.1.0]" />
+    </dependencies>
+  </metadata>
+</package>
